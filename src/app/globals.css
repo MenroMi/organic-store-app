@@ -1,27 +1,42 @@
+@import url("https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700&family=Roboto:wght@400;700&family=Yellowtail&display=swap");
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-:root {
-  --foreground-rgb: 0, 0, 0;
-  --background-start-rgb: 214, 219, 220;
-  --background-end-rgb: 255, 255, 255;
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --foreground-rgb: 255, 255, 255;
-    --background-start-rgb: 0, 0, 0;
-    --background-end-rgb: 0, 0, 0;
-  }
+/* START: General styles */
+.general-header {
+  @apply flex w-full h-[150px] items-center px-8 bg-white border-b font-['Roboto'] font-normal;
 }
 
-body {
-  color: rgb(var(--foreground-rgb));
-  background: linear-gradient(
-      to bottom,
-      transparent,
-      rgb(var(--background-end-rgb))
-    )
-    rgb(var(--background-start-rgb));
+.general-header__navbar {
+  @apply flex justify-between text-primary-green text-[19px] h-full w-full;
 }
+
+.nav-item {
+  @apply h-full flex items-center text-center hover:bg-green-light hover:text-white transition px-5;
+}
+
+.cart {
+  @apply flex-1 h-full w-full flex items-center justify-end;
+}
+
+/** START: Burger menu styles **/
+
+.burger-nav__item {
+  @apply px-10 py-8 font-bold hover:bg-green-light hover:text-white transition-all;
+}
+
+.overlay {
+  @apply fixed h-full w-full bg-green-light inset-0 bg-opacity-25 z-10;
+}
+
+/** END: Burger menu styles **/
+
+/* END: General styles */
