@@ -11,7 +11,7 @@ import BurgerMenu from "@/components/BurgerMenu";
 
 const Navbar = () => {
   return (
-    <header className="general-header max-sm:h-[100px]">
+    <header className="general-header max-sm:h-[100px] lg:fixed lg:top-0 lg:z-[12] lg:backdrop-blur-sm">
       <nav className="general-header__navbar max-lg:gap-4 lg:gap-2">
         <div className="flex justify-between max-w-[865px] w-full gap-2">
           <Link

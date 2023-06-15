@@ -10,9 +10,9 @@
   box-sizing: border-box;
 }
 
-/* START: General styles */
+/* START: Header styles */
 .general-header {
-  @apply flex w-full h-[150px] items-center px-8 bg-white border-b font-['Roboto'] font-normal;
+  @apply flex w-full h-[150px] items-center px-8 bg-white/[0.5] font-['Roboto'] font-normal;
 }
 
 .general-header__navbar {
@@ -34,9 +34,25 @@
 }
 
 .overlay {
-  @apply fixed h-full w-full bg-green-light inset-0 bg-opacity-25 z-10;
+  @apply fixed h-full w-full bg-green-light inset-0 bg-opacity-25 z-[13];
 }
 
 /** END: Burger menu styles **/
 
-/* END: General styles */
+/* END: Header styles */
+
+/* START: Nature section styles */
+
+.nature {
+  @apply w-full lg:mt-[150px] h-[913px] font-['Roboto'];
+}
+
+.nature__bg-img {
+  @apply bg-nature-bg w-full h-full bg-center bg-cover bg-no-repeat px-8;
+}
+
+.nature-txt-container {
+  @apply flex w-full h-full flex-col justify-center;
+}
+
+/* END: Nature section styles */

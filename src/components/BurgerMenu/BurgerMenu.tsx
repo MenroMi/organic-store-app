@@ -35,7 +35,7 @@ const BurgerMenu = () => {
       </svg>
 
       <div
-        className={`fixed h-full w-[70vw] bg-white z-[11] top-0 right-0 py-10 ${
+        className={`fixed h-full w-[70vw] bg-white z-[14] top-0 right-0 py-10 ${
           isOpen ? "visible" : "hidden"
         }`}
       >
