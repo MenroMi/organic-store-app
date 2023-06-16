@@ -14,3 +14,12 @@ export interface IBannerProps {
   classNameTitle: string;
   classNameDescr: string;
 }
+
+export interface IProductCardProps {
+  label: string;
+  name: string;
+  priceDiscount: string;
+  priceOld: string;
+  category: string;
+  image: string;
+}

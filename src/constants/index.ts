@@ -1,3 +1,4 @@
+import { products } from "./products";
 import { navLinks } from "./navigation";
 import { aboutReasons } from "./about";
 import {
@@ -12,4 +13,5 @@ export {
   footerSocialMedia,
   footerUtilityPages,
   aboutReasons,
+  products,
 };
