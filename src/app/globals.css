@@ -76,3 +76,19 @@
 }
 
 /* END: Footer styles */
+
+/* START: Banners styles */
+
+.banner-list {
+  @apply w-full h-full flex items-center justify-center gap-12 px-8 flex-col;
+}
+
+.banner {
+  @apply font-['Roboto'] relative w-full h-full;
+}
+
+.banner__description {
+  @apply absolute flex flex-col top-[50%] translate-y-[-50%] left-8;
+}
+
+/* END: Banners styles */
