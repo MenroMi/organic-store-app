@@ -21,8 +21,8 @@ const AboutUs = () => {
         />
 
         <div className="flex-1">
-          <h2 className="about-us__title sm:text-4xl">About Us</h2>
-          <p className="capitalize font-bold text-4xl leading-[1.15] text-primary-green mt-4 sm:text-5xl">
+          <h2 className="title sm:text-4xl">About Us</h2>
+          <p className="subtitle leading-[1.3] mt-4 sm:text-5xl">
             We Believe in Organic <br />
             Foods For Strong Health
           </p>

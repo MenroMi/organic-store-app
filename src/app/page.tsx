@@ -2,7 +2,13 @@
 import Image from "next/image";
 
 // components
-import { AboutUs, BannersList, ExploreNature, Organic } from "@/components";
+import {
+  AboutUs,
+  BannersList,
+  ExploreNature,
+  Organic,
+  Testimonial,
+} from "@/components";
 
 export default function Home() {
   return (
@@ -11,6 +17,7 @@ export default function Home() {
       <BannersList />
       <AboutUs />
       <Organic />
+      <Testimonial />
     </main>
   );
 }

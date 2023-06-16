@@ -1,3 +1,4 @@
+import { advantages } from "./testimontial";
 import { products } from "./products";
 import { navLinks } from "./navigation";
 import { aboutReasons } from "./about";
@@ -14,4 +15,5 @@ export {
   footerUtilityPages,
   aboutReasons,
   products,
+  advantages,
 };

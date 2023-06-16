@@ -10,6 +10,18 @@
   box-sizing: border-box;
 }
 
+/* START: General styles */
+
+.title {
+  @apply font-['Yellowtail'] text-green-light text-4xl;
+}
+
+.subtitle {
+  @apply capitalize font-['Roboto'] text-primary-green font-bold text-[45px];
+}
+
+/* END: General styles */
+
 /* START: Header styles */
 .general-header {
   @apply flex w-full h-[150px] items-center px-8 bg-white/[0.5] font-['Roboto'] font-normal;
@@ -103,24 +115,12 @@
   @apply flex w-full h-full justify-center items-center;
 }
 
-.about-us__title {
-  @apply font-['Yellowtail'] text-2xl text-green-light;
-}
-
 /* END: About us styles */
 
 /* START: Organic styles */
 
 .organic {
   @apply h-full py-[120px] flex flex-col w-full items-center;
-}
-
-.organic__title {
-  @apply font-['Yellowtail'] text-green-light text-4xl;
-}
-
-.organic__second-title {
-  @apply font-['Roboto'] text-primary-green font-bold text-[45px];
 }
 
 /* END: Organic styles */
@@ -140,3 +140,23 @@
 }
 
 /* END: Product card styles */
+
+/* START: Testimonial styles */
+
+.testimonial {
+  @apply flex flex-col items-center justify-center bg-testimonial-bg bg-center h-full bg-contain pb-24;
+}
+
+.advantages {
+  @apply mt-24 flex flex-col w-full h-full gap-6 justify-center max-sm:items-center sm:px-5 sm:flex-row sm:flex-wrap;
+}
+
+.advantages__advantage-container {
+  @apply w-full h-32 border-t-[6px] border-b-[6px] border-green-light rounded-none sm:rounded-full p-1 sm:w-[250px] sm:h-[250px] sm:border-[6px];
+}
+
+.advantages__advantage {
+  @apply flex flex-col justify-center items-center w-full h-full  bg-grey-text/[0.1] sm:rounded-full;
+}
+
+/* END: Testimonial styles */

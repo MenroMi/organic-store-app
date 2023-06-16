@@ -21,6 +21,7 @@ module.exports = {
       },
       backgroundImage: {
         "nature-bg": "url(/header-bg.png)",
+        "testimonial-bg": "url(/Testimonial-bg.png)",
       },
     },
   },

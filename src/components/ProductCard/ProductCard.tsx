@@ -30,7 +30,7 @@ const ProductCard: React.FC<IProductCardProps> = (props) => {
         <span className="text-primary-green font-bold text-sm lg:text-lg">
           $ {priceDiscount} USD
         </span>
-        <Rating />
+        <Rating classNameContainer="ml-auto" clickable={true} />
       </div>
     </div>
   );

@@ -10,8 +10,8 @@ import ProductCard from "@/components/ProductCard";
 const Organic = () => {
   return (
     <section className="organic">
-      <h2 className="organic__title">Organic</h2>
-      <h3 className="organic__second-title">Our Products</h3>
+      <h2 className="title">Organic</h2>
+      <h3 className="subtitle">Our Products</h3>
 
       <div className="flex flex-wrap gap-5 justify-center mt-11">
         {products.map((product) => (
