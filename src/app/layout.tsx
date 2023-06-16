@@ -1,5 +1,5 @@
 // components
-import { Navbar } from "@/components";
+import { Footer, Navbar } from "@/components";
 
 // styles
 import "./globals.css";
@@ -19,6 +19,7 @@ export default function RootLayout({
       <body>
         <Navbar />
         {children}
+        <Footer />
       </body>
     </html>
   );

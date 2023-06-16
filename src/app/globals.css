@@ -56,3 +56,23 @@
 }
 
 /* END: Nature section styles */
+
+/* START: Footer styles */
+
+.general-footer {
+  @apply flex flex-col w-full min-h-[630px] pt-10;
+}
+
+.general-footer__nav-container {
+  @apply w-full h-full flex justify-around px-8 mt-auto pb-10 flex-wrap;
+}
+
+.nav-contact {
+  @apply flex flex-col gap-7 text-right pr-3 text-primary-green;
+}
+
+.nav-social {
+  @apply flex flex-col w-full max-h-full justify-center items-center gap-[45px];
+}
+
+/* END: Footer styles */

@@ -1,17 +1,8 @@
-export const navLinks = [
-  {
-    label: "Home",
-  },
-  {
-    label: "About Us",
-  },
-  {
-    label: "Shop",
-  },
-  {
-    label: "Pages",
-  },
-  {
-    label: "Contact Us",
-  },
-];
+import { navLinks } from "./navigation";
+import {
+  footerContactData,
+  footerSocialMedia,
+  footerUtilityPages,
+} from "./footer";
+
+export { navLinks, footerContactData, footerSocialMedia, footerUtilityPages };
