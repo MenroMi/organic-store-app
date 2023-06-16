@@ -17,6 +17,7 @@ module.exports = {
         "green-light": "#7EB693",
         "secondary-yellow": "#EFD372",
         "grey-text": "#525C60",
+        "about-us": "#F9F8F8",
       },
       backgroundImage: {
         "nature-bg": "url(/header-bg.png)",

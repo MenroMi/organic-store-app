@@ -92,3 +92,19 @@
 }
 
 /* END: Banners styles */
+
+/* START: Banners styles */
+
+.about-us {
+  @apply h-full w-full pl-8 pr-9 py-20 bg-about-us;
+}
+
+.about-us__container {
+  @apply flex w-full h-full justify-center items-center;
+}
+
+.about-us__title {
+  @apply font-['Yellowtail'] text-2xl text-green-light;
+}
+
+/* END: Banners styles */

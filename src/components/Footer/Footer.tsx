@@ -1,11 +1,14 @@
+// basic
+import Image from "next/image";
+import Link from "next/link";
+import React from "react";
+
+// constants
 import {
   footerContactData,
   footerSocialMedia,
   footerUtilityPages,
 } from "@/constants";
-import Image from "next/image";
-import Link from "next/link";
-import React from "react";
 
 const Footer = () => {
   return (
