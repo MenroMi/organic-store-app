@@ -4,14 +4,13 @@
 import Image from "next/image";
 import React, { useState } from "react";
 
-const Rating = ({
+// interface
+import { IRatingProps } from "@/types";
+
+const Rating: React.FC<IRatingProps> = ({
   classNameContainer,
   classNameImage,
   clickable,
-}: {
-  classNameContainer?: string;
-  classNameImage?: string;
-  clickable: boolean;
 }) => {
   const [rating, setRating] = useState(5);
   return (

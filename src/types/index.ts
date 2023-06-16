@@ -23,3 +23,9 @@ export interface IProductCardProps {
   category: string;
   image: string;
 }
+
+export interface IRatingProps {
+  classNameContainer?: string;
+  classNameImage?: string;
+  clickable: boolean;
+}

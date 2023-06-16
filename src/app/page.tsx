@@ -6,6 +6,7 @@ import {
   AboutUs,
   BannersList,
   ExploreNature,
+  Offers,
   Organic,
   Testimonial,
 } from "@/components";
@@ -18,6 +19,7 @@ export default function Home() {
       <AboutUs />
       <Organic />
       <Testimonial />
+      <Offers />
     </main>
   );
 }

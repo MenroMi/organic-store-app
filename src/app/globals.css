@@ -160,3 +160,19 @@
 }
 
 /* END: Testimonial styles */
+
+/* START: Offers styles */
+
+.offer-products {
+  @apply h-full bg-primary-green pt-[139px] pb-[160px];
+}
+
+.offer-products__information {
+  @apply flex flex-col items-center px-5 lg:flex-row lg:justify-between lg:items-end;
+}
+
+.offer-products__cards {
+  @apply flex mt-[40px] px-5 gap-5 justify-center flex-wrap xl:flex-nowrap;
+}
+
+/* END: Offers styles */

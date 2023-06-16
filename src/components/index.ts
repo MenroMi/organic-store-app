@@ -5,6 +5,7 @@ import BannersList from "./BannersList";
 import AboutUs from "./AboutUs";
 import Organic from "./Organic";
 import Testimonial from "./Testimonial";
+import Offers from "./Offers";
 
 export {
   Navbar,
@@ -14,4 +15,5 @@ export {
   AboutUs,
   Organic,
   Testimonial,
+  Offers,
 };
