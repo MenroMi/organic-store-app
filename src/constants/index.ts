@@ -1,3 +1,4 @@
+import { advantagesEcoProducts } from "./ecoFriendly";
 import { advantages } from "./testimontial";
 import { products } from "./products";
 import { navLinks } from "./navigation";
@@ -16,4 +17,5 @@ export {
   aboutReasons,
   products,
   advantages,
+  advantagesEcoProducts,
 };

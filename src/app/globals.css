@@ -176,3 +176,19 @@
 }
 
 /* END: Offers styles */
+
+/* START: Eco friendly styles */
+
+.eco-friendly {
+  @apply font-['Roboto'] h-full w-full flex items-center md:pr-5;
+}
+
+.eco-friendly__bg {
+  @apply bg-eco-friendly-bg bg-left bg-no-repeat w-full flex max-w-[100%] min-h-[700px] lg:max-w-[50%] lg:bg-cover max-md:hidden;
+}
+
+.eco-information {
+  @apply h-full rounded-3xl bg-white md:ml-[-50px] px-14 pt-8 pb-12;
+}
+
+/* END: Eco friendly styles */

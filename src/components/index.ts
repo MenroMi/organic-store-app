@@ -6,6 +6,7 @@ import AboutUs from "./AboutUs";
 import Organic from "./Organic";
 import Testimonial from "./Testimonial";
 import Offers from "./Offers";
+import EcoFriendly from "./EcoFriendly";
 
 export {
   Navbar,
@@ -16,4 +17,5 @@ export {
   Organic,
   Testimonial,
   Offers,
+  EcoFriendly,
 };

@@ -5,6 +5,7 @@ import Image from "next/image";
 import {
   AboutUs,
   BannersList,
+  EcoFriendly,
   ExploreNature,
   Offers,
   Organic,
@@ -20,6 +21,7 @@ export default function Home() {
       <Organic />
       <Testimonial />
       <Offers />
+      <EcoFriendly />
     </main>
   );
 }
