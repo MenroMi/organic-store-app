@@ -7,6 +7,7 @@ import Organic from "./Organic";
 import Testimonial from "./Testimonial";
 import Offers from "./Offers";
 import EcoFriendly from "./EcoFriendly";
+import Categories from "./Categories";
 
 export {
   Navbar,
@@ -18,4 +19,5 @@ export {
   Testimonial,
   Offers,
   EcoFriendly,
+  Categories,
 };
