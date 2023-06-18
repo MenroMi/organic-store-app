@@ -72,7 +72,7 @@
 /* START: Footer styles */
 
 .general-footer {
-  @apply flex flex-col w-full min-h-[630px] pt-10;
+  @apply flex flex-col w-full min-h-[630px] pt-20;
 }
 
 .general-footer__nav-container {
@@ -208,7 +208,7 @@
 /* START: News styles */
 
 .news {
-  @apply min-h-[885px] pt-[130px] pb-[110px] px-8;
+  @apply min-h-[885px] pt-20 pb-16 px-8 sm:pt-[130px] sm:pb-[110px];
 }
 
 .news__container {
@@ -236,3 +236,27 @@
 }
 
 /* END: News styles */
+
+/* START: Newsletter styles */
+
+.newsletter-section {
+  @apply px-7 flex justify-center;
+}
+
+.newsletter {
+  @apply bg-newsletter-img bg-cover bg-no-repeat bg-center flex flex-col justify-center items-center gap-5 w-full max-w-[1380px] h-[250px]  rounded-2xl px-5 sm:justify-between sm:flex-row sm:px-10 md:px-16 lg:rounded-none lg:bg-contain md:h-[320px];
+}
+
+.newsletter__descr {
+  @apply capitalize leading-[1.2] font-bold text-white text-xl max-sm:self-start sm:text-3xl lg:text-5xl;
+}
+
+.newsletter__form {
+  @apply font-['Open_Sans'] w-full flex flex-col items-end justify-end gap-2 sm:w-[300px] lg:flex-1 lg:flex-row;
+}
+
+.newsletter-input {
+  @apply text-base text-black/[0.5] rounded-md w-full pl-7 sm:max-w-[300px] md:text-lg h-[60px] lg:max-w-[350px] lg:h-[82px] lg:rounded-2xl;
+}
+
+/* END: Newsletter styles */

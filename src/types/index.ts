@@ -4,6 +4,7 @@ export interface ICustomButtonProps {
   classNameArrow?: string;
   classNameContent?: string;
   title: string;
+  type?: "button" | "submit" | "reset" | undefined;
 }
 
 export interface IBannerProps {

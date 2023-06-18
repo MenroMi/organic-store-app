@@ -12,9 +12,10 @@ const CustomButton: React.FC<ICustomButtonProps> = ({
   classNameArrow,
   classNameContent,
   title,
+  type,
 }) => {
   return (
-    <button className={classNameContainer} type="button">
+    <button className={classNameContainer} type={type || "button"}>
       <div
         className={twMerge(
           "w-full h-full flex justify-between items-center pl-8 pr-3",

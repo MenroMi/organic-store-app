@@ -23,6 +23,7 @@ module.exports = {
         "nature-bg": "url(/header-bg.png)",
         "testimonial-bg": "url(/Testimonial-bg.png)",
         "eco-friendly-bg": "url(/eco-friendly-frame-bg.png)",
+        "newsletter-img": "url(/subscribe-frame-bg.png)",
       },
     },
   },

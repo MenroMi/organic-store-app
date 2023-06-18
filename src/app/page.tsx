@@ -9,6 +9,7 @@ import {
   EcoFriendly,
   ExploreNature,
   News,
+  Newsletter,
   Offers,
   Organic,
   Testimonial,
@@ -26,6 +27,7 @@ export default function Home() {
       <EcoFriendly />
       <Categories />
       <News />
+      <Newsletter />
     </main>
   );
 }
