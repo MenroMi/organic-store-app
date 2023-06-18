@@ -8,6 +8,7 @@ import Testimonial from "./Testimonial";
 import Offers from "./Offers";
 import EcoFriendly from "./EcoFriendly";
 import Categories from "./Categories";
+import News from "./News";
 
 export {
   Navbar,
@@ -20,4 +21,5 @@ export {
   Offers,
   EcoFriendly,
   Categories,
+  News,
 };

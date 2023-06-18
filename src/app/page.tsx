@@ -8,6 +8,7 @@ import {
   Categories,
   EcoFriendly,
   ExploreNature,
+  News,
   Offers,
   Organic,
   Testimonial,
@@ -24,6 +25,7 @@ export default function Home() {
       <Offers />
       <EcoFriendly />
       <Categories />
+      <News />
     </main>
   );
 }

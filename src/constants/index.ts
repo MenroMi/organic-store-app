@@ -1,3 +1,4 @@
+import { articles } from "./articles";
 import { categories } from "./categories";
 import { advantagesEcoProducts } from "./ecoFriendly";
 import { advantages } from "./testimontial";
@@ -20,4 +21,5 @@ export {
   advantages,
   advantagesEcoProducts,
   categories,
+  articles,
 };

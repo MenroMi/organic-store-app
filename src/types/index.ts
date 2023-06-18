@@ -2,6 +2,7 @@ export interface ICustomButtonProps {
   classNameContainer: string;
   classNameText: string;
   classNameArrow?: string;
+  classNameContent?: string;
   title: string;
 }
 
