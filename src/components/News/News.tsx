@@ -24,14 +24,14 @@ const News = () => {
 
         <CustomButton
           title="More News"
-          classNameContainer="md:max-w-[210px] w-full h-[82px] border border-primary-green rounded-2xl lg:self-end"
-          classNameText="text-primary-green text-[20px]"
+          classNameContainer="custom-trans md:max-w-[210px] w-full h-[82px] border border-primary-green rounded-2xl lg:self-end group hover:bg-primary-green"
+          classNameText="custom-trans text-primary-green text-[20px] group-hover:text-white"
         />
       </div>
 
       <div className="news__container">
         {articles.map((a) => (
-          <div key={a.title} className="new">
+          <div key={a.title} className="new group">
             <Image
               src={a.bgImage}
               alt={a.alt}
@@ -39,7 +39,7 @@ const News = () => {
               height={515}
               className="new__bg-image"
             />
-            <article className="new__article">
+            <article className="new__article cursor-pointer custom-trans group-hover:translate-y-[-20px]">
               <div className="flex gap-2 items-center">
                 <Image
                   src="/icons/user.svg"
@@ -54,7 +54,7 @@ const News = () => {
               <p className="new__article-descr">{a.description}</p>
               <CustomButton
                 title="View More"
-                classNameContainer="w-full h-[50px] mt-auto"
+                classNameContainer="w-full h-[50px] mt-auto "
                 classNameContent="flex pl-0 pr-0 justify-start gap-3"
                 classNameText="text-lg text-primary-green"
                 classNameArrow="p-2"

@@ -12,8 +12,9 @@ const ProductCard: React.FC<IProductCardProps> = (props) => {
   const { name, label, priceOld, priceDiscount, image, category } = props;
 
   return (
-    <div className="flex justify-center mb-5">
-      <div className="card lg:max-w-[447px] lg:h-[590px]">
+    <div className=" flex justify-center mb-5">
+      <div className="card lg:max-w-[447px] lg:h-[590px] cursor-pointer">
+        {/*relative after:content-[''] after:rounded-[30px] after:absolute after:top-0 after:left-0 after:w-full after:h-full hover:after:bg-black/[0.2] */}
         <div className="card__category">{category}</div>
         <Image
           src={image}

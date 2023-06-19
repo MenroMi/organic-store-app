@@ -34,6 +34,8 @@ const Newsletter = () => {
             classNameContainer="
                     bg-primary-green 
                     h-[50px] 
+                    border-4
+                    border-primary-green
                     rounded-md 
                     w-full 
                     sm:w-[300px] 
@@ -41,8 +43,11 @@ const Newsletter = () => {
                     lg:h-[82px] 
                     lg:rounded-2xl 
                     lg:max-w-[200px]
+                    custom-trans
+                    group
+                    hover:bg-white
                 "
-            classNameText="text-white lg:font-bold lg:text-lg tracking-wider"
+            classNameText="custom-trans text-white lg:font-bold lg:text-lg tracking-wider group-hover:text-primary-green"
             classNameArrow="bg-[#335B6B] max-lg:p-1"
             classNameContent="
                     flex 

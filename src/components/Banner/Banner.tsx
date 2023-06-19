@@ -20,7 +20,7 @@ const Banner: React.FC<IBannerProps> = ({
   return (
     <div
       ref={elemRef}
-      className={`banner custom-trans lg:w-[665px] lg:h-[378px] ${
+      className={`banner custom-trans lg:w-[665px] lg:h-[378px] hover:scale-105 ${
         value ? "opacity-100 translate-y-0" : "opacity-0 translate-y-5"
       }`}
     >

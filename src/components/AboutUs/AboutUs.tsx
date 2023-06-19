@@ -67,8 +67,8 @@ const AboutUs = () => {
           </div>
           <CustomButton
             title="Shop Now"
-            classNameContainer="bg-primary-green h-[82px] w-full sm:w-[200px] rounded-2xl mt-12 shadow-xl"
-            classNameText="text-white text-[19px]"
+            classNameContainer="custom-trans duration-300 border-4 border-primary-green bg-primary-green h-[82px] w-full  rounded-2xl mt-12 shadow-xl hover:bg-transparent  hover:border-primary-green group sm:w-[200px]"
+            classNameText="custom-trans text-white text-[19px] group-hover:text-primary-green"
             classNameArrow="bg-[#335B6B]"
           />
         </div>

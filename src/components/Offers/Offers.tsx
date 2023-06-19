@@ -30,8 +30,9 @@ const Offers = () => {
         </div>
         <CustomButton
           title="View All products"
-          classNameContainer="bg-secondary-yellow w-full max-w-[267px] h-[82px] rounded-2xl shadow-xl max-lg:mt-5"
-          classNameText="text-xl text-primary-green"
+          classNameContainer="custom-trans bg-secondary-yellow w-full border-4 border-secondary-yellow max-w-[267px] h-[82px] rounded-2xl shadow-xl max-lg:mt-5 group hover:bg-transparent"
+          classNameText="custom-trans text-xl text-primary-green group-hover:text-secondary-yellow"
+          classNameArrow="custom-trans group-hover:bg-secondary-yellow"
         />
       </div>
 

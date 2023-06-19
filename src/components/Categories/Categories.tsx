@@ -16,19 +16,16 @@ const Categories = () => {
       ref={elemRef}
       className={`categories custom-trans opacity-0 ${value && "opacity-100"}`}
     >
-      {categories.map((c) => (
+      {categories.map((c, i) => (
         <Fragment key={c.name}>
-          <Link href={c.href} className="relative">
-            <Image
-              src={c.image}
-              width={460}
-              height={560}
-              alt={c.alt}
-              priority
-              className="w-full h-auto object-cover max-lg:h-[200px]"
-            />
-            <div className="category-bg">
-              <h3 className="capitalize font-bold text-2xl text-primary-green">
+          <Link
+            href={c.href}
+            className={`relative w-full h-[580px] max-lg:h-[200px] group bg-fixed bg-cover ${
+              i === 0 ? "bg-juice-bg" : i === 1 ? "bg-food-bg" : "bg-cookie-bg"
+            }`}
+          >
+            <div className="custom-trans category-bg w-[280px] shadow-xl group-hover:w-[310px]">
+              <h3 className="custom-trans capitalize font-bold text-2xl text-primary-green group-hover:text-green-light">
                 {c.name}
               </h3>
             </div>

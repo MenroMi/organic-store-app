@@ -8,6 +8,7 @@ export const sliderOptions = {
   autoplaySpeed: 3000,
   pauseOnHover: true,
   adaptiveHeight: true,
+  focusOnSelect: true,
   responsive: [
     {
       breakpoint: 1440,
