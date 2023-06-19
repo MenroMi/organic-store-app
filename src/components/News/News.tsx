@@ -1,11 +1,19 @@
+"use client";
+
 import React from "react";
 import CustomButton from "../CustomButton";
 import Image from "next/image";
 import { articles } from "@/constants";
+import useVisible from "@/hooks/useVisible";
 
 const News = () => {
+  const { elemRef, value } = useVisible();
+
   return (
-    <section className="news">
+    <section
+      ref={elemRef}
+      className={`news custom-trans opacity-0 ${value && "opacity-100"}`}
+    >
       <div className="flex flex-col gap-5 lg:gap-0 lg:flex-row lg:justify-between">
         <div className="flex flex-col max-md:gap-3">
           <h2 className="title">News</h2>

@@ -31,3 +31,14 @@ export interface IRatingProps {
   classNameImage?: string;
   clickable: boolean;
 }
+
+export type IWindowSize = {
+  width?: number;
+  height?: number;
+};
+
+export type IOptions = {
+  root: null;
+  threshold: number;
+  rootMargin: string;
+};

@@ -1,14 +1,32 @@
+"use client";
+
 // basic
 import React, { Fragment } from "react";
 
 // constants
 import { advantagesEcoProducts } from "@/constants";
+import useVisible from "@/hooks/useVisible";
 
 const EcoFriendly = () => {
+  const { elemRef, value } = useVisible();
+
   return (
-    <section className="eco-friendly">
-      <div className="eco-friendly__bg "></div>
-      <div className="eco-information">
+    <section
+      ref={elemRef}
+      className={`eco-friendly custom-trans opacity-0 ${
+        value && "opacity-100"
+      }`}
+    >
+      <div
+        className={`eco-friendly__bg custom-trans  opacity-0 ${
+          value && "opacity-100"
+        }`}
+      ></div>
+      <div
+        className={`eco-information custom-trans delay-500 opacity-0 ${
+          value && "opacity-100"
+        }`}
+      >
         <h2 className="title max-md:text-2xl">Eco Friendly</h2>
         <h3 className="subtitle max-md:text-3xl">
           From our Farm <br />

@@ -58,7 +58,7 @@ const Footer = () => {
                   alt={media.alt}
                   width={21}
                   height={17}
-                  className="object-contain"
+                  className="object-contain w-auto"
                 />
                 <h2 className="lg:hidden font-bold text-xl text-primary-green">
                   {media.label}

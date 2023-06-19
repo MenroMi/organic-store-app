@@ -1,7 +1,9 @@
+"use client";
+
 // basic
 import Image from "next/image";
 import Link from "next/link";
-import React from "react";
+import React, { useEffect, useState } from "react";
 
 // constants
 import { navLinks } from "@/constants";
@@ -10,8 +12,34 @@ import { navLinks } from "@/constants";
 import BurgerMenu from "@/components/BurgerMenu";
 
 const Navbar = () => {
+  const [smaller, setSmaller] = useState<boolean>(false);
+
+  useEffect(() => {
+    const handleScroll = (e: Event) => {
+      const {
+        documentElement: { scrollTop },
+      } = e.target as any;
+
+      if (scrollTop >= 100) {
+        return setSmaller(true);
+      } else {
+        setSmaller(false);
+      }
+
+      return null;
+    };
+
+    window.addEventListener("scroll", handleScroll);
+
+    return () => window.addEventListener("scroll", handleScroll);
+  }, []);
+
   return (
-    <header className="general-header max-sm:h-[100px] lg:fixed lg:top-0 lg:z-[12] lg:backdrop-blur-sm">
+    <header
+      className={`general-header transition-all max-sm:h-[100px] lg:fixed lg:top-0 lg:z-[12] lg:backdrop-blur-sm ${
+        smaller ? "h-[90px]" : "h-[150px]"
+      } `}
+    >
       <nav className="general-header__navbar max-lg:gap-4 lg:gap-2">
         <div className="flex justify-between max-w-[865px] w-full gap-2">
           <Link
@@ -23,6 +51,7 @@ const Navbar = () => {
               alt="organic store logo"
               width={200}
               height={56}
+              priority
               className="object-contain"
             />
           </Link>
@@ -46,6 +75,7 @@ const Navbar = () => {
                 alt="cart logo"
                 width={26}
                 height={24}
+                priority
                 className="object-contain"
               />
             </div>

@@ -1,3 +1,5 @@
+"use client";
+
 // basic
 import Image from "next/image";
 import React from "react";
@@ -7,20 +9,27 @@ import { aboutReasons } from "@/constants";
 
 // components
 import CustomButton from "@/components/CustomButton";
+import useVisible from "@/hooks/useVisible";
 
 const AboutUs = () => {
+  const { elemRef, value } = useVisible();
   return (
-    <section className="about-us lg:py-36">
+    <section ref={elemRef} className="about-us lg:py-36">
       <div className="about-us__container">
         <Image
           src="/about-us-bg.png"
           alt="healthy and organic food"
           width={675}
           height={642}
-          className="object-contain flex-1 max-lg:hidden"
+          priority
+          className={`w-full object-contain custom-trans flex-1 max-lg:hidden ${
+            value ? "opacity-100" : "opacity-0"
+          }`}
         />
 
-        <div className="flex-1">
+        <div
+          className={`custom-trans flex-1 opacity-0 ${value && "opacity-100"}`}
+        >
           <h2 className="title sm:text-4xl">About Us</h2>
           <p className="subtitle leading-[1.3] mt-4 sm:text-5xl">
             We Believe in Organic <br />
@@ -42,7 +51,7 @@ const AboutUs = () => {
                     alt={reason.alt}
                     width={53}
                     height={46}
-                    className=" object-contain"
+                    className="w-auto object-contain"
                   />
                 </div>
                 <div className="flex flex-col gap-2">

@@ -6,7 +6,7 @@ import Banner from "@/components/Banner/Banner";
 
 const BannersList = () => {
   return (
-    <section className="banner-list py-24 lg:flex-row lg:py-[140px]">
+    <section className={`banner-list flex py-24 lg:flex-row lg:py-[140px]`}>
       {banners.map((banner) => (
         <Banner
           key={banner.name}

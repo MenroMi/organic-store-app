@@ -1,3 +1,5 @@
+"use client";
+
 // basic
 import React from "react";
 
@@ -7,10 +9,18 @@ import { products } from "@/constants";
 // components
 import CustomButton from "@/components/CustomButton";
 import ProductCard from "@/components/ProductCard";
+import useVisible from "@/hooks/useVisible";
 
 const Offers = () => {
+  const { elemRef, value } = useVisible();
+
   return (
-    <section className="offer-products">
+    <section
+      ref={elemRef}
+      className={`offer-products custom-trans opacity-0 ${
+        value && "opacity-100"
+      }`}
+    >
       <div className="offer-products__information">
         <div className="flex flex-col text-center lg:text-left">
           <h2 className="title">Offer Products</h2>

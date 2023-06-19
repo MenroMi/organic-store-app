@@ -1,3 +1,4 @@
+import { sliderOptions } from "./sliderOptions";
 import { articles } from "./articles";
 import { categories } from "./categories";
 import { advantagesEcoProducts } from "./ecoFriendly";
@@ -22,4 +23,5 @@ export {
   advantagesEcoProducts,
   categories,
   articles,
+  sliderOptions,
 };

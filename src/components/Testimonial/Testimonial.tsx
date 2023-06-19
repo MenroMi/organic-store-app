@@ -1,22 +1,49 @@
+"use client";
+
 // basic
 import Image from "next/image";
-import React from "react";
+import React, { useState } from "react";
 
 // constants
 import { advantages } from "@/constants";
 
+// hooks
+import useVisible from "@/hooks/useVisible";
+
 // components
 import Rating from "@/components/Rating";
+import Counter from "@/components/Counter";
 
 const Testimonial = () => {
+  const { elemRef, value } = useVisible();
+  const [isOnce, setIsOnce] = useState(false);
   return (
-    <section className="testimonial lg:pt-[130px] lg:pb-[150px] xl:bg-no-repeat xl:bg-cover">
-      <h2 className="title px-5">Testimonial</h2>
-      <h3 className="subtitle px-5 text-center max-md:leading-[1.1] max-md:mt-4">
+    <section
+      ref={elemRef}
+      className={`testimonial custom-trans lg:pt-[130px] lg:pb-[150px] xl:bg-no-repeat xl:bg-cover opacity-0 ${
+        value && "opacity-100"
+      }`}
+    >
+      <h2
+        className={`title custom-trans px-5 ${
+          value ? "opacity-100 translate-y-0" : "opacity-0 translate-y-[-10px]"
+        }`}
+      >
+        Testimonial
+      </h2>
+      <h3
+        className={`subtitle custom-trans px-5 text-center max-md:leading-[1.1] max-md:mt-4 delay-500 ${
+          value ? "opacity-100 translate-y-0" : "opacity-0 translate-y-[-10px]"
+        }`}
+      >
         What Our Customer Saying?
       </h3>
 
-      <div className="flex flex-col items-center mt-14">
+      <div
+        className={`flex custom-trans flex-col items-center mt-14 opacity-0 ${
+          value && "opacity-100"
+        }`}
+      >
         <div className="flex h-[115px]">
           <Image
             src="/woman-avatar.jpg"
@@ -45,7 +72,7 @@ const Testimonial = () => {
           <p className="text-sm text-grey-text">Consumer</p>
         </div>
 
-        <div className="border-t border-b max-w-[70%] w-full mt-20 sm:max-w-[966px]"></div>
+        <div className="border-t border-b max-w-[70%] w-full mt-20 lg:max-w-[966px]"></div>
 
         <div className="advantages">
           {advantages.map((a) => (
@@ -54,9 +81,17 @@ const Testimonial = () => {
               className="advantages__advantage-container"
             >
               <div className="advantages__advantage">
-                <p className="font-bold text-[42px] text-primary-green">
-                  {a.numbers}
-                </p>
+                {value && (
+                  <Counter
+                    duration="3"
+                    number={a.number}
+                    character={
+                      !a.number.match(/\D/gi) ? "" : a.number.match(/\D/gi)![0]
+                    }
+                    isOnce={isOnce}
+                    setIsOnce={(val) => setIsOnce(val)}
+                  />
+                )}
                 <p className="capitalize font-bold text-lg text-primary-green">
                   {a.description}
                 </p>

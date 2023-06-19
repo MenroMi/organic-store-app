@@ -1,18 +1,22 @@
 export const advantages = [
   {
-    numbers: "100%",
+    number: "100%",
     description: "organic",
+    id: "organic",
   },
   {
-    numbers: "285",
+    number: "285",
     description: "active product",
+    id: "active",
   },
   {
-    numbers: "385+",
+    number: "385+",
     description: "organic orchads",
+    id: "orchads",
   },
   {
-    numbers: "25+",
+    number: "25+",
     description: "years of farming",
+    id: "years",
   },
 ];
