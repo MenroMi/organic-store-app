@@ -28,7 +28,7 @@
 
 /* START: Header styles */
 .general-header {
-  @apply flex w-full  items-center px-8 bg-white/[0.5] font-['Roboto'] font-normal;
+  @apply flex w-full  items-center px-8 bg-white/[0.7] font-['Roboto'] font-normal;
 }
 
 .general-header__navbar {
@@ -50,7 +50,7 @@
 }
 
 .overlay {
-  @apply fixed h-full w-full bg-green-light inset-0 bg-opacity-25 z-[13];
+  @apply fixed h-full w-full bg-green-light inset-0 bg-opacity-25 z-[13] overflow-hidden;
 }
 
 /** END: Burger menu styles **/
@@ -140,7 +140,7 @@
 }
 
 .card__product-name {
-  @apply font-['Roboto'] text-[22px] text-primary-green;
+  @apply font-['Roboto'] text-primary-green;
 }
 
 /* END: Product card styles */

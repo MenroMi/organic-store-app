@@ -3,7 +3,7 @@
 // basic
 import Image from "next/image";
 import Link from "next/link";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 
 // constants
 import { navLinks } from "@/constants";
@@ -13,6 +13,8 @@ import BurgerMenu from "@/components/BurgerMenu";
 
 const Navbar = () => {
   const [smaller, setSmaller] = useState<boolean>(false);
+  const [isOpen, setIsOpen] = useState<boolean>(false);
+  const scrollRef = useRef<number>(0);
 
   useEffect(() => {
     const handleScroll = (e: Event) => {
@@ -62,7 +64,38 @@ const Navbar = () => {
               </Link>
             ))}
           </div>
-          <BurgerMenu />
+          <BurgerMenu
+            isOpen={isOpen}
+            setIsOpen={setIsOpen}
+            scrollValue={scrollRef.current}
+            classNameContainer="self-center lg:hidden cursor-pointer"
+          >
+            <svg
+              onClick={() => {
+                scrollRef.current = document.documentElement.scrollTop;
+                setIsOpen(true);
+              }}
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 448 512"
+              fill="#274C5B"
+              className={`transition-all max-sm:w-[30px] max-sm:h-[30px] w-[60px] h-[60px] ${
+                isOpen ? "hidden" : "visible"
+              }`}
+            >
+              <path d="M0 96C0 78.3 14.3 64 32 64H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 128 0 113.7 0 96zM0 256c0-17.7 14.3-32 32-32H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32H32c-17.7 0-32-14.3-32-32s14.3-32 32-32H416c17.7 0 32 14.3 32 32z" />
+            </svg>
+            <div className="flex flex-col h-full w-full justify-center">
+              {navLinks.map((link) => (
+                <Link
+                  key={link.label}
+                  href="/"
+                  className="burger-nav__item max-md:text-2xl md:text-4xl"
+                >
+                  {link.label}
+                </Link>
+              ))}
+            </div>
+          </BurgerMenu>
         </div>
         <div className="cart max-sm:min-w-[40px] max-lg:min-w-[80px] lg:min-w-[159px]">
           <Link

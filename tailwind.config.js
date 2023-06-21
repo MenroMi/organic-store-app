@@ -14,7 +14,9 @@ module.exports = {
       },
       colors: {
         "primary-green": "#274C5B",
+        "primary-red": "#823333",
         "green-light": "#7EB693",
+        "red-light": "#b87272",
         "secondary-yellow": "#EFD372",
         "grey-text": "#525C60",
         "grey-light": "#F9F8F8",
@@ -27,6 +29,7 @@ module.exports = {
         "juice-bg": "url(/juice.png)",
         "food-bg": "url(/food.png)",
         "cookie-bg": "url(/cookies.png)",
+        "search-icon": "url(/icons/search-bar.svg)",
       },
     },
   },

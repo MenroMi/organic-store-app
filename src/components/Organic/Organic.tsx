@@ -14,7 +14,7 @@ import useVisible from "@/hooks/useVisible";
 // components
 import ProductCard from "@/components/ProductCard";
 
-import SliderCarousel from "@/components/Slider";
+import SliderCarousel from "@/components/Sliders/Slider";
 
 const Organic = () => {
   const { elemRef, value } = useVisible();
@@ -39,6 +39,7 @@ const Organic = () => {
               name={product?.name}
               priceDiscount={product?.priceDiscount}
               priceOld={product?.priceOld}
+              classNameContainer="lg:max-w-[380px] lg:h-[530px]"
             />
           ))}
         </SliderCarousel>

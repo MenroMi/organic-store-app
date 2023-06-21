@@ -1,3 +1,4 @@
+import { filtersData } from "./filter";
 import { sliderOptions } from "./sliderOptions";
 import { articles } from "./articles";
 import { categories } from "./categories";
@@ -24,4 +25,5 @@ export {
   categories,
   articles,
   sliderOptions,
+  filtersData,
 };

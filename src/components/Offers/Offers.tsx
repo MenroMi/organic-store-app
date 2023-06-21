@@ -51,6 +51,7 @@ const Offers = () => {
               priceDiscount={prod?.priceDiscount}
               priceOld={prod?.priceOld}
               key={prod?.name}
+              classNameContainer="lg:max-w-[447px] lg:h-[590px]"
             />
           );
         })}

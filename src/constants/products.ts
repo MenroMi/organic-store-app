@@ -47,4 +47,12 @@ export const products = [
     category: "mill",
     image: "/food-images/hazelnut.png",
   },
+  {
+    label: "Calabrese Broccoli",
+    name: "broccoli2",
+    priceDiscount: "21.00",
+    priceOld: "25.00",
+    category: "vegetable",
+    image: "/food-images/broccoli.png",
+  },
 ];

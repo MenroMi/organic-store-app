@@ -24,12 +24,28 @@ export interface IProductCardProps {
   priceOld: string;
   category: string;
   image: string;
+  classNameContainer?: string;
+  classNameTitle?: string;
+  classNameDivider?: string;
+  classNameContainerPrice?: string;
+  classNameOldPrice?: string;
+  classNameActualPrice?: string;
+  classNameRating?: string;
+  classNameCategory?: string;
 }
 
 export interface IRatingProps {
   classNameContainer?: string;
   classNameImage?: string;
   clickable: boolean;
+}
+
+export interface IBurgerMenuProps {
+  children: React.ReactNode;
+  isOpen: boolean;
+  setIsOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  scrollValue: number;
+  classNameContainer?: string;
 }
 
 export type IWindowSize = {
@@ -41,4 +57,9 @@ export type IOptions = {
   root: null;
   threshold: number;
   rootMargin: string;
+};
+
+export type IPrice = {
+  from: string;
+  to: string;
 };
