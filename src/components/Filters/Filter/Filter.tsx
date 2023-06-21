@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 interface IFilterProps {
   label: string;
@@ -25,22 +25,18 @@ const Filter: React.FC<IFilterProps> = ({ label, data }) => {
 
   return (
     <div
-      className={`flex flex-col relative w-full h-[10%] ${
-        showDropdownMenu && "h-[70%]"
-      }`}
+      className={`relative w-full min-h-[10%]`}
     >
       <button
         type="button"
         onClick={() => {
           setShowDropdownMenu(!showDropdownMenu);
         }}
-        className={`transition ease-in-out duration-300 border-y-4 border-primary-green text-primary-green h-full ${
-          showDropdownMenu && "h-[14.5%]"
-        } w-full font-bold hover:bg-primary-green hover:text-white ${
+        className={`capitalize transition ease-in-out duration-300 border-y-4 border-primary-green text-primary-green h-[80px] w-full font-bold hover:bg-primary-green hover:text-white ${
           showDropdownMenu && "bg-primary-green text-white "
         }`}
       >
-        Categories
+        {label}
       </button>
       <form
         onSubmit={handleSubmit}
@@ -87,7 +83,7 @@ const Filter: React.FC<IFilterProps> = ({ label, data }) => {
         <button
           disabled={!category && true}
           type="submit"
-          className={`transition-all ease-in-out duration-200 h-[60px] bg-green-light mt-2 text-white rounded-md font-bold hover:bg-primary-green/[0.8] disabled:opacity-50 disabled:hover:bg-green-light`}
+          className={`transition-all ease-in-out duration-200 h-[60px] bg-green-light mt-2 text-white rounded-md font-bold hover:bg-green-darker disabled:opacity-50 disabled:hover:bg-green-light`}
         >
           Confirm
         </button>

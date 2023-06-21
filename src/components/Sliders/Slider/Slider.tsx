@@ -10,7 +10,7 @@ import "slick-carousel/slick/slick-theme.css";
 
 const SliderCarousel = ({ children }: { children: React.ReactNode }) => {
   return (
-    <Slider className="w-full max-w-[85vw]" {...sliderOptions}>
+    <Slider className="w-full max-w-[70vw] sm:max-w-[80pvw] md:max-w-[85vw]" {...sliderOptions}>
       {children}
     </Slider>
   );

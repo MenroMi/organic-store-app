@@ -39,7 +39,13 @@ const Organic = () => {
               name={product?.name}
               priceDiscount={product?.priceDiscount}
               priceOld={product?.priceOld}
-              classNameContainer="lg:max-w-[380px] lg:h-[530px]"
+              classNameContainer="max-md:h-[400px] lg:max-w-[380px] lg:h-[530px]"
+              classNameCategory="max-md:max-w-full max-md:h-[20px]"
+              classNameTitle="max-md:text-base"
+              classNameContainerPrice="max-md:flex-col"
+              classNameActualPrice="max-md:text-lg"
+              classNameRating="max-md:ml-0"
+              classNameDivider="max-sm:mt-[0.5rem]"
             />
           ))}
         </SliderCarousel>

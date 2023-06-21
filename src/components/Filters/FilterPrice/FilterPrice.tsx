@@ -31,14 +31,14 @@ const FilterPrice = () => {
   };
 
   return (
-    <div className={`relative w-full h-[10%]`}>
+    <div className={`mt-10 relative w-full min-h-[10%]`}>
       <button
         type="button"
         onClick={() => {
           setShowDropdownMenu(!showDropdownMenu);
           setPrice({ from: "", to: "" });
         }}
-        className={`transition ease-in-out duration-300 border-y-4 border-primary-green text-primary-green min-h-full w-full font-bold hover:bg-primary-green hover:text-white ${
+        className={`transition ease-in-out duration-300 border-y-4 border-primary-green text-primary-green h-[80px] w-full font-bold hover:bg-primary-green hover:text-white ${
           showDropdownMenu && "bg-primary-green text-white "
         }`}
       >
@@ -88,33 +88,38 @@ const FilterPrice = () => {
         </div>
 
         <div className="flex gap-2">
-          {["confirm", "reset"].map((label) => (
-            <button
-              key={label}
-              type={label === "confirm" ? "submit" : "button"}
-              className={`
-                capitalize 
-                transition-all 
-                ease-in-out 
-                duration-200 
-                h-[60px] 
-                mt-2 
-                text-white 
-                rounded-md 
-                font-bold 
-             
-                disabled:opacity-50 
-                disabled:hover:bg-green-light
-                ${
-                  label === "confirm"
-                    ? "w-[70%] bg-green-light hover:bg-primary-green/[0.8] disabled:hover:bg-green-light"
-                    : "w-[30%] bg-red-light hover:bg-primary-red/[0.8] disabled:hover:bg-red-light"
+          {["confirm", "reset"].map((label) => {
+            return (
+              <button
+                key={label}
+                onClick={() =>
+                  label === "reset" ? setPrice({ from: "", to: "" }) : ""
                 }
-              `}
-            >
-              {label}
-            </button>
-          ))}
+                type={label === "confirm" ? "submit" : "button"}
+                className={`
+              capitalize 
+              transition-all 
+              ease-in-out 
+              duration-200 
+              h-[60px] 
+              mt-2 
+              text-white 
+              rounded-md 
+              font-bold 
+           
+              disabled:opacity-50 
+              disabled:hover:bg-green-light
+              ${
+                label === "confirm"
+                  ? "w-[70%] bg-green-light hover:bg-primary-green/[0.8] disabled:hover:bg-green-light"
+                  : "w-[30%] bg-red-light hover:bg-primary-red/[0.8] disabled:hover:bg-red-light"
+              }
+            `}
+              >
+                {label}
+              </button>
+            );
+          })}
         </div>
       </form>
     </div>
