@@ -14,7 +14,7 @@ import useVisible from "@/hooks/useVisible";
 const AboutUs = () => {
   const { elemRef, value } = useVisible();
   return (
-    <section ref={elemRef} className="about-us lg:py-36">
+    <section id="about-us" ref={elemRef} className="about-us lg:py-36">
       <div className="about-us__container">
         <Image
           src="/about-us-bg.png"
@@ -70,6 +70,7 @@ const AboutUs = () => {
             classNameContainer="custom-trans duration-300 border-4 border-primary-green bg-primary-green h-[82px] w-full  rounded-2xl mt-12 shadow-xl hover:bg-transparent  hover:border-primary-green group sm:w-[200px]"
             classNameText="custom-trans text-white text-[19px] group-hover:text-primary-green"
             classNameArrow="bg-[#335B6B]"
+            route="/catalog"
           />
         </div>
       </div>

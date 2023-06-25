@@ -33,6 +33,7 @@ const Offers = () => {
           classNameContainer="custom-trans bg-secondary-yellow w-full border-4 border-secondary-yellow max-w-[267px] h-[82px] rounded-2xl shadow-xl max-lg:mt-5 group hover:bg-transparent"
           classNameText="custom-trans text-xl text-primary-green group-hover:text-secondary-yellow"
           classNameArrow="custom-trans group-hover:bg-secondary-yellow"
+          route="/catalog"
         />
       </div>
 

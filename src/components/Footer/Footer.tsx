@@ -12,7 +12,7 @@ import {
 
 const Footer = () => {
   return (
-    <footer className="general-footer lg:pt-0">
+    <footer id="contact" className="general-footer lg:pt-0">
       <div className="general-footer__nav-container lg:pb-0 lg:flex-nowrap lg:justify-center lg:gap-5">
         <div className="nav-contact max-lg:order-2 max-lg:w-full max-lg:flex-1 max-lg:text-center max-lg:border-r lg:gap-8">
           <h2 className="text-lg font-bold sm:text-[42px] sm:leading-[1]">

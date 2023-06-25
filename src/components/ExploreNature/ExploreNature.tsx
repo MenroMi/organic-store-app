@@ -39,6 +39,7 @@ const ExploreNature = () => {
             }`}
             classNameText="text-primary-green text-xl"
             title="Explore Now"
+            route="/catalog"
           />
         </div>
       </div>
