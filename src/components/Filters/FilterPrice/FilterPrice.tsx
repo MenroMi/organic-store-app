@@ -11,12 +11,12 @@ import { IPrice } from "@/types";
 import { IFiltersReducer } from "@/types/reduxTypes";
 
 const FilterPrice = () => {
+  const dispatch = useDispatch();
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const price: IPrice = useSelector(
     (state: { filters: IFiltersReducer }) => state.filters.filterPrice
   );
 
-  const dispatch = useDispatch();
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 

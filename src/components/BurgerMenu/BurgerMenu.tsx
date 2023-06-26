@@ -15,7 +15,6 @@ const BurgerMenu: React.FC<IBurgerMenuProps> = ({
 }) => {
   const [scrollPosition, setScrollPosition] = useState(0);
 
-
   useEffect(() => {
     if (isOpen) {
       setScrollPosition(scrollValue);
@@ -40,6 +39,8 @@ const BurgerMenu: React.FC<IBurgerMenuProps> = ({
     window.addEventListener("keydown", onCloseMenuByEsc);
 
     return () => window.removeEventListener("keydown", onCloseMenuByEsc);
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
