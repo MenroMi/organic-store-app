@@ -3,6 +3,7 @@ import { Footer, Navbar } from "@/components";
 
 // styles
 import "./globals.css";
+import ReduxProvider from "@/redux/provider";
 
 export const metadata = {
   title: "Organick Store",
@@ -17,9 +18,11 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
-        <Navbar />
-        {children}
-        <Footer />
+        <ReduxProvider>
+          <Navbar />
+          {children}
+          <Footer />
+        </ReduxProvider>
       </body>
     </html>
   );

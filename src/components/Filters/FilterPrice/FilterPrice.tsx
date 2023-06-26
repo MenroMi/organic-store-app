@@ -1,15 +1,22 @@
 "use client";
-
-import { IPrice } from "@/types";
+// basic
 import React, { useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+
+// lib
+import { onSetPriceFilter } from "@/redux/slices/filtersSlice";
+
+// interface
+import { IPrice } from "@/types";
+import { IFiltersReducer } from "@/types/reduxTypes";
 
 const FilterPrice = () => {
-  const [showDropdownMenu, setShowDropdownMenu] = useState<boolean>(false);
-  const [price, setPrice] = useState<IPrice>({
-    from: "",
-    to: "",
-  });
+  const [isOpen, setIsOpen] = useState<boolean>(false);
+  const price: IPrice = useSelector(
+    (state: { filters: IFiltersReducer }) => state.filters.filterPrice
+  );
 
+  const dispatch = useDispatch();
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
@@ -26,7 +33,7 @@ const FilterPrice = () => {
       data.to = price.to;
     }
 
-    setPrice({ from: "", to: "" });
+    dispatch(onSetPriceFilter({ from: "", to: "" }));
     return;
   };
 
@@ -35,11 +42,11 @@ const FilterPrice = () => {
       <button
         type="button"
         onClick={() => {
-          setShowDropdownMenu(!showDropdownMenu);
-          setPrice({ from: "", to: "" });
+          setIsOpen(!isOpen);
+          dispatch(onSetPriceFilter({ from: "", to: "" }));
         }}
         className={`transition ease-in-out duration-300 border-y-4 border-primary-green text-primary-green h-[80px] w-full font-bold hover:bg-primary-green hover:text-white ${
-          showDropdownMenu && "bg-primary-green text-white "
+          isOpen && "bg-primary-green text-white "
         }`}
       >
         Price
@@ -48,7 +55,7 @@ const FilterPrice = () => {
         onSubmit={handleSubmit}
         className={`group flex flex-col w-full max-w-[500px] z-10 p-3 mt-3 bg-primary-green/[0.8] backdrop-blur-sm
           shadow-xl 
-        ${showDropdownMenu ? "" : "hidden"}`}
+        ${isOpen ? "" : "hidden"}`}
       >
         <div className="flex items-center justify-around h-10 gap-5 ">
           {Object.keys(price).map((k) => {
@@ -61,20 +68,24 @@ const FilterPrice = () => {
                 name={key}
                 value={price[key]}
                 onBlur={() =>
-                  setPrice((prev) => ({
-                    ...prev,
-                    [key]: /\$/gi.test(price[key])
-                      ? price[key].replace(/\$/gi, "$")
-                      : price[key]
-                      ? price[key] + "$"
-                      : "",
-                  }))
+                  dispatch(
+                    onSetPriceFilter({
+                      ...price,
+                      [key]: /\$/gi.test(price[key])
+                        ? price[key].replace(/\$/gi, "$")
+                        : price[key]
+                        ? price[key] + "$"
+                        : "",
+                    })
+                  )
                 }
                 onChange={(e) => {
-                  setPrice((prev) => ({
-                    ...prev,
-                    [key]: e.target.value.replace(/[^0-9.$]/gi, ""),
-                  }));
+                  dispatch(
+                    onSetPriceFilter({
+                      ...price,
+                      [key]: e.target.value.replace(/[^0-9.$]/gi, ""),
+                    })
+                  );
                 }}
                 className={`w-full max-w-[50%] h-10 px-3 ${
                   key === "from"
@@ -93,7 +104,9 @@ const FilterPrice = () => {
               <button
                 key={label}
                 onClick={() =>
-                  label === "reset" ? setPrice({ from: "", to: "" }) : ""
+                  label === "reset"
+                    ? dispatch(onSetPriceFilter({ from: "", to: "" }))
+                    : ""
                 }
                 type={label === "confirm" ? "submit" : "button"}
                 className={`

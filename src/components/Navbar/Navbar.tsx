@@ -12,8 +12,8 @@ import { navLinks } from "@/constants";
 import BurgerMenu from "@/components/BurgerMenu";
 
 const Navbar = () => {
-  const [smaller, setSmaller] = useState<boolean>(false);
   const [isOpen, setIsOpen] = useState<boolean>(false);
+  const [smaller, setSmaller] = useState<boolean>(false);
   const scrollRef = useRef<number>(0);
 
   useEffect(() => {
@@ -60,7 +60,7 @@ const Navbar = () => {
           <svg
             onClick={() => {
               scrollRef.current = document.documentElement.scrollTop;
-              setIsOpen(true);
+              setIsOpen(!isOpen);
             }}
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 448 512"
@@ -81,7 +81,7 @@ const Navbar = () => {
 
           <BurgerMenu
             isOpen={isOpen}
-            setIsOpen={setIsOpen}
+            setIsOpen={() => setIsOpen(!isOpen)}
             scrollValue={scrollRef.current}
             classNameContainer={`self-center cursor-pointer ${
               !isOpen && "hidden"
@@ -100,24 +100,43 @@ const Navbar = () => {
             </div>
           </BurgerMenu>
         </div>
-        <div className="cart max-sm:min-w-[40px] max-lg:min-w-[80px] lg:min-w-[159px]">
-          <Link
-            href="/"
-            className="flex border rounded-full items-center gap-3 max-sm:p-1 max-lg:p-2 lg:py-2 lg:pl-3 lg:pr-6 "
-          >
-            <div className="max-sm:p-2 p-4 rounded-full bg-primary-green">
-              <Image
-                src="/icons/cart.svg"
-                alt="cart logo"
-                width={26}
-                height={24}
-                priority
-                className="object-contain"
-              />
-            </div>
+        <div className="flex gap-3">
+          <div className="cart max-sm:min-w-[40px] max-lg:min-w-[80px] lg:min-w-[165px]">
+            <Link
+              href="/"
+              className="flex border rounded-full items-center gap-3 max-sm:p-1 max-lg:p-2 lg:py-2 lg:pl-3 lg:pr-6 "
+            >
+              <div className="max-sm:p-2 p-4 rounded-full bg-primary-green">
+                <Image
+                  src="/icons/cart.svg"
+                  alt="cart logo"
+                  width={26}
+                  height={24}
+                  priority
+                  className="object-contain"
+                />
+              </div>
 
-            <p className="lg:visible max-lg:hidden">Cart 0</p>
-          </Link>
+              <p className="lg:visible max-lg:hidden">Cart 0</p>
+            </Link>
+          </div>
+          <div className="cart max-sm:min-w-[40px] max-xl:min-w-[80px]">
+            <Link
+              href="/"
+              className="border rounded-full items-center gap-3 max-sm:p-1 max-lg:p-2 lg:p-2 active:scale-90 transition"
+            >
+              <div className="max-sm:p-2 p-4 rounded-full bg-primary-green">
+                <Image
+                  src="/icons/user.svg"
+                  alt="user logo"
+                  width={23}
+                  height={23}
+                  priority
+                  className="object-contain"
+                />
+              </div>
+            </Link>
+          </div>
         </div>
       </nav>
     </header>
