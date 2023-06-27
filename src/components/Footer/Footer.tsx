@@ -9,6 +9,7 @@ import {
   footerSocialMedia,
   footerUtilityPages,
 } from "@/constants";
+import { navHref } from "@/constants/navigation";
 
 const Footer = () => {
   return (
@@ -33,7 +34,7 @@ const Footer = () => {
         </div>
 
         <div className="nav-social max-lg:order-1 max-lg:mb-10 lg:max-w-[630px] lg:border-l lg:border-r lg:pr-0">
-          <Link href="/" className="flex items-center transition">
+          <Link href={navHref.home} className="flex items-center transition">
             <Image
               src="/logo.png"
               alt="organic store logo"

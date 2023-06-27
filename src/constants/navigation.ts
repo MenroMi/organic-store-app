@@ -1,22 +1,32 @@
+export enum navHref {
+  home = "/home",
+  aboutUs = "/home#about-us",
+  contact = "#contact",
+  shop = "/catalog",
+  registration = "/auth/register",
+  logIn = "/auth/login",
+  forgotPass = "/auth/forgot",
+}
+
 export const navLinks = [
   {
     label: "Home",
-    href: "/",
+    href: navHref.home,
   },
   {
     label: "About Us",
-    href: "#about-us",
+    href: navHref.aboutUs,
   },
   {
     label: "Shop",
-    href: "/catalog",
+    href: navHref.shop,
   },
   {
     label: "Pages",
-    href: "/",
+    href: navHref.home,
   },
   {
     label: "Contact Us",
-    href: "#contact",
+    href: navHref.contact,
   },
 ];

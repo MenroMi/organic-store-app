@@ -5,16 +5,35 @@ import Image from "next/image";
 import Link from "next/link";
 import React, { useEffect, useRef, useState } from "react";
 
+// libs
+import { useDispatch, useSelector } from "react-redux";
+import { setOpenLoginForm } from "@/redux/slices/authSlice";
+
 // constants
 import { navLinks } from "@/constants";
 
+// hooks
+import useWindowSize from "@/hooks/useWindowSize";
+
 // components
 import BurgerMenu from "@/components/BurgerMenu";
+import { BurgerMenuAuth, DropdownAuth } from "@/components/Auth";
+
+// interface
+import { IAuthReducer } from "@/types/reduxTypes";
+import { navHref } from "@/constants/navigation";
 
 const Navbar = () => {
+  const {
+    windowSize: { width },
+  } = useWindowSize();
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [smaller, setSmaller] = useState<boolean>(false);
   const scrollRef = useRef<number>(0);
+  const isOpenLoginForm = useSelector(
+    (state: { auth: IAuthReducer }) => state.auth.isOpenLoginForm
+  );
+  const dispatch = useDispatch();
 
   useEffect(() => {
     const handleScroll = (e: Event) => {
@@ -45,7 +64,7 @@ const Navbar = () => {
       <nav className="general-header__navbar max-lg:gap-4 lg:gap-2">
         <div className="flex justify-between items-center max-w-[865px] w-full gap-2">
           <Link
-            href="/"
+            href={navHref.home}
             className="flex items-center max-lg:w-[120px] transition"
           >
             <Image
@@ -83,11 +102,13 @@ const Navbar = () => {
             isOpen={isOpen}
             setIsOpen={() => setIsOpen(!isOpen)}
             scrollValue={scrollRef.current}
-            classNameContainer={`self-center cursor-pointer ${
-              !isOpen && "hidden"
+            classNameContainer={`relative cursor-pointer ${
+              (!isOpen || width! >= 1024) && "hidden"
             }`}
           >
-            <div className="flex flex-col h-full w-full justify-center">
+            <BurgerMenuAuth />
+            {isOpenLoginForm && width! < 1024 && <DropdownAuth />}
+            <div className="flex flex-col h-full w-full justify-start">
               {navLinks.map((link) => (
                 <Link
                   key={link.label}
@@ -103,7 +124,7 @@ const Navbar = () => {
         <div className="flex gap-3">
           <div className="cart max-sm:min-w-[40px] max-lg:min-w-[80px] lg:min-w-[165px]">
             <Link
-              href="/"
+              href={navHref.home}
               className="flex border rounded-full items-center gap-3 max-sm:p-1 max-lg:p-2 lg:py-2 lg:pl-3 lg:pr-6 "
             >
               <div className="max-sm:p-2 p-4 rounded-full bg-primary-green">
@@ -121,9 +142,14 @@ const Navbar = () => {
             </Link>
           </div>
           <div className="cart max-sm:min-w-[40px] max-xl:min-w-[80px]">
-            <Link
-              href="/"
+            <button
+              type="button"
               className="border rounded-full items-center gap-3 max-sm:p-1 max-lg:p-2 lg:p-2 active:scale-90 transition"
+              onClick={() => {
+                return width! < 1024
+                  ? setIsOpen(!isOpen)
+                  : dispatch(setOpenLoginForm());
+              }}
             >
               <div className="max-sm:p-2 p-4 rounded-full bg-primary-green">
                 <Image
@@ -135,10 +161,11 @@ const Navbar = () => {
                   className="object-contain"
                 />
               </div>
-            </Link>
+            </button>
           </div>
         </div>
       </nav>
+      {isOpenLoginForm && width! >= 1024 && <DropdownAuth />}
     </header>
   );
 };

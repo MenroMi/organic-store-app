@@ -1,3 +1,5 @@
+import { navHref } from "./navigation";
+
 export const footerContactData = [
   {
     label: "Email",
@@ -43,22 +45,22 @@ export const footerSocialMedia = [
 export const footerUtilityPages = [
   {
     label: "Style Guide",
-    href: "/",
+    href: navHref.home,
   },
   {
     label: "Protected",
-    href: "/",
+    href: navHref.home,
   },
   {
     label: "Page Not Found",
-    href: "/",
+    href: navHref.home,
   },
   {
     label: "Changelog",
-    href: "/",
+    href: navHref.home,
   },
   {
     label: "Licenses",
-    href: "/",
+    href: navHref.home,
   },
 ];
