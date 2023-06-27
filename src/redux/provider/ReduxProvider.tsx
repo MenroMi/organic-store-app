@@ -5,12 +5,13 @@ import { Provider } from "react-redux";
 import { configureStore } from "@reduxjs/toolkit";
 
 // reducers
-import { filters } from "@/redux/slices";
+import { filters, auth } from "@/redux/slices";
 
 // store
 const store = configureStore({
   reducer: {
     filters,
+    auth,
   },
   middleware: (getDefaultMiddleware) => getDefaultMiddleware(),
   devTools: process.env.NODE_ENV !== "production",

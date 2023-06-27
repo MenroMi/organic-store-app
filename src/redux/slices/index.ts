@@ -1,3 +1,4 @@
 import filters from "./filtersSlice";
+import auth from "./authSlice";
 
-export { filters };
+export { filters, auth };
