@@ -32,8 +32,6 @@ const Filter: React.FC<IFilterProps> = ({ label, data }) => {
     return data.filter((d) => d.startsWith(category.toLowerCase()));
   };
 
-  console.log(category);
-
   return (
     <div className={`relative w-full min-h-[10%]`}>
       <button
