@@ -9,7 +9,11 @@
 }
 
 html {
-  @apply scroll-smooth;
+  @apply scroll-smooth h-full;
+}
+
+body {
+  @apply h-full;
 }
 
 /* START: General styles */

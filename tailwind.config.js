@@ -14,6 +14,7 @@ module.exports = {
       },
       colors: {
         "primary-green": "#274C5B",
+        "primary-green-darker": "#1e3d4a",
         "primary-red": "#823333",
         "green-light": "#7EB693",
         "green-darker": "#649e7a",
@@ -31,6 +32,9 @@ module.exports = {
         "food-bg": "url(/food.png)",
         "cookie-bg": "url(/cookies.png)",
         "search-icon": "url(/icons/search-bar.svg)",
+        "register-bg": "url(/register-bg.jpg)",
+        "login-bg": "url(/login-bg.jpg)",
+        "forgot-pass-bg": "url(/forgot-bg.jpg)",
       },
     },
   },
