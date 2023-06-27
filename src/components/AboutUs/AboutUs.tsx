@@ -7,9 +7,11 @@ import React from "react";
 // constants
 import { aboutReasons } from "@/constants";
 
+// hooks
+import useVisible from "@/hooks/useVisible";
+
 // components
 import CustomButton from "@/components/CustomButton";
-import useVisible from "@/hooks/useVisible";
 
 const AboutUs = () => {
   const { elemRef, value } = useVisible();

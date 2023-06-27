@@ -1,6 +1,6 @@
 export const metadata = {
-  title: "Organick Store",
-  description: "E-shop with organic food delicious.",
+  title: "Authentication to store",
+  description: "Authentication to organick store.",
 };
 
 export default function RootLayout({

@@ -1,10 +1,13 @@
 "use client";
 
-import LoginByProviders from "@/components/Auth/LoginByProviders";
-import CustomButton from "@/components/CustomButton";
-import { navHref } from "@/constants/navigation";
+// basic
 import Link from "next/link";
-import React from "react";
+
+// constants
+import { navHref } from "@/constants/navigation";
+
+// components
+import { CustomButton, LoginByProviders } from "@/components";
 
 const LoginPage = () => {
   const onHandleSubmit = (e: React.FormEvent<HTMLFormElement>) => {

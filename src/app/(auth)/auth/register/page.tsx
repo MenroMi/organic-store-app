@@ -1,14 +1,14 @@
 "use client";
-
-import CustomButton from "@/components/CustomButton";
-import { navHref } from "@/constants/navigation";
+// basic
 import Link from "next/link";
-import { useRouter } from "next/navigation";
-import React from "react";
+
+// constants
+import { navHref } from "@/constants/navigation";
+
+// components
+import { CustomButton } from "@/components";
 
 const RegisterPage = () => {
-  const router = useRouter();
-
   const onHandleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
   };

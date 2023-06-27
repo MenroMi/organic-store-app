@@ -1,9 +1,13 @@
 "use client";
 
-import CustomButton from "@/components/CustomButton";
-import { navHref } from "@/constants/navigation";
+// basic
 import Link from "next/link";
-import React from "react";
+
+// constants
+import { navHref } from "@/constants/navigation";
+
+// components
+import CustomButton from "@/components/CustomButton";
 
 const ForgotPasswordPage = () => {
   const onHandleSubmit = (e: React.FormEvent<HTMLFormElement>) => {

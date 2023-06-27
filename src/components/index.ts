@@ -12,6 +12,13 @@ import News from "./News";
 import Newsletter from "./Newsletter";
 import FilterList from "./Filters";
 import ProductsList from "./ProductsList";
+import {
+  DropdownAuth,
+  BurgerMenuAuth,
+  LoginByProviders,
+  LoginFormByEmail,
+} from "./Auth";
+import CustomButton from "./CustomButton";
 
 export {
   Navbar,
@@ -28,4 +35,9 @@ export {
   Newsletter,
   FilterList,
   ProductsList,
+  DropdownAuth,
+  BurgerMenuAuth,
+  LoginByProviders,
+  LoginFormByEmail,
+  CustomButton,
 };
