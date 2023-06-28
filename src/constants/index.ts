@@ -12,6 +12,7 @@ import {
   footerSocialMedia,
   footerUtilityPages,
 } from "./footer";
+import { regexpEmail, regexpName, regexpPassword } from "./regexpConst";
 
 export {
   navLinks,
@@ -26,4 +27,7 @@ export {
   articles,
   sliderOptions,
   filtersData,
+  regexpEmail,
+  regexpName,
+  regexpPassword,
 };

@@ -23,5 +23,8 @@ export const initRegisterStates: IRegisterReducer = {
   name: "",
   email: "",
   password: "",
+  errorName: false,
+  errorEmail: false,
+  errorPass: false,
   isConfirm: false,
 };

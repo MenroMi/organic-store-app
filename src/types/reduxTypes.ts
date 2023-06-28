@@ -16,5 +16,8 @@ export interface IRegisterReducer {
   name: string;
   email: string;
   password: string;
+  errorName: boolean;
+  errorEmail: boolean;
+  errorPass: boolean;
   isConfirm: boolean;
 }

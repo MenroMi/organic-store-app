@@ -10,13 +10,13 @@ import { useDispatch, useSelector } from "react-redux";
 import { navHref } from "@/constants/navigation";
 
 // utils
-import memoSelector from "@/utils/authSelector";
+import memoAuthSelector from "@/utils/selectors/authSelector";
 
 // slice
 import { setEmail, setPassword } from "@/redux/slices/authSlice";
 
 const LoginFormByEmail = () => {
-  const { email, password } = useSelector(memoSelector);
+  const { email, password } = useSelector(memoAuthSelector);
   const dispatch = useDispatch();
 
   const onHandleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
