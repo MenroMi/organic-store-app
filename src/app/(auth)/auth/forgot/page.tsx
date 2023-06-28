@@ -8,8 +8,14 @@ import { navHref } from "@/constants/navigation";
 
 // components
 import CustomButton from "@/components/CustomButton";
+import { Spinner } from "@/components";
+import { useEffect, useState } from "react";
 
 const ForgotPasswordPage = () => {
+  const [isLoading, setLoading] = useState<boolean>(false);
+
+  useEffect(() => () => setLoading(false), []);
+
   const onHandleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
   };
@@ -48,10 +54,12 @@ const ForgotPasswordPage = () => {
         <p className="text-gray-500 font-thin text-lg text-center mt-4">
           You can go to{" "}
           <Link
+            onClick={() => setLoading(true)}
             href={navHref.logIn}
             className="text-primary-green font-semibold hover:text-green-darker transition uppercase"
           >
             Log In
+            {isLoading && <Spinner display="inline-block" />}
           </Link>
         </p>
       </div>

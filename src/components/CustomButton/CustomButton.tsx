@@ -22,7 +22,7 @@ const CustomButton: React.FC<ICustomButtonProps> = ({
 
   return (
     <button
-      onClick={() => (route ? router.push(route) : {})}
+      onClick={() => (route ? router.replace(route) : {})}
       className={classNameContainer}
       type={type || "button"}
     >

@@ -7,9 +7,14 @@ import Link from "next/link";
 import { navHref } from "@/constants/navigation";
 
 // components
-import { CustomButton, LoginByProviders } from "@/components";
+import { CustomButton, LoginByProviders, Spinner } from "@/components";
+import { useEffect, useState } from "react";
 
 const LoginPage = () => {
+  const [isLoading, setLoading] = useState<boolean>(false);
+
+  useEffect(() => () => setLoading(false), []);
+
   const onHandleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
   };
@@ -68,10 +73,12 @@ const LoginPage = () => {
         <p className="text-gray-500 font-thin text-lg text-center">
           You do not have an account?{" "}
           <Link
+            onClick={() => setLoading(true)}
             href={navHref.registration}
             className="font-bold text-primary-green hover:text-green-darker cursor-pointer transition"
           >
             Register!
+            {isLoading && <Spinner display="inline-block" />}
           </Link>
         </p>
       </div>

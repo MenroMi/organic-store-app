@@ -19,6 +19,8 @@ import {
   LoginFormByEmail,
 } from "./Auth";
 import CustomButton from "./CustomButton";
+import HeaderProfile from "./HeaderProfile";
+import Spinner from "./Spinner";
 
 export {
   Navbar,
@@ -40,4 +42,6 @@ export {
   LoginByProviders,
   LoginFormByEmail,
   CustomButton,
+  HeaderProfile,
+  Spinner,
 };

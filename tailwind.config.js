@@ -1,4 +1,26 @@
+import plugin from "tailwindcss/plugin";
+
 /** @type {import('tailwindcss').Config} */
+
+const shapeRendering = plugin(({ addUtilities }) => {
+  const newUtilities = {
+    ".shape-auto": {
+      "shape-rendering": "auto",
+    },
+    ".shape-optimize-speed": {
+      "shape-rendering": "optimizeSpeed",
+    },
+    ".shape-crisp-edges": {
+      "shape-rendering": "crispEdges",
+    },
+    ".shape-geometric-precision": {
+      "shape-rendering": "geometricPrecision",
+    },
+  };
+
+  addUtilities(newUtilities);
+});
+
 module.exports = {
   content: [
     "./src/pages/**/*.{js,ts,jsx,tsx,mdx}",
@@ -38,5 +60,5 @@ module.exports = {
       },
     },
   },
-  plugins: [],
+  plugins: [shapeRendering],
 };

@@ -22,10 +22,6 @@ export const navLinks = [
     href: navHref.shop,
   },
   {
-    label: "Pages",
-    href: navHref.home,
-  },
-  {
     label: "Contact Us",
     href: navHref.contact,
   },

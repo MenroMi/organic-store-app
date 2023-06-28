@@ -6,9 +6,14 @@ import Link from "next/link";
 import { navHref } from "@/constants/navigation";
 
 // components
-import { CustomButton } from "@/components";
+import { CustomButton, Spinner } from "@/components";
+import { useEffect, useState } from "react";
 
 const RegisterPage = () => {
+  const [isLoading, setLoading] = useState<boolean>(false);
+
+  useEffect(() => () => setLoading(false), []);
+
   const onHandleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
   };
@@ -70,10 +75,12 @@ const RegisterPage = () => {
         <p className="text-gray-500 font-thin text-lg text-center mt-4">
           Back to{" "}
           <Link
+            onClick={() => setLoading(true)}
             href={navHref.logIn}
             className="text-primary-green font-bold cursor-pointer hover:text-green-darker transition"
           >
             log in
+            {isLoading && <Spinner display="inline-block" />}
           </Link>
         </p>
       </div>

@@ -52,7 +52,12 @@ const Navbar = () => {
 
     window.addEventListener("scroll", handleScroll);
 
-    return () => window.addEventListener("scroll", handleScroll);
+    return () => {
+      dispatch(setOpenLoginForm());
+      window.addEventListener("scroll", handleScroll);
+    };
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
