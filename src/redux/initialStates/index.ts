@@ -1,4 +1,8 @@
-import { IAuthReducer, IFiltersReducer } from "@/types/reduxTypes";
+import {
+  IAuthReducer,
+  IFiltersReducer,
+  IRegisterReducer,
+} from "@/types/reduxTypes";
 
 export const initFilterStates: IFiltersReducer = {
   searchFilterCategory: "",
@@ -13,4 +17,11 @@ export const initAuthStates: IAuthReducer = {
   password: "",
   isLogin: false,
   isOpenLoginForm: false,
+};
+
+export const initRegisterStates: IRegisterReducer = {
+  name: "",
+  email: "",
+  password: "",
+  isConfirm: false,
 };

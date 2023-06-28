@@ -11,3 +11,10 @@ export interface IAuthReducer {
   isLogin: boolean;
   isOpenLoginForm: boolean;
 }
+
+export interface IRegisterReducer {
+  name: string;
+  email: string;
+  password: string;
+  isConfirm: boolean;
+}
