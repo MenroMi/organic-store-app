@@ -67,7 +67,6 @@ const Navbar = () => {
     return null;
   };
 
-  console.log(isOpenLogInForm, width! >= 1024);
   return (
     <>
       <nav

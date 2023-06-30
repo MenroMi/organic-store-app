@@ -20,13 +20,14 @@ import {
   LoginByProviders,
   LoginFormByEmail,
   RegisterForm,
-  AuthForm,
 } from "./Auth";
 import { CustomButton } from "./Buttons";
 import { HeaderProfile } from "./Headers";
 import Spinner from "./Spinner";
+import Header from "./Header";
 
 export {
+  Header,
   Navbar,
   ExploreNature,
   Footer,
@@ -46,7 +47,6 @@ export {
   LoginByProviders,
   LoginFormByEmail,
   RegisterForm,
-  AuthForm,
   CustomButton,
   HeaderProfile,
   Spinner,
