@@ -28,3 +28,6 @@ const ReduxProvider: React.FC<IReduxProvider> = ({ children }) => {
 };
 
 export default ReduxProvider;
+
+// type for dispatch thunk
+export type AppDispatch = typeof store.dispatch;
