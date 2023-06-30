@@ -62,12 +62,12 @@ const Navbar = () => {
   }, []);
 
   return (
-    <header
-      className={`general-header transition-all max-sm:h-[100px] lg:fixed lg:top-0 lg:z-[12] lg:backdrop-blur-sm ${
-        smaller ? "h-[90px]" : "h-[150px]"
-      } `}
-    >
-      <nav className="general-header__navbar max-lg:gap-4 lg:gap-2">
+    <>
+      <nav
+        className={`general-header__navbar max-lg:gap-4 lg:gap-2 ${
+          smaller ? "h-[90px]" : "h-[150px]"
+        }`}
+      >
         <div className="flex justify-between items-center max-w-[865px] w-full gap-2">
           <a
             href={navHref.home}
@@ -155,7 +155,7 @@ const Navbar = () => {
         </div>
       </nav>
       {isOpenLoginForm && width! >= 1024 && <DropdownAuth />}
-    </header>
+    </>
   );
 };
 
