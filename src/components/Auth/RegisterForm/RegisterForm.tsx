@@ -9,40 +9,35 @@ import {
   setRegEmailError,
   setRegNameError,
   setRegPassError,
+  setResetResponse,
 } from "@/redux/slices/registerSlice";
-import { onRegister } from "@/services/onRegister";
 import onValidateForm from "@/utils/onValidateForm";
-import { memoRegSelector } from "@/selectors";
+import { memoRegSelector } from "@/redux/selectors";
 import Image from "next/image";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { onRegisterThunk } from "@/redux/thunks";
+import { AppDispatch } from "@/redux/provider/ReduxProvider";
 
 const RegisterForm = () => {
   const [isLoading, setIsLoading] = useState<boolean>(false);
-  const [response, setResponse] = useState<{
-    success: boolean;
-    response: string;
-  }>({ success: false, response: "" });
   const [isOpenPass, setOpenPass] = useState<boolean>(false);
-  const { name, email, password, errorEmail, errorName, errorPass } =
+  const { name, email, password, errorEmail, errorName, errorPass, response } =
     useSelector(memoRegSelector);
-  const dispatch = useDispatch();
+  const dispatch = useDispatch<AppDispatch>();
 
   const onHandleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     setIsLoading(true);
-    onRegister(name, email, password)
-      .then(({ success, response }) => {
-        setResponse({ success, response });
-        setIsLoading(false);
-        dispatch(setRegName(""));
-        dispatch(setRegEmail(""));
-        dispatch(setRegPass(""));
-      })
-      .finally(() => {
-        setTimeout(() => setResponse({ success: false, response: "" }), 5000);
-      });
+
+    await dispatch(onRegisterThunk({ name, email, password }));
+
+    setIsLoading(false);
+    dispatch(setRegName(""));
+    dispatch(setRegEmail(""));
+    dispatch(setRegPass(""));
+    setTimeout(() => dispatch(setResetResponse()), 5000);
   };
 
   return (
