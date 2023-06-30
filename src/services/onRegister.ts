@@ -9,6 +9,7 @@ export const onRegister = async (
     email,
     password,
     options: {
+      emailRedirectTo: `${location.origin}/auth/callback`,
       data: {
         name,
       },

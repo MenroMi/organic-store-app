@@ -7,7 +7,7 @@ import Link from "next/link";
 import { navHref } from "@/constants/navigation";
 
 // components
-import CustomButton from "@/components/CustomButton";
+import CustomButton from "@/components/Buttons/CustomButton";
 import { Spinner } from "@/components";
 import { useEffect, useState } from "react";
 

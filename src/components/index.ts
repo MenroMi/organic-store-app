@@ -1,25 +1,29 @@
+import {
+  AboutUs,
+  BannersList,
+  Categories,
+  EcoFriendly,
+  ExploreNature,
+  Offers,
+  Organic,
+  Testimonial,
+} from "./HomePageComponents";
 import Navbar from "./Navbar";
-import ExploreNature from "./ExploreNature";
 import Footer from "./Footer";
-import BannersList from "./BannersList";
-import AboutUs from "./AboutUs";
-import Organic from "./Organic";
-import Testimonial from "./Testimonial";
-import Offers from "./Offers";
-import EcoFriendly from "./EcoFriendly";
-import Categories from "./Categories";
 import News from "./News";
 import Newsletter from "./Newsletter";
-import FilterList from "./Filters";
-import ProductsList from "./ProductsList";
+import { FilterList } from "./Filters";
+import ProductsList from "./Products/ProductsList";
 import {
   DropdownAuth,
   BurgerMenuAuth,
   LoginByProviders,
   LoginFormByEmail,
+  RegisterForm,
+  AuthForm,
 } from "./Auth";
-import CustomButton from "./CustomButton";
-import HeaderProfile from "./HeaderProfile";
+import { CustomButton } from "./Buttons";
+import { HeaderProfile } from "./Headers";
 import Spinner from "./Spinner";
 
 export {
@@ -41,6 +45,8 @@ export {
   BurgerMenuAuth,
   LoginByProviders,
   LoginFormByEmail,
+  RegisterForm,
+  AuthForm,
   CustomButton,
   HeaderProfile,
   Spinner,

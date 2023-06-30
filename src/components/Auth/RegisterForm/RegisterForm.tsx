@@ -12,7 +12,7 @@ import {
 } from "@/redux/slices/registerSlice";
 import { onRegister } from "@/services/onRegister";
 import onValidateForm from "@/utils/onValidateForm";
-import { memoRegSelector } from "@/utils/selectors";
+import { memoRegSelector } from "@/selectors";
 import Image from "next/image";
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";

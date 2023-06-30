@@ -13,6 +13,7 @@ import {
   footerUtilityPages,
 } from "./footer";
 import { regexpEmail, regexpName, regexpPassword } from "./regexpConst";
+import { navHref } from "./navigation";
 
 export {
   navLinks,
@@ -30,4 +31,5 @@ export {
   regexpEmail,
   regexpName,
   regexpPassword,
+  navHref,
 };

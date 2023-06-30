@@ -1,10 +1,10 @@
 "use client";
 
 import React from "react";
-import CustomButton from "../CustomButton";
-import Image from "next/image";
+import CustomButton from "../Buttons/CustomButton";
 import { articles } from "@/constants";
 import useVisible from "@/hooks/useVisible";
+import New from "../New/New";
 
 const News = () => {
   const { elemRef, value } = useVisible();
@@ -31,36 +31,7 @@ const News = () => {
 
       <div className="news__container">
         {articles.map((a) => (
-          <div key={a.title} className="new group">
-            <Image
-              src={a.bgImage}
-              alt={a.alt}
-              width={670}
-              height={515}
-              className="new__bg-image"
-            />
-            <article className="new__article cursor-pointer custom-trans group-hover:translate-y-[-20px]">
-              <div className="flex gap-2 items-center">
-                <Image
-                  src="/icons/user.svg"
-                  alt=""
-                  width={18}
-                  height={20}
-                  className="object-contain"
-                />
-                <p className="text-[17px] text-primary-green">{a.user}</p>
-              </div>
-              <h3 className="new__article-title">{a.title}</h3>
-              <p className="new__article-descr">{a.description}</p>
-              <CustomButton
-                title="View More"
-                classNameContainer="w-full h-[50px] mt-auto "
-                classNameContent="flex pl-0 pr-0 justify-start gap-3"
-                classNameText="text-lg text-primary-green"
-                classNameArrow="p-2"
-              />
-            </article>
-          </div>
+          <New key={a.title} article={a} />
         ))}
       </div>
     </section>

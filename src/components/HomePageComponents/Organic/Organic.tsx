@@ -12,7 +12,7 @@ import { products } from "@/constants";
 import useVisible from "@/hooks/useVisible";
 
 // components
-import ProductCard from "@/components/ProductCard";
+import ProductCard from "@/components/Products/ProductCard";
 
 import SliderCarousel from "@/components/Sliders/Slider";
 

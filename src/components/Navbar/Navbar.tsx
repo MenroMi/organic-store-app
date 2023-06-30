@@ -16,12 +16,13 @@ import { navLinks } from "@/constants";
 import useWindowSize from "@/hooks/useWindowSize";
 
 // components
-import BurgerMenu from "@/components/BurgerMenu";
+import BurgerMenu from "@/components/Menu/BurgerMenu";
 import { BurgerMenuAuth, DropdownAuth } from "@/components/Auth";
 
 // interface
 import { IAuthReducer } from "@/types/reduxTypes";
 import { navHref } from "@/constants/navigation";
+import NavbarUser from "@/components/User/NavbarUser";
 
 const Navbar = () => {
   const {
@@ -68,7 +69,7 @@ const Navbar = () => {
     >
       <nav className="general-header__navbar max-lg:gap-4 lg:gap-2">
         <div className="flex justify-between items-center max-w-[865px] w-full gap-2">
-          <Link
+          <a
             href={navHref.home}
             className="flex items-center max-lg:w-[120px] transition"
           >
@@ -80,11 +81,10 @@ const Navbar = () => {
               priority
               className="object-contain"
             />
-          </Link>
+          </a>
           <svg
             onClick={() => {
               scrollRef.current = document.documentElement.scrollTop;
-              setIsOpen(!isOpen);
             }}
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 448 512"
@@ -146,28 +146,12 @@ const Navbar = () => {
               <p className="lg:visible max-lg:hidden">Cart 0</p>
             </Link>
           </div>
-          <div className="cart max-sm:min-w-[40px] max-xl:min-w-[80px]">
-            <button
-              type="button"
-              className="border rounded-full items-center gap-3 max-sm:p-1 max-lg:p-2 lg:p-2 active:scale-90 transition"
-              onClick={() => {
-                return width! < 1024
-                  ? setIsOpen(!isOpen)
-                  : dispatch(setOpenLoginForm());
-              }}
-            >
-              <div className="max-sm:p-2 p-4 rounded-full bg-primary-green">
-                <Image
-                  src="/icons/user.svg"
-                  alt="user logo"
-                  width={23}
-                  height={23}
-                  priority
-                  className="object-contain"
-                />
-              </div>
-            </button>
-          </div>
+          <NavbarUser
+            width={width}
+            setIsOpen={setIsOpen}
+            dispatch={dispatch}
+            isOpen={isOpen}
+          />
         </div>
       </nav>
       {isOpenLoginForm && width! >= 1024 && <DropdownAuth />}

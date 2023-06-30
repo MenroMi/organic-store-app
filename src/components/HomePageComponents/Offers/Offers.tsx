@@ -7,8 +7,8 @@ import React from "react";
 import { products } from "@/constants";
 
 // components
-import CustomButton from "@/components/CustomButton";
-import ProductCard from "@/components/ProductCard";
+import CustomButton from "@/components/Buttons/CustomButton";
+import ProductCard from "@/components/Products/ProductCard";
 import useVisible from "@/hooks/useVisible";
 
 const Offers = () => {

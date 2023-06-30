@@ -2,7 +2,7 @@
 import { banners } from "@/constants/banners";
 
 // components
-import Banner from "@/components/Banner/Banner";
+import Banner from "@/components/HomePageComponents/Banner/Banner";
 
 const BannersList = () => {
   return (

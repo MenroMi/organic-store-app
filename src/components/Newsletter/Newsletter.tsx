@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
-import CustomButton from "@/components/CustomButton";
+import CustomButton from "@/components/Buttons/CustomButton";
 
 const Newsletter = () => {
   const [email, setEmail] = useState<string>("");

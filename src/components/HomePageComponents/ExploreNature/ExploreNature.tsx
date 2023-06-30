@@ -1,7 +1,7 @@
 "use client";
 
 // components
-import CustomButton from "@/components/CustomButton";
+import CustomButton from "@/components/Buttons/CustomButton";
 import useVisible from "@/hooks/useVisible";
 
 const ExploreNature = () => {

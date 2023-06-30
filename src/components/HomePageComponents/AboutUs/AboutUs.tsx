@@ -11,7 +11,7 @@ import { aboutReasons } from "@/constants";
 import useVisible from "@/hooks/useVisible";
 
 // components
-import CustomButton from "@/components/CustomButton";
+import CustomButton from "@/components/Buttons/CustomButton";
 
 const AboutUs = () => {
   const { elemRef, value } = useVisible();
