@@ -20,9 +20,9 @@ import BurgerMenu from "@/components/Menu/BurgerMenu";
 import { BurgerMenuAuth, DropdownAuth } from "@/components/Auth";
 
 // interface
-import { IAuthReducer } from "@/types/reduxTypes";
 import { navHref } from "@/constants/navigation";
 import NavbarUser from "@/components/User/NavbarUser";
+import { memoAuthSelector } from "@/redux/selectors";
 
 const Navbar = () => {
   const {
@@ -31,9 +31,7 @@ const Navbar = () => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [smaller, setSmaller] = useState<boolean>(false);
   const scrollRef = useRef<number>(0);
-  const isOpenLoginForm = useSelector(
-    (state: { auth: IAuthReducer }) => state.auth.isOpenLoginForm
-  );
+  const { isOpenLogInForm, user } = useSelector(memoAuthSelector);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -61,6 +59,15 @@ const Navbar = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  const onLogInForm = () => {
+    if (isOpenLogInForm) {
+      return width! < 1024 && !user && <DropdownAuth />;
+    }
+
+    return null;
+  };
+
+  console.log(isOpenLogInForm, width! >= 1024);
   return (
     <>
       <nav
@@ -112,7 +119,7 @@ const Navbar = () => {
             }`}
           >
             <BurgerMenuAuth />
-            {isOpenLoginForm && width! < 1024 && <DropdownAuth />}
+            {onLogInForm()}
             <div className="flex flex-col h-full w-full justify-start">
               {navLinks.map((link) => (
                 <Link
@@ -154,7 +161,7 @@ const Navbar = () => {
           />
         </div>
       </nav>
-      {isOpenLoginForm && width! >= 1024 && <DropdownAuth />}
+      {isOpenLogInForm && width! >= 1024 && <DropdownAuth />}
     </>
   );
 };
