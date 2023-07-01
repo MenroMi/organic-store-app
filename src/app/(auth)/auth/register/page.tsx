@@ -1,19 +1,26 @@
-"use client";
 // basic
-import Link from "next/link";
+import { cookies } from "next/headers";
+import { redirect } from "next/navigation";
+
+// libs
+import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
 
 // constants
 import { navHref } from "@/constants/navigation";
 
 // components
-import { CustomButton, Spinner } from "@/components";
-import { useEffect, useState } from "react";
-import RegisterForm from "@/components/Auth/RegisterForm/RegisterForm";
+import { CustomButton, RegisterForm, AuthLink } from "@/components";
 
-const RegisterPage = () => {
-  const [isLoading, setLoading] = useState<boolean>(false);
+const RegisterPage = async () => {
+  const supabase = createServerComponentClient({ cookies });
 
-  useEffect(() => () => setLoading(false), []);
+  const {
+    data: { session },
+  } = await supabase.auth.getSession();
+
+  if (session) {
+    redirect("/");
+  }
 
   return (
     <>
@@ -22,17 +29,13 @@ const RegisterPage = () => {
           Registration
         </h1>
         <RegisterForm />
-        <p className="text-gray-500 font-thin text-lg text-center mt-4">
-          Back to{" "}
-          <Link
-            onClick={() => setLoading(true)}
-            href={navHref.logIn}
-            className="text-primary-green font-bold cursor-pointer hover:text-green-darker transition"
-          >
-            log in
-            {isLoading && <Spinner display="inline-block" />}
-          </Link>
-        </p>
+        <AuthLink
+          route={navHref.logIn}
+          classNameParagraph="text-gray-500 font-thin text-lg text-center mt-4"
+          classNameLink="text-primary-green font-bold cursor-pointer hover:text-green-darker transition"
+          contentParagraph="Back to"
+          contentLink="log in"
+        />
       </div>
       <CustomButton
         title="Back to home"

@@ -3,6 +3,7 @@ import BurgerMenuAuth from "./BurgerMenuAuth";
 import LoginByProviders from "./LoginByProviders";
 import LoginFormByEmail from "./LoginFormByEmail";
 import RegisterForm from "./RegisterForm";
+import AuthLink from "./AuthLink";
 
 export {
   DropdownAuth,
@@ -10,4 +11,5 @@ export {
   LoginByProviders,
   LoginFormByEmail,
   RegisterForm,
+  AuthLink,
 };
