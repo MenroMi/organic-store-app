@@ -133,7 +133,7 @@ const LoginFormByEmail: React.FC<ILoginFormByEmailProps> = ({
         />
       </label>
       <Link
-        href={navHref.home}
+        href={navHref.forgotPass}
         className="text-gray-400 text-lg text-right hover:text-primary-green transition"
       >
         Forgot Password?
