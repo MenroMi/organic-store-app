@@ -1,5 +1,8 @@
 "use client";
 
+// basic
+import { useRouter } from "next/navigation";
+
 // libs
 import { useDispatch, useSelector } from "react-redux";
 
@@ -16,14 +19,21 @@ import { setOpenLoginForm } from "@/redux/slices/authSlice";
 import { AppDispatch } from "@/redux/provider/ReduxProvider";
 
 const LogInBtnInBurger = () => {
+  const router = useRouter();
   const { user } = useSelector(memoAuthSelector);
   const dispatch = useDispatch<AppDispatch>();
 
   return (
     <button
-      onClick={() =>
-        !user ? dispatch(setOpenLoginForm()) : dispatch(onLogOutThunk())
-      }
+      onClick={() => {
+        if (!user) {
+          dispatch(setOpenLoginForm());
+          return;
+        }
+
+        dispatch(onLogOutThunk());
+        router.push("/");
+      }}
       className="sm:ml-auto rounded-full border-2 px-6 py-2 bg-white hover:bg-gray-200 hover:text-white transition"
     >
       {user ? "Log out" : "Log in"}
