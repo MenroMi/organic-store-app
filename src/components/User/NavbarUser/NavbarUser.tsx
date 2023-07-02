@@ -1,5 +1,3 @@
-"use client";
-
 // basic
 import Image from "next/image";
 
@@ -46,7 +44,13 @@ const NavbarUser: React.FC<INavbarUser> = ({
           }`}
         >
           <Image
-            src={user ? "/woman-avatar.jpg" : "/icons/user.svg"}
+            src={
+              user
+                ? user.user_metadata?.avatar
+                  ? user?.user_metadata?.avatar
+                  : "/woman-avatar.jpg"
+                : "/icons/user.svg"
+            }
             alt="user logo"
             width={40}
             height={40}

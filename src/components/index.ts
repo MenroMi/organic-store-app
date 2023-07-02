@@ -23,9 +23,8 @@ import {
   AuthLink,
 } from "./Auth";
 import { CustomButton } from "./Buttons";
-import { HeaderProfile } from "./Headers";
+import { HeaderProfile, Header } from "./Headers";
 import Spinner from "./Spinner";
-import Header from "./Header";
 import ForgotPasswordForm from "./Auth/ForgotPasswordForm";
 export {
   Header,

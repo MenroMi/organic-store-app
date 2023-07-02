@@ -39,17 +39,55 @@ const onSignInThunk = createAsyncThunk(
   }
 );
 
+const onSignInGoogleThunk = createAsyncThunk("auth/loginGoogle", async () => {
+  try {
+    await supabase.auth.signInWithOAuth({
+      provider: "google",
+      options: {
+        queryParams: {
+          access_type: "offline",
+          prompt: "consent",
+        },
+      },
+    });
+
+    return null;
+  } catch (error) {
+    return error;
+  }
+});
+
 const getAuthUserThunk = createAsyncThunk("auth/relogin", async () => {
   try {
     const { data } = await supabase.auth.getUser();
 
     if (data && data?.user) {
+      const { role, id, user_metadata } = data?.user;
+
+      if (
+        data?.user?.app_metadata?.providers &&
+        Array.isArray(data?.user?.app_metadata?.providers) &&
+        data?.user?.app_metadata?.providers.includes("google")
+      ) {
+        const { full_name, email_verified, avatar_url } = user_metadata;
+
+        return {
+          role,
+          id,
+          user_metadata: {
+            name: full_name,
+            avatar: avatar_url,
+          },
+        };
+      }
+
       return {
-        role: data?.user?.role,
-        id: data?.user?.id,
-        user_metadata: data?.user?.user_metadata,
+        role,
+        id,
+        user_metadata,
       };
     }
+
     return null;
   } catch (error) {
     alert("onUserFetch: " + error);
@@ -70,4 +108,4 @@ const onLogOutThunk = createAsyncThunk("auth/logout", async () => {
   }
 });
 
-export { onSignInThunk, getAuthUserThunk, onLogOutThunk };
+export { onSignInThunk, onSignInGoogleThunk, getAuthUserThunk, onLogOutThunk };

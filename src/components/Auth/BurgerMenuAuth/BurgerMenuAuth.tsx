@@ -47,7 +47,13 @@ const BurgerMenuAuth = () => {
     >
       <div className="hover:bg-slate-100 flex flex-col sm:flex-row items-center px-10 py-2 gap-5 w-full transition">
         <Image
-          src={user ? "/woman-avatar.jpg" : "/icons/user.svg"}
+          src={
+            user
+              ? user.user_metadata?.avatar
+                ? user?.user_metadata?.avatar
+                : "/woman-avatar.jpg"
+              : "/icons/user.svg"
+          }
           alt="user avatar"
           width={115}
           height={115}
