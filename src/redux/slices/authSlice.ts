@@ -5,6 +5,7 @@ import { createSlice } from "@reduxjs/toolkit";
 import {
   getAuthUserThunk,
   onLogOutThunk,
+  onSignInFacebookThunk,
   onSignInGoogleThunk,
   onSignInThunk,
 } from "@/redux/thunks/auth";
@@ -46,6 +47,9 @@ const authSlice = createSlice({
       return { ...state, isLoading: true };
     });
     builder.addCase(onSignInGoogleThunk.pending, (state) => {
+      return { ...state, isLoading: true };
+    });
+    builder.addCase(onSignInFacebookThunk.pending, (state) => {
       return { ...state, isLoading: true };
     });
     builder.addCase(getAuthUserThunk.pending, (state) => {

@@ -57,6 +57,21 @@ const onSignInGoogleThunk = createAsyncThunk("auth/loginGoogle", async () => {
   }
 });
 
+const onSignInFacebookThunk = createAsyncThunk(
+  "auth/loginFacebook",
+  async () => {
+    try {
+      await supabase.auth.signInWithOAuth({
+        provider: "facebook",
+      });
+
+      return null;
+    } catch (error) {
+      return error;
+    }
+  }
+);
+
 const getAuthUserThunk = createAsyncThunk("auth/relogin", async () => {
   try {
     const { data } = await supabase.auth.getUser();
@@ -79,8 +94,22 @@ const getAuthUserThunk = createAsyncThunk("auth/relogin", async () => {
             avatar: avatar_url,
           },
         };
-      }
+      } else if (
+        data?.user?.app_metadata?.providers &&
+        Array.isArray(data?.user?.app_metadata?.providers) &&
+        data?.user?.app_metadata?.providers.includes("facebook")
+      ) {
+        const { full_name, email_verified, avatar_url } = user_metadata;
 
+        return {
+          role,
+          id,
+          user_metadata: {
+            name: full_name,
+            avatar: avatar_url,
+          },
+        };
+      }
       return {
         role,
         id,
@@ -108,4 +137,10 @@ const onLogOutThunk = createAsyncThunk("auth/logout", async () => {
   }
 });
 
-export { onSignInThunk, onSignInGoogleThunk, getAuthUserThunk, onLogOutThunk };
+export {
+  onSignInThunk,
+  onSignInGoogleThunk,
+  onSignInFacebookThunk,
+  getAuthUserThunk,
+  onLogOutThunk,
+};

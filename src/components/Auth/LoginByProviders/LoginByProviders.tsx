@@ -1,7 +1,10 @@
 "use client";
 
 import { AppDispatch } from "@/redux/provider/ReduxProvider";
-import { onSignInGoogleThunk } from "@/redux/thunks/auth";
+import {
+  onSignInFacebookThunk,
+  onSignInGoogleThunk,
+} from "@/redux/thunks/auth";
 import { useDispatch } from "react-redux";
 
 const LoginByProviders = () => {
@@ -13,6 +16,9 @@ const LoginByProviders = () => {
     switch (target.dataset.provider) {
       case "google":
         dispatch(onSignInGoogleThunk());
+        break;
+      case "facebook":
+        dispatch(onSignInFacebookThunk());
         break;
     }
   };
