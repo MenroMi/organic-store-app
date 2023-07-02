@@ -6,6 +6,7 @@ export enum navHref {
   registration = "/auth/register",
   logIn = "/auth/login",
   forgotPass = "/auth/forgot",
+  profile = "/profile",
 }
 
 export const navLinks = [

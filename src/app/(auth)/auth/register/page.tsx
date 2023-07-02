@@ -1,10 +1,3 @@
-// basic
-import { cookies } from "next/headers";
-import { redirect } from "next/navigation";
-
-// libs
-import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
-
 // constants
 import { navHref } from "@/constants/navigation";
 
@@ -12,16 +5,6 @@ import { navHref } from "@/constants/navigation";
 import { CustomButton, RegisterForm, AuthLink } from "@/components";
 
 const RegisterPage = async () => {
-  const supabase = createServerComponentClient({ cookies });
-
-  const {
-    data: { session },
-  } = await supabase.auth.getSession();
-
-  if (session) {
-    redirect("/");
-  }
-
   return (
     <>
       <div className="flex items-center flex-col justify-center max-w-[500px] w-full min-h-[500px] bg-white/80 rounded-lg shadow-xl backdrop-blur-sm px-5 py-5">

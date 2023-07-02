@@ -1,27 +1,10 @@
-// basic
-import { cookies } from "next/headers";
-import { redirect } from "next/navigation";
-
-// libs
-import { createServerComponentClient } from "@supabase/auth-helpers-nextjs";
-
 // constants
 import { navHref } from "@/constants/navigation";
 
 // components
 import { AuthLink, CustomButton, ForgotPasswordForm } from "@/components";
 
-const ForgotPasswordPage = async () => {
-  const supabase = createServerComponentClient({ cookies });
-
-  const {
-    data: { session },
-  } = await supabase.auth.getSession();
-
-  if (session) {
-    redirect("/");
-  }
-
+const ForgotPasswordPage = () => {
   return (
     <>
       <div className="flex items-center flex-col justify-center max-w-[500px] w-full min-h-[200px] bg-white/80 rounded-lg shadow-xl backdrop-blur-sm px-5 py-5">

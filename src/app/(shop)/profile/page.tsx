@@ -10,7 +10,7 @@ const ProfilePage = async () => {
   } = await supabase.auth.getSession();
 
   if (!session) {
-    redirect("/");
+    redirect("/auth/login");
   }
 
   return (
