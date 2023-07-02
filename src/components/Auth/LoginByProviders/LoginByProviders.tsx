@@ -4,6 +4,7 @@ import { AppDispatch } from "@/redux/provider/ReduxProvider";
 import {
   onSignInFacebookThunk,
   onSignInGoogleThunk,
+  onSignInGitHubThunk,
 } from "@/redux/thunks/auth";
 import { useDispatch } from "react-redux";
 
@@ -19,6 +20,9 @@ const LoginByProviders = () => {
         break;
       case "facebook":
         dispatch(onSignInFacebookThunk());
+        break;
+      case "github":
+        dispatch(onSignInGitHubThunk());
         break;
     }
   };
