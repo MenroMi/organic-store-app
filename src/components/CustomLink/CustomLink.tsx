@@ -10,7 +10,6 @@ interface ICustomLinkProps {
   href: string;
   classNameLink?: string;
   onClickFn?: (value?: SetStateAction<any>) => void;
-  children?: React.ReactNode;
 }
 
 const CustomLink: React.FC<ICustomLinkProps> = ({
@@ -18,7 +17,6 @@ const CustomLink: React.FC<ICustomLinkProps> = ({
   href,
   classNameLink,
   onClickFn = () => {},
-  children,
 }) => {
   const [active, setActive] = useState<boolean>(false);
   let pathname = usePathname();
@@ -31,7 +29,7 @@ const CustomLink: React.FC<ICustomLinkProps> = ({
         return;
       }
 
-      if (pathname && pathname === "home" && label === "Home") {
+      if (pathname && label.toLowerCase() === pathname) {
         setActive(true);
         return;
       }
@@ -50,7 +48,6 @@ const CustomLink: React.FC<ICustomLinkProps> = ({
       className={twMerge(classNameLink, active && "text-green-darker")}
     >
       {label}
-      {children}
     </Link>
   );
 };

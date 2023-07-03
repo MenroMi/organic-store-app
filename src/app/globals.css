@@ -34,7 +34,7 @@ body {
 
 /* START: Header styles */
 .general-header {
-  @apply flex w-full  items-center px-8 bg-white/[0.7] font-['Roboto'] font-normal;
+  @apply flex w-full items-center px-8 bg-white/[0.7] font-['Roboto'] font-normal;
 }
 
 .general-header__navbar {
