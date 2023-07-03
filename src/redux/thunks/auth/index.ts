@@ -24,10 +24,19 @@ const onSignInThunk = createAsyncThunk(
         };
       }
 
+      const {
+        role,
+        id,
+        user_metadata: { avatar_url, full_name },
+      } = data?.user;
+
       return {
-        role: data?.user?.role,
-        id: data?.user?.id,
-        user_metadata: data?.user?.user_metadata,
+        role,
+        id,
+        user_metadata: {
+          name: full_name,
+          avatar: avatar_url,
+        },
       };
     } catch (error) {
       console.log(error);
@@ -91,25 +100,15 @@ const getAuthUserThunk = createAsyncThunk("auth/relogin", async () => {
     if (data && data?.user) {
       const { role, id, user_metadata } = data?.user;
 
-      if (
-        data?.user?.app_metadata?.providers &&
-        Array.isArray(data?.user?.app_metadata?.providers)
-      ) {
-        const { full_name, email_verified, avatar_url } = user_metadata;
+      const { full_name, avatar_url } = user_metadata;
 
-        return {
-          role,
-          id,
-          user_metadata: {
-            name: full_name,
-            avatar: avatar_url,
-          },
-        };
-      }
       return {
         role,
         id,
-        user_metadata,
+        user_metadata: {
+          name: full_name,
+          avatar: avatar_url,
+        },
       };
     }
 
