@@ -46,7 +46,7 @@ const Testimonial = () => {
       >
         <div className="flex h-[115px]">
           <Image
-            src="/woman-avatar.jpg"
+            src="/icons/no-image.svg"
             alt="user avatar"
             width={115}
             height={115}

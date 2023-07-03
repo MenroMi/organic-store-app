@@ -14,11 +14,11 @@ const HeaderProfile = () => {
       <div className="px-40 flex gap-5">
         <div className="relative group before:bg-black/50 before:w-[230px] before:h-[230px] before:absolute before:top-[50%] before:left-[50%] before:z-20  before:rounded-full before:translate-x-[-50%] before:translate-y-[-50%] before:mt-[-75px] before:opacity-0 before:hover:opacity-100 before:transition">
           <Image
-            src="/woman-avatar.jpg"
+            src="/icons/no-image.svg"
             alt="user avatar"
             width={250}
             height={250}
-            className="rounded-full w-[250px] h-[250px] object-cover border-[10px] mt-[-150px] border-white drop-shadow-lg"
+            className="rounded-full w-[250px] h-[250px] object-cover border-[10px] mt-[-150px] border-white drop-shadow-lg bg-white"
           />
           <button className="opacity-0 group-hover:opacity-100 flex absolute z-[21] top-[50%] left-[50%] translate-x-[-50%] translate-y-[-50%] mt-[-75px] bg-white/50 px-3 py-2 text-white backdrop-blur-md rounded-lg w-[70%] justify-center gap-2 transition hover:bg-white/60 active:bg-white/70">
             <svg
