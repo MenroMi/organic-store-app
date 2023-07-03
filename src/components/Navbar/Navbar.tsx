@@ -23,6 +23,7 @@ import { BurgerMenuAuth, DropdownAuth } from "@/components/Auth";
 import { navHref } from "@/constants/navigation";
 import NavbarUser from "@/components/User/NavbarUser";
 import { memoAuthSelector } from "@/redux/selectors";
+import CustomLink from "@/components/CustomLink";
 
 const Navbar = () => {
   const {
@@ -102,10 +103,13 @@ const Navbar = () => {
             <path d="M0 96C0 78.3 14.3 64 32 64H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 128 0 113.7 0 96zM0 256c0-17.7 14.3-32 32-32H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32H32c-17.7 0-32-14.3-32-32s14.3-32 32-32H416c17.7 0 32 14.3 32 32z" />
           </svg>
           <div className="max-lg:hidden h-full flex justify-center items-center">
-            {navLinks.map((link) => (
-              <Link key={link.label} href={link.href} className="nav-item">
-                {link.label}
-              </Link>
+            {navLinks.map(({ label, href }) => (
+              <CustomLink
+                key={label}
+                label={label}
+                href={href}
+                classNameLink="nav-item"
+              />
             ))}
           </div>
 
@@ -120,14 +124,13 @@ const Navbar = () => {
             <BurgerMenuAuth />
             {onLogInForm()}
             <div className="flex flex-col h-full w-full justify-start">
-              {navLinks.map((link) => (
-                <Link
-                  key={link.label}
-                  href={link.href}
-                  className="burger-nav__item max-md:text-2xl md:text-4xl"
-                >
-                  {link.label}
-                </Link>
+              {navLinks.map(({ label, href }) => (
+                <CustomLink
+                  key={label}
+                  label={label}
+                  href={href}
+                  classNameLink="burger-nav__item max-md:text-2xl md:text-4xl"
+                />
               ))}
             </div>
           </BurgerMenu>
@@ -166,3 +169,24 @@ const Navbar = () => {
 };
 
 export default Navbar;
+
+/*
+              <Link key={link.label} href={link.href} className="nav-item">
+                {link.label}
+              </Link>
+*/
+
+// burger menu
+/*
+
+              {navLinks.map((link) => (
+                <Link
+                  key={link.label}
+                  href={link.href}
+                  className="burger-nav__item max-md:text-2xl md:text-4xl"
+                >
+                  {link.label}
+                </Link>
+              ))}
+
+*/

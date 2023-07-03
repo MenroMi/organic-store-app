@@ -27,3 +27,10 @@ export const navLinks = [
     href: navHref.contact,
   },
 ];
+
+export const userMenuLinks = [
+  { label: "Profile", href: navHref.profile },
+  { label: "Favorite", href: navHref.home },
+  { label: "Settings", href: navHref.home },
+  { label: "Log Out", href: navHref.home },
+];

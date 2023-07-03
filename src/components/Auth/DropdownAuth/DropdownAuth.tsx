@@ -18,10 +18,11 @@ import LoginByProviders from "@/components/Auth/LoginByProviders";
 import Spinner from "@/components/Spinner";
 import { UserMenu } from "@/components/Menu";
 import LoginFormByEmail from "@/components/Auth/LoginFormByEmail/LoginFormByEmail";
+import { useLoading } from "@/hooks/useLoading";
 
 const DropdownAuth = () => {
+  const { loading, setLoading } = useLoading();
   const { user } = useSelector(memoAuthSelector);
-  const [isLoading, setLoading] = useState<boolean>(false);
   const router = useRouter();
 
   useEffect(() => {
@@ -29,7 +30,7 @@ const DropdownAuth = () => {
   }, []);
 
   return (
-    <div className=" lg:absolute top-32 lg:right-16 py-4 lg:max-w-[400px] w-full min-h-[300px] bg-white shadow-xl border z-20">
+    <div className="lg:absolute lg:top-32 lg:right-16 py-4 lg:max-w-[400px] w-full min-h-[300px] bg-white shadow-xl border z-20  ">
       {user && user.role ? (
         <UserMenu />
       ) : (
@@ -59,7 +60,7 @@ const DropdownAuth = () => {
               className="font-bold text-primary-green hover:text-green-darker cursor-pointer transition"
             >
               Register!
-              {isLoading && <Spinner display="inline-block" />}
+              {loading && <Spinner display="inline-block" />}
             </span>
           </p>
         </>

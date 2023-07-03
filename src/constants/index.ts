@@ -5,7 +5,6 @@ import { categories } from "./categories";
 import { advantagesEcoProducts } from "./ecoFriendly";
 import { advantages } from "./testimontial";
 import { products } from "./products";
-import { navLinks } from "./navigation";
 import { aboutReasons } from "./about";
 import {
   footerContactData,
@@ -13,7 +12,7 @@ import {
   footerUtilityPages,
 } from "./footer";
 import { regexpEmail, regexpName, regexpPassword } from "./regexpConst";
-import { navHref } from "./navigation";
+import { navHref, userMenuLinks, navLinks } from "./navigation";
 
 export {
   navLinks,
@@ -32,4 +31,5 @@ export {
   regexpName,
   regexpPassword,
   navHref,
+  userMenuLinks,
 };

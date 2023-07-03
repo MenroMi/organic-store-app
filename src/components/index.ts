@@ -26,6 +26,8 @@ import { CustomButton } from "./Buttons";
 import { HeaderProfile, Header } from "./Headers";
 import Spinner from "./Spinner";
 import ForgotPasswordForm from "./Auth/ForgotPasswordForm";
+import CustomLink from "./CustomLink";
+
 export {
   Header,
   Navbar,
@@ -52,4 +54,5 @@ export {
   HeaderProfile,
   Spinner,
   ForgotPasswordForm,
+  CustomLink,
 };
