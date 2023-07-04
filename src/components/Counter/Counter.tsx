@@ -39,6 +39,8 @@ const Counter = ({
 
       timer = setTimeout(countNumber, incrementTime);
     }, incrementTime);
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [number, duration]);
 
   return (

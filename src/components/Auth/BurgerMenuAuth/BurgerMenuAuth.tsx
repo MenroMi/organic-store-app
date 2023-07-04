@@ -61,7 +61,7 @@ const BurgerMenuAuth = () => {
           className="flex w-[100px] h-[100px] sm:w-[115px] sm:h-[115px] object-cover rounded-full"
         />
         <p className="font-bold text-lg sm:text-2xl">
-          {user ? user?.user_metadata?.name : "Unauthorized"}
+          {user ? user?.user_metadata?.name : "Guest"}
         </p>
         <LogInBtnInBurger />
       </div>

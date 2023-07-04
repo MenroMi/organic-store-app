@@ -8,7 +8,7 @@ interface IRegistrationData {
 }
 
 const onRegisterThunk = createAsyncThunk(
-  "registration/register_new_user",
+  "registration/registerNewUser",
   async ({ name, email, password }: IRegistrationData) => {
     const { data: userForm, error } = await supabase.auth.signUp({
       email,

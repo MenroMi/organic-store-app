@@ -9,8 +9,11 @@ import React, { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { setOpenLoginForm } from "@/redux/slices/authSlice";
 
+// selectors
+import { memoAuthSelector } from "@/redux/selectors";
+
 // constants
-import { navLinks } from "@/constants";
+import { navLinks, navHref } from "@/constants";
 
 // hooks
 import useWindowSize from "@/hooks/useWindowSize";
@@ -18,18 +21,14 @@ import useWindowSize from "@/hooks/useWindowSize";
 // components
 import BurgerMenu from "@/components/Menu/BurgerMenu";
 import { BurgerMenuAuth, DropdownAuth } from "@/components/Auth";
-
-// interface
-import { navHref } from "@/constants/navigation";
-import NavbarUser from "@/components/User/NavbarUser";
-import { memoAuthSelector } from "@/redux/selectors";
 import CustomLink from "@/components/CustomLink";
+import NavbarUser from "@/components/User/NavbarUser";
 
 const Navbar = () => {
   const {
     windowSize: { width },
   } = useWindowSize();
-  const [isOpen, setIsOpen] = useState<boolean>(false);
+  const [isOpen, setIsOpen] = useState<boolean>(true);
   const [smaller, setSmaller] = useState<boolean>(false);
   const scrollRef = useRef<number>(0);
   const { isOpenLogInForm, user, isLogin } = useSelector(memoAuthSelector);
