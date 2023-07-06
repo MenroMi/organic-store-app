@@ -2,6 +2,7 @@ import {
   IAuthReducer,
   IFiltersReducer,
   IRegisterReducer,
+  IUpdatePassReducer,
 } from "@/types/reduxTypes";
 
 export const initFilterStates: IFiltersReducer = {
@@ -47,4 +48,20 @@ export const initRegisterStates: IRegisterReducer = {
   errorPass: false,
   isError: false,
   isLoading: false,
+};
+
+export const initUpdatePassStates: IUpdatePassReducer = {
+  email: "",
+  newPassword: "",
+  repeatPassword: "",
+  isError: false,
+  isLoading: false,
+  error: {
+    msg: "",
+    name: "",
+    status: "",
+  },
+  errorEmail: false,
+  errorPass: false,
+  errorName: false,
 };

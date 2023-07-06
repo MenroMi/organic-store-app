@@ -4,6 +4,7 @@
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 
 // libs
 import { useDispatch, useSelector } from "react-redux";
@@ -16,6 +17,9 @@ import memoAuthSelector from "@/redux/selectors/authSelector";
 
 // constants
 import { regexpEmail, navHref, regexpPassword } from "@/constants";
+
+// hooks
+import { useLoading } from "@/hooks/useLoading";
 
 // utils
 import { onValidateForm } from "@/utils";
@@ -33,7 +37,6 @@ import Spinner from "@/components/Spinner";
 
 // interface/types
 import { AppDispatch } from "@/redux/provider/ReduxProvider";
-import { useRouter } from "next/navigation";
 
 interface ILoginFormByEmailProps {
   classNameForm?: string;
@@ -53,6 +56,7 @@ const LoginFormByEmail: React.FC<ILoginFormByEmailProps> = ({
   classNameButtonConfirm,
 }) => {
   const router = useRouter();
+  const { loading, setLoading } = useLoading();
   const [isOpenPass, setOpenPass] = useState<boolean>(false);
   const { email, password, error, isLoading, errorEmail, isLogin, errorPass } =
     useSelector(memoAuthSelector);
@@ -73,6 +77,8 @@ const LoginFormByEmail: React.FC<ILoginFormByEmailProps> = ({
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isLogin]);
+
+  useEffect(() => setLoading(false), []);
 
   return (
     <form onSubmit={(e) => onHandleSubmit(e)} className={classNameForm}>
@@ -133,6 +139,7 @@ const LoginFormByEmail: React.FC<ILoginFormByEmailProps> = ({
         />
       </label>
       <Link
+        onClick={() => setLoading(true)}
         href={navHref.forgotPass}
         className="text-gray-400 text-lg text-right hover:text-primary-green transition"
       >
@@ -148,7 +155,7 @@ const LoginFormByEmail: React.FC<ILoginFormByEmailProps> = ({
         type="submit"
         className={classNameButtonConfirm}
       >
-        {isLoading ? <Spinner /> : "Log In"}
+        {isLoading || loading ? <Spinner /> : "Log In"}
       </button>
     </form>
   );

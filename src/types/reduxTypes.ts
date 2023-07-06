@@ -32,3 +32,9 @@ export interface IRegisterReducer extends IErrorAuth {
   password: string;
   response: IResponse;
 }
+
+export interface IUpdatePassReducer extends IErrorAuth {
+  email: string;
+  newPassword: string;
+  repeatPassword: string;
+}

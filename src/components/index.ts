@@ -21,6 +21,7 @@ import {
   LoginFormByEmail,
   RegisterForm,
   AuthLink,
+  UpdatePasswordForm,
 } from "./Auth";
 import { CustomButton } from "./Buttons";
 import { HeaderProfile, Header } from "./Headers";
@@ -55,4 +56,5 @@ export {
   Spinner,
   ForgotPasswordForm,
   CustomLink,
+  UpdatePasswordForm,
 };

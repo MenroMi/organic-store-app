@@ -28,7 +28,7 @@ const Navbar = () => {
   const {
     windowSize: { width },
   } = useWindowSize();
-  const [isOpen, setIsOpen] = useState<boolean>(true);
+  const [isOpen, setIsOpen] = useState<boolean>(false);
   const [smaller, setSmaller] = useState<boolean>(false);
   const scrollRef = useRef<number>(0);
   const { isOpenLogInForm, user, isLogin } = useSelector(memoAuthSelector);
