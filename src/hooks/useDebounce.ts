@@ -1,13 +1,11 @@
 // basic
 import { useState, useEffect } from "react";
 
-// rq
-
-const useDebounce = (params: any, debounce: number): any => {
+const useDebounce = (params: any, debounce: number = 400): any => {
   const [newParams, setNewParams] = useState<any>(params);
   const [isEnd, setIsEnd] = useState<boolean>(false);
 
-  const stringify = (obj: object) => JSON.stringify(obj);
+  const stringify = (any: any) => JSON.stringify(any);
 
   useEffect(() => {
     let timerID: NodeJS.Timeout;

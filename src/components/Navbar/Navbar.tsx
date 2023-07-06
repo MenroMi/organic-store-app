@@ -9,19 +9,20 @@ import React, { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { setOpenLoginForm } from "@/redux/slices/authSlice";
 
+// selectors
+import { memoAuthSelector } from "@/redux/selectors";
+
 // constants
-import { navLinks } from "@/constants";
+import { navLinks, navHref } from "@/constants";
 
 // hooks
 import useWindowSize from "@/hooks/useWindowSize";
 
 // components
-import BurgerMenu from "@/components/BurgerMenu";
+import BurgerMenu from "@/components/Menu/BurgerMenu";
 import { BurgerMenuAuth, DropdownAuth } from "@/components/Auth";
-
-// interface
-import { IAuthReducer } from "@/types/reduxTypes";
-import { navHref } from "@/constants/navigation";
+import CustomLink from "@/components/CustomLink";
+import NavbarUser from "@/components/User/NavbarUser";
 
 const Navbar = () => {
   const {
@@ -30,9 +31,7 @@ const Navbar = () => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [smaller, setSmaller] = useState<boolean>(false);
   const scrollRef = useRef<number>(0);
-  const isOpenLoginForm = useSelector(
-    (state: { auth: IAuthReducer }) => state.auth.isOpenLoginForm
-  );
+  const { isOpenLogInForm, user, isLogin } = useSelector(memoAuthSelector);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -41,7 +40,7 @@ const Navbar = () => {
         documentElement: { scrollTop },
       } = e.target as any;
 
-      if (scrollTop >= 100) {
+      if (scrollTop >= 50) {
         return setSmaller(true);
       } else {
         setSmaller(false);
@@ -60,15 +59,52 @@ const Navbar = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  const onLogInForm = () => {
+    if (isOpenLogInForm) {
+      return width! < 1024 && !user && <DropdownAuth />;
+    }
+    return null;
+  };
+
+  const onAllowSecureRoutes = (
+    label: string,
+    href: string,
+    classNameLink: string
+  ) => {
+    if (isLogin) {
+      return (
+        <CustomLink
+          key={label}
+          label={label}
+          href={href}
+          classNameLink={classNameLink}
+        />
+      );
+    }
+
+    if (label.toLowerCase() === "profile") {
+      return;
+    }
+
+    return (
+      <CustomLink
+        key={label}
+        label={label}
+        href={href}
+        classNameLink={classNameLink}
+      />
+    );
+  };
+
   return (
-    <header
-      className={`general-header transition-all max-sm:h-[100px] lg:fixed lg:top-0 lg:z-[12] lg:backdrop-blur-sm ${
-        smaller ? "h-[90px]" : "h-[150px]"
-      } `}
-    >
-      <nav className="general-header__navbar max-lg:gap-4 lg:gap-2">
-        <div className="flex justify-between items-center max-w-[865px] w-full gap-2">
-          <Link
+    <>
+      <nav
+        className={`general-header__navbar max-lg:gap-4 lg:gap-2 ${
+          smaller ? "h-[90px]" : "h-[150px]"
+        }`}
+      >
+        <div className="flex justify-between lg:justify-start items-center max-w-[865px] w-full lg:gap-28">
+          <a
             href={navHref.home}
             className="flex items-center max-lg:w-[120px] transition"
           >
@@ -80,7 +116,7 @@ const Navbar = () => {
               priority
               className="object-contain"
             />
-          </Link>
+          </a>
           <svg
             onClick={() => {
               scrollRef.current = document.documentElement.scrollTop;
@@ -89,18 +125,16 @@ const Navbar = () => {
             xmlns="http://www.w3.org/2000/svg"
             viewBox="0 0 448 512"
             fill="#274C5B"
-            className={`transition-all max-sm:w-[30px] max-sm:h-[30px] w-[60px] h-[60px] lg:hidden ${
+            className={`cursor-pointer transition-all max-sm:w-[30px] max-sm:h-[30px] w-[60px] h-[60px] lg:hidden ${
               isOpen ? "hidden" : "visible"
             }`}
           >
             <path d="M0 96C0 78.3 14.3 64 32 64H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 128 0 113.7 0 96zM0 256c0-17.7 14.3-32 32-32H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32H32c-17.7 0-32-14.3-32-32s14.3-32 32-32H416c17.7 0 32 14.3 32 32z" />
           </svg>
           <div className="max-lg:hidden h-full flex justify-center items-center">
-            {navLinks.map((link) => (
-              <Link key={link.label} href={link.href} className="nav-item">
-                {link.label}
-              </Link>
-            ))}
+            {navLinks.map(({ label, href }) => {
+              return onAllowSecureRoutes(label, href, "nav-item");
+            })}
           </div>
 
           <BurgerMenu
@@ -112,17 +146,15 @@ const Navbar = () => {
             }`}
           >
             <BurgerMenuAuth />
-            {isOpenLoginForm && width! < 1024 && <DropdownAuth />}
+            {onLogInForm()}
             <div className="flex flex-col h-full w-full justify-start">
-              {navLinks.map((link) => (
-                <Link
-                  key={link.label}
-                  href={link.href}
-                  className="burger-nav__item max-md:text-2xl md:text-4xl"
-                >
-                  {link.label}
-                </Link>
-              ))}
+              {navLinks.map(({ label, href }) => {
+                return onAllowSecureRoutes(
+                  label,
+                  href,
+                  "burger-nav__item max-md:text-2xl md:text-4xl"
+                );
+              })}
             </div>
           </BurgerMenu>
         </div>
@@ -146,32 +178,16 @@ const Navbar = () => {
               <p className="lg:visible max-lg:hidden">Cart 0</p>
             </Link>
           </div>
-          <div className="cart max-sm:min-w-[40px] max-xl:min-w-[80px]">
-            <button
-              type="button"
-              className="border rounded-full items-center gap-3 max-sm:p-1 max-lg:p-2 lg:p-2 active:scale-90 transition"
-              onClick={() => {
-                return width! < 1024
-                  ? setIsOpen(!isOpen)
-                  : dispatch(setOpenLoginForm());
-              }}
-            >
-              <div className="max-sm:p-2 p-4 rounded-full bg-primary-green">
-                <Image
-                  src="/icons/user.svg"
-                  alt="user logo"
-                  width={23}
-                  height={23}
-                  priority
-                  className="object-contain"
-                />
-              </div>
-            </button>
-          </div>
+          <NavbarUser
+            width={width}
+            setIsOpen={setIsOpen}
+            dispatch={dispatch}
+            isOpen={isOpen}
+          />
         </div>
       </nav>
-      {isOpenLoginForm && width! >= 1024 && <DropdownAuth />}
-    </header>
+      {isOpenLogInForm && width! >= 1024 && <DropdownAuth />}
+    </>
   );
 };
 

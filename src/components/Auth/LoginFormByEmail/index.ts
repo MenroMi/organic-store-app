@@ -1,2 +1,2 @@
-import LoginFormByEmail from "./LoginForm";
+import LoginFormByEmail from "./LoginFormByEmail";
 export default LoginFormByEmail;

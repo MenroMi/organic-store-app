@@ -6,6 +6,7 @@ export enum navHref {
   registration = "/auth/register",
   logIn = "/auth/login",
   forgotPass = "/auth/forgot",
+  profile = "/profile",
 }
 
 export const navLinks = [
@@ -14,15 +15,22 @@ export const navLinks = [
     href: navHref.home,
   },
   {
-    label: "About Us",
-    href: navHref.aboutUs,
-  },
-  {
     label: "Shop",
     href: navHref.shop,
+  },
+  {
+    label: "Profile",
+    href: navHref.profile,
   },
   {
     label: "Contact Us",
     href: navHref.contact,
   },
+];
+
+export const userMenuLinks = [
+  { label: "Profile", href: navHref.profile },
+  // { label: "Favorite", href: navHref.home },
+  // { label: "Settings", href: navHref.home },
+  { label: "Log Out", href: navHref.home },
 ];

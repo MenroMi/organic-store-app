@@ -5,13 +5,15 @@ import { Provider } from "react-redux";
 import { configureStore } from "@reduxjs/toolkit";
 
 // reducers
-import { filters, auth } from "@/redux/slices";
+import { filters, auth, registration, updatePass } from "@/redux/slices";
 
 // store
 const store = configureStore({
   reducer: {
     filters,
     auth,
+    registration,
+    updatePass,
   },
   middleware: (getDefaultMiddleware) => getDefaultMiddleware(),
   devTools: process.env.NODE_ENV !== "production",
@@ -27,3 +29,6 @@ const ReduxProvider: React.FC<IReduxProvider> = ({ children }) => {
 };
 
 export default ReduxProvider;
+
+// type for dispatch thunk
+export type AppDispatch = typeof store.dispatch;

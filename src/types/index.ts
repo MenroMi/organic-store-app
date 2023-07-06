@@ -49,6 +49,14 @@ export interface IBurgerMenuProps {
   classNameContainer?: string;
 }
 
+export interface IAuthLinkProps {
+  classNameParagraph?: string;
+  contentParagraph?: string;
+  classNameLink?: string;
+  contentLink?: string;
+  route: string;
+}
+
 export type IWindowSize = {
   width?: number;
   height?: number;

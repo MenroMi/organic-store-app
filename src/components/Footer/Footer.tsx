@@ -8,8 +8,11 @@ import {
   footerContactData,
   footerSocialMedia,
   footerUtilityPages,
+  navHref,
 } from "@/constants";
-import { navHref } from "@/constants/navigation";
+
+// components
+import CustomLink from "@/components/CustomLink/CustomLink";
 
 const Footer = () => {
   return (
@@ -74,14 +77,13 @@ const Footer = () => {
             Utility Pages
           </h2>
           <div className="flex flex-col">
-            {footerUtilityPages.map((page) => (
-              <Link
-                href={page.href}
-                key={page.label}
-                className="text-lg text-grey-text py-2 hover:underline max-sm:text-sm lg:py-3"
-              >
-                {page.label}
-              </Link>
+            {footerUtilityPages.map(({ label, href }) => (
+              <CustomLink
+                key={label}
+                label={label}
+                href={href}
+                classNameLink="text-lg text-grey-text py-2 hover:underline max-sm:text-sm lg:py-3"
+              />
             ))}
           </div>
         </div>
