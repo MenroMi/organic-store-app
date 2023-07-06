@@ -17,7 +17,7 @@ import { memoAuthSelector } from "@/redux/selectors";
 import LoginByProviders from "@/components/Auth/LoginByProviders";
 import Spinner from "@/components/Spinner";
 import { UserMenu } from "@/components/Menu";
-import LoginFormByEmail from "@/components/Auth/LoginFormByEmail/LoginFormByEmail";
+import LoginFormByEmail from "@/components/Auth/FormsAuth/LoginFormByEmail/LoginFormByEmail";
 import { useLoading } from "@/hooks/useLoading";
 
 const DropdownAuth = () => {

@@ -26,7 +26,7 @@ import {
 import { CustomButton } from "./Buttons";
 import { HeaderProfile, Header } from "./Headers";
 import Spinner from "./Spinner";
-import ForgotPasswordForm from "./Auth/ForgotPasswordForm";
+import ForgotPasswordForm from "./Auth/FormsAuth/ForgotPasswordForm";
 import CustomLink from "./CustomLink";
 
 export {
