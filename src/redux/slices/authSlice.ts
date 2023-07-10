@@ -18,29 +18,9 @@ const authSlice = createSlice({
   name: "auth",
   initialState: initAuthStates,
   reducers: {
-    setEmail: (state, action) => {
-      return {
-        ...state,
-        email: action?.payload ?? "",
-      };
-    },
-    setPassword: (state, action) => {
-      return {
-        ...state,
-        password: action?.payload ?? "",
-      };
-    },
     setOpenLoginForm: (state) => {
       return { ...state, isOpenLoginForm: !state.isOpenLoginForm };
     },
-    setEmailError: (state, action) => ({
-      ...state,
-      errorEmail: action.payload,
-    }),
-    setPassError: (state, action) => ({
-      ...state,
-      errorPass: action.payload,
-    }),
   },
   extraReducers: (builder) => {
     // PENDING
@@ -67,7 +47,7 @@ const authSlice = createSlice({
     // FULFILLED
     builder.addCase(onSignInThunk.fulfilled, (state, action) => {
       if (action.payload?.id) {
-        const { id, role, user_metadata } = action.payload;
+        const { id, role, user_metadata, accessToken } = action.payload;
 
         return {
           ...state,
@@ -76,6 +56,7 @@ const authSlice = createSlice({
             role,
             user_metadata,
           },
+          accessToken,
           isError: false,
           error: { name: "", msg: "" },
           isLoading: false,
@@ -127,23 +108,10 @@ const authSlice = createSlice({
         error: { msg: "", name: "" },
       };
     });
-
-    // REJECTED
-    builder.addCase(onSignInThunk.rejected, (state, action) => {
-      return {
-        ...state,
-      };
-    });
   },
 });
 
 const { actions, reducer } = authSlice;
 
 export default reducer;
-export const {
-  setOpenLoginForm,
-  setEmail,
-  setPassword,
-  setEmailError,
-  setPassError,
-} = actions;
+export const { setOpenLoginForm } = actions;

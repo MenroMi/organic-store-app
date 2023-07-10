@@ -19,18 +19,10 @@ import memoAuthSelector from "@/redux/selectors/authSelector";
 import { regexpEmail, navHref, regexpPassword } from "@/constants";
 
 // hooks
-import { useLoading } from "@/hooks/useLoading";
+import useHandleInputErrors from "@/hooks/useHandleInputErrors";
 
 // utils
 import { onValidateForm } from "@/utils";
-
-// slice
-import {
-  setEmail,
-  setEmailError,
-  setPassError,
-  setPassword,
-} from "@/redux/slices/authSlice";
 
 // components
 import Spinner from "@/components/Spinner";
@@ -56,18 +48,26 @@ const LoginFormByEmail: React.FC<ILoginFormByEmailProps> = ({
   classNameButtonConfirm,
 }) => {
   const router = useRouter();
-  const { loading, setLoading } = useLoading();
-  const [isOpenPass, setOpenPass] = useState<boolean>(false);
-  const { email, password, error, isLoading, errorEmail, isLogin, errorPass } =
-    useSelector(memoAuthSelector);
+  const {
+    loading,
+    setLoading,
+    errorEmail,
+    errorPassword,
+    setErrorEmail,
+    setErrorPassword,
+  } = useHandleInputErrors();
+  const [visiblePass, setVisiblePass] = useState<boolean>(false);
+  const [email, setEmail] = useState<string>("");
+  const [password, setPassword] = useState<string>("");
+  const { error, isLoading, isLogin } = useSelector(memoAuthSelector);
   const dispatch = useDispatch<AppDispatch>();
 
   const onHandleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     dispatch(onSignInThunk({ email, password }));
-    dispatch(setEmail(""));
-    dispatch(setPassword(""));
+    setEmail("");
+    setPassword("");
   };
 
   useEffect(() => {
@@ -86,13 +86,13 @@ const LoginFormByEmail: React.FC<ILoginFormByEmailProps> = ({
         Email:
         <input
           onChange={(e) =>
-            onValidateForm(
-              dispatch,
-              setEmail,
-              setEmailError,
-              regexpEmail,
-              errorEmail,
-              e.target.value
+            setEmail(
+              onValidateForm(
+                setErrorEmail,
+                regexpEmail,
+                errorEmail,
+                e.target.value
+              )
             )
           }
           value={email}
@@ -112,17 +112,17 @@ const LoginFormByEmail: React.FC<ILoginFormByEmailProps> = ({
         Password:
         <input
           onChange={(e) =>
-            onValidateForm(
-              dispatch,
-              setPassword,
-              setPassError,
-              regexpPassword,
-              errorPass,
-              e.target.value
+            setPassword(
+              onValidateForm(
+                setErrorPassword,
+                regexpPassword,
+                errorPassword,
+                e.target.value
+              )
             )
           }
           value={password}
-          type={isOpenPass ? "text" : "password"}
+          type={visiblePass ? "text" : "password"}
           name="password"
           required
           className={classNameInputPassword}
@@ -130,11 +130,11 @@ const LoginFormByEmail: React.FC<ILoginFormByEmailProps> = ({
           autoComplete="on"
         />
         <Image
-          onClick={() => setOpenPass(!isOpenPass)}
-          src={isOpenPass ? "/icons/eye-close.svg" : "/icons/eye-open.svg"}
+          onClick={() => setVisiblePass(!visiblePass)}
+          src={visiblePass ? "/icons/eye-close.svg" : "/icons/eye-open.svg"}
           alt="icon for control visibility password"
-          width={isOpenPass ? 32 : 30}
-          height={isOpenPass ? 32 : 30}
+          width={visiblePass ? 32 : 30}
+          height={visiblePass ? 32 : 30}
           className="absolute top-[55%] right-4"
         />
       </label>

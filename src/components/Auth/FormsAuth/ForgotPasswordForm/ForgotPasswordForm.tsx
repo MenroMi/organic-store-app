@@ -7,7 +7,7 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
 // slices
-import { setEmail, setLoading } from "@/redux/slices/updatePassSlice";
+import { setLoading } from "@/redux/slices/updatePassSlice";
 
 // thunk
 import { onUpdatePasswordThunk } from "@/redux/thunks";
@@ -25,17 +25,16 @@ import Spinner from "@/components/Spinner";
 import { AppDispatch } from "@/redux/provider/ReduxProvider";
 
 const ForgotPasswordForm = () => {
+  const [email, setEmail] = useState<string>("");
   const [showMsg, setShowMsg] = useState<boolean>(false);
-  const { email, loading, isError, error } = useSelector(
-    memoUpdatePassSelector
-  );
+  const { loading, isError, error } = useSelector(memoUpdatePassSelector);
   const dispatch = useDispatch<AppDispatch>();
 
   const onHandleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     dispatch(onUpdatePasswordThunk(email));
-    dispatch(setEmail(""));
+    setEmail("");
     dispatch(setLoading(false));
     setShowMsg(true);
     setTimeout(() => setShowMsg(false), 5000);
@@ -51,7 +50,7 @@ const ForgotPasswordForm = () => {
       <label className="text-primary-green text-xl">
         Email:
         <input
-          onChange={(e) => dispatch(setEmail(e.target.value))}
+          onChange={(e) => setEmail(e.target.value)}
           value={email}
           type="email"
           name="email"

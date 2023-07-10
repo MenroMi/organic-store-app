@@ -8,13 +8,7 @@ export interface ILoader {
   isLoading: boolean;
 }
 
-export interface ILoaderAndErrors extends ILoader {
+export interface IErrors {
   isError: boolean;
   error: IError | null;
-}
-
-export interface IErrorAuth extends ILoaderAndErrors {
-  errorName?: boolean;
-  errorEmail: boolean;
-  errorPass: boolean;
 }

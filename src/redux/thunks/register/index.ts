@@ -16,7 +16,7 @@ const onRegisterThunk = createAsyncThunk(
       options: {
         emailRedirectTo: `${location.origin}/auth/callback`,
         data: {
-          name,
+          full_name: name,
         },
       },
     });

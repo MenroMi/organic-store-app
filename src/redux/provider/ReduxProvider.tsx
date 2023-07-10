@@ -8,7 +8,7 @@ import { configureStore } from "@reduxjs/toolkit";
 import { filters, auth, registration, updatePass } from "@/redux/slices";
 
 // store
-const store = configureStore({
+export const store = configureStore({
   reducer: {
     filters,
     auth,

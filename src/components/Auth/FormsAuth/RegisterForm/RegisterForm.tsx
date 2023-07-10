@@ -2,15 +2,7 @@
 
 import Spinner from "@/components/Spinner";
 import { regexpEmail, regexpName, regexpPassword } from "@/constants";
-import {
-  setRegEmail,
-  setRegName,
-  setRegPass,
-  setRegEmailError,
-  setRegNameError,
-  setRegPassError,
-  setResetResponse,
-} from "@/redux/slices/registerSlice";
+import { setResetResponse } from "@/redux/slices/registerSlice";
 import onValidateForm from "@/utils/onValidateForm";
 import { memoRegSelector } from "@/redux/selectors";
 import Image from "next/image";
@@ -18,25 +10,38 @@ import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { onRegisterThunk } from "@/redux/thunks";
 import { AppDispatch } from "@/redux/provider/ReduxProvider";
+import useHandleInputErrors from "@/hooks/useHandleInputErrors";
 
 const RegisterForm = () => {
-  const [isLoading, setIsLoading] = useState<boolean>(false);
-  const [isOpenPass, setOpenPass] = useState<boolean>(false);
-  const { name, email, password, errorEmail, errorName, errorPass, response } =
-    useSelector(memoRegSelector);
+  const [name, setName] = useState<string>("");
+  const [email, setEmail] = useState<string>("");
+  const [password, setPassword] = useState<string>("");
+  const [visiblePass, setVisiblePass] = useState<boolean>(false);
+
+  const { response } = useSelector(memoRegSelector);
   const dispatch = useDispatch<AppDispatch>();
+  const {
+    loading,
+    errorName,
+    errorEmail,
+    errorPassword,
+    setLoading,
+    setErrorEmail,
+    setErrorName,
+    setErrorPassword,
+  } = useHandleInputErrors();
 
   const onHandleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    setIsLoading(true);
+    setLoading(true);
 
     await dispatch(onRegisterThunk({ name, email, password }));
 
-    setIsLoading(false);
-    dispatch(setRegName(""));
-    dispatch(setRegEmail(""));
-    dispatch(setRegPass(""));
+    setLoading(false);
+    setName("");
+    setEmail("");
+    setPassword("");
     setTimeout(() => dispatch(setResetResponse()), 5000);
   };
 
@@ -49,13 +54,13 @@ const RegisterForm = () => {
         Name:
         <input
           onChange={(e) => {
-            onValidateForm(
-              dispatch,
-              setRegName,
-              setRegNameError,
-              regexpName,
-              errorName,
-              e.target.value
+            setName(
+              onValidateForm(
+                setErrorName,
+                regexpName,
+                errorName,
+                e.target.value
+              )
             );
           }}
           value={name}
@@ -75,13 +80,13 @@ const RegisterForm = () => {
         Email:
         <input
           onChange={(e) =>
-            onValidateForm(
-              dispatch,
-              setRegEmail,
-              setRegEmailError,
-              regexpEmail,
-              errorEmail,
-              e.target.value
+            setEmail(
+              onValidateForm(
+                setErrorEmail,
+                regexpEmail,
+                errorEmail,
+                e.target.value
+              )
             )
           }
           value={email}
@@ -101,17 +106,17 @@ const RegisterForm = () => {
         Password:
         <input
           onChange={(e) =>
-            onValidateForm(
-              dispatch,
-              setRegPass,
-              setRegPassError,
-              regexpPassword,
-              errorPass,
-              e.target.value
+            setPassword(
+              onValidateForm(
+                setErrorPassword,
+                regexpPassword,
+                errorPassword,
+                e.target.value
+              )
             )
           }
           value={password}
-          type={isOpenPass ? "text" : "password"}
+          type={visiblePass ? "text" : "password"}
           name="password"
           required
           className="w-full h-[60px] bg-white border-[1px] border-primary-green mt-2 text-primary-green font-normal px-3 rounded-lg hover:border-green-darker transition placeholder:text-lg"
@@ -119,15 +124,15 @@ const RegisterForm = () => {
           autoComplete="on"
         />
         <Image
-          onClick={() => setOpenPass(!isOpenPass)}
-          src={isOpenPass ? "/icons/eye-close.svg" : "/icons/eye-open.svg"}
+          onClick={() => setVisiblePass(!visiblePass)}
+          src={visiblePass ? "/icons/eye-close.svg" : "/icons/eye-open.svg"}
           alt="icon for control visibility password"
-          width={isOpenPass ? 32 : 30}
-          height={isOpenPass ? 32 : 30}
+          width={visiblePass ? 32 : 30}
+          height={visiblePass ? 32 : 30}
           className="absolute top-[55%] right-4"
         />
       </label>
-      {errorPass && (
+      {errorPassword && (
         <p className="text-red-500 text-sm">
           Password should have: min 8 char., 1 lowercase letter, 1 uppercase
           letter, 1 special symbol and 1 number.
@@ -140,11 +145,16 @@ const RegisterForm = () => {
       <button
         type="submit"
         disabled={
-          !name || !email || !password || errorEmail || errorName || errorPass
+          !name ||
+          !email ||
+          !password ||
+          errorEmail ||
+          errorName ||
+          errorPassword
         }
         className="w-full h-[60px] bg-primary-green mt-5 font-bold text-lg px-3 text-white hover:bg-primary-green-darker transition tracking-widest rounded-lg disabled:opacity-80"
       >
-        {isLoading ? <Spinner /> : "Register"}
+        {loading ? <Spinner /> : "Register"}
       </button>
     </form>
   );

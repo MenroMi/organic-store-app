@@ -18,10 +18,10 @@ import LoginByProviders from "@/components/Auth/LoginByProviders";
 import Spinner from "@/components/Spinner";
 import { UserMenu } from "@/components/Menu";
 import LoginFormByEmail from "@/components/Auth/FormsAuth/LoginFormByEmail/LoginFormByEmail";
-import { useLoading } from "@/hooks/useLoading";
+import useHandleInputErrors from "@/hooks/useHandleInputErrors";
 
 const DropdownAuth = () => {
-  const { loading, setLoading } = useLoading();
+  const { loading, setLoading } = useHandleInputErrors();
   const { user } = useSelector(memoAuthSelector);
   const router = useRouter();
 

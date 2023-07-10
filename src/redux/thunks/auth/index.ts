@@ -25,10 +25,15 @@ const onSignInThunk = createAsyncThunk(
       }
 
       const {
-        role,
-        id,
-        user_metadata: { avatar_url, full_name },
-      } = data?.user;
+        session: { access_token },
+        user: { role, id, user_metadata },
+      } = data;
+
+      const { full_name, avatar_url } = user_metadata;
+
+      if (access_token) {
+        localStorage.setItem("access_token", access_token);
+      }
 
       return {
         role,
@@ -37,6 +42,7 @@ const onSignInThunk = createAsyncThunk(
           name: full_name,
           avatar: avatar_url,
         },
+        accessToken: access_token,
       };
     } catch (error) {
       console.log(error);
@@ -95,6 +101,25 @@ const onSignInGitHubThunk = createAsyncThunk("auth/loginGithub", async () => {
 
 const getAuthUserThunk = createAsyncThunk("auth/relogin", async () => {
   try {
+    const {
+      data: { session },
+    } = await supabase.auth.getSession();
+    const { access_token, refresh_token } = session;
+    const localStorageToken = localStorage.getItem("access_token");
+
+    console.log(refresh_token);
+
+    if (
+      access_token &&
+      localStorageToken &&
+      access_token !== localStorageToken
+    ) {
+      const { data: refresh } = await supabase.auth.refreshSession({
+        refresh_token,
+      });
+      localStorage.setItem("access_token", refresh.session?.access_token);
+    }
+
     const { data } = await supabase.auth.getUser();
 
     if (data && data?.user) {
@@ -114,7 +139,6 @@ const getAuthUserThunk = createAsyncThunk("auth/relogin", async () => {
 
     return null;
   } catch (error) {
-    alert("onUserFetch: " + error);
     return null;
   }
 });
@@ -122,6 +146,11 @@ const getAuthUserThunk = createAsyncThunk("auth/relogin", async () => {
 const onLogOutThunk = createAsyncThunk("auth/logout", async () => {
   try {
     await supabase.auth.signOut();
+
+    if (localStorage.getItem("access_token")) {
+      localStorage.removeItem("access_token");
+    }
+
     return null;
   } catch (error) {
     error = error as Error;

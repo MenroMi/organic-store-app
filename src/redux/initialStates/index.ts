@@ -15,15 +15,12 @@ export const initFilterStates: IFiltersReducer = {
 
 export const initAuthStates: IAuthReducer = {
   user: null,
-  email: "",
-  password: "",
+  accessToken: "",
   error: {
     name: "",
     msg: "",
     status: "",
   },
-  errorEmail: false,
-  errorPass: false,
   isError: false,
   isLoading: false,
   isLogin: false,
@@ -31,9 +28,6 @@ export const initAuthStates: IAuthReducer = {
 };
 
 export const initRegisterStates: IRegisterReducer = {
-  name: "",
-  email: "",
-  password: "",
   response: {
     success: false,
     response: "",
@@ -43,15 +37,11 @@ export const initRegisterStates: IRegisterReducer = {
     msg: "",
     status: "",
   },
-  errorName: false,
-  errorEmail: false,
-  errorPass: false,
   isError: false,
   isLoading: false,
 };
 
 export const initUpdatePassStates: IUpdatePassReducer = {
-  email: "",
   newPassword: "",
   repeatPassword: "",
   isError: false,
@@ -61,7 +51,4 @@ export const initUpdatePassStates: IUpdatePassReducer = {
     name: "",
     status: "",
   },
-  errorEmail: false,
-  errorPass: false,
-  errorName: false,
 };
