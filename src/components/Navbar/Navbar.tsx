@@ -1,43 +1,43 @@
-"use client";
+'use client';
 
 // basic
-import Image from "next/image";
-import Link from "next/link";
-import React, { useEffect, useRef, useState } from "react";
+import Image from 'next/image';
+import Link from 'next/link';
+import React, {useEffect, useRef, useState} from 'react';
 
 // libs
-import { useDispatch, useSelector } from "react-redux";
-import { setOpenLoginForm } from "@/redux/slices/authSlice";
+import {useDispatch, useSelector} from 'react-redux';
+import {setOpenLoginForm} from '@/redux/slices/authSlice';
 
 // selectors
-import { memoAuthSelector } from "@/redux/selectors";
+import {memoAuthSelector} from '@/redux/selectors';
 
 // constants
-import { navLinks, navHref } from "@/constants";
+import {navLinks, navHref} from '@/constants';
 
 // hooks
-import useWindowSize from "@/hooks/useWindowSize";
+import useWindowSize from '@/hooks/useWindowSize';
 
 // components
-import BurgerMenu from "@/components/Menu/BurgerMenu";
-import { BurgerMenuAuth, DropdownAuth } from "@/components/Auth";
-import CustomLink from "@/components/CustomLink";
-import NavbarUser from "@/components/User/NavbarUser";
+import BurgerMenu from '@/components/Menu/BurgerMenu';
+import {BurgerMenuAuth, DropdownAuth} from '@/components/Auth';
+import CustomLink from '@/components/CustomLink';
+import NavbarUser from '@/components/User/NavbarUser';
 
 const Navbar = () => {
   const {
-    windowSize: { width },
+    windowSize: {width},
   } = useWindowSize();
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [smaller, setSmaller] = useState<boolean>(false);
   const scrollRef = useRef<number>(0);
-  const { isOpenLogInForm, user, isLogin } = useSelector(memoAuthSelector);
+  const {isOpenLogInForm, user, isLogin} = useSelector(memoAuthSelector);
   const dispatch = useDispatch();
 
   useEffect(() => {
     const handleScroll = (e: Event) => {
       const {
-        documentElement: { scrollTop },
+        documentElement: {scrollTop},
       } = e.target as any;
 
       if (scrollTop >= 50) {
@@ -49,11 +49,11 @@ const Navbar = () => {
       return null;
     };
 
-    window.addEventListener("scroll", handleScroll);
+    window.addEventListener('scroll', handleScroll);
 
     return () => {
       dispatch(setOpenLoginForm());
-      window.addEventListener("scroll", handleScroll);
+      window.addEventListener('scroll', handleScroll);
     };
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
@@ -69,7 +69,7 @@ const Navbar = () => {
   const onAllowSecureRoutes = (
     label: string,
     href: string,
-    classNameLink: string
+    classNameLink: string,
   ) => {
     if (isLogin) {
       return (
@@ -82,7 +82,7 @@ const Navbar = () => {
       );
     }
 
-    if (label.toLowerCase() === "profile") {
+    if (label.toLowerCase() === 'profile') {
       return;
     }
 
@@ -100,7 +100,7 @@ const Navbar = () => {
     <>
       <nav
         className={`general-header__navbar max-lg:gap-4 lg:gap-2 ${
-          smaller ? "h-[90px]" : "h-[150px]"
+          smaller ? 'h-[90px]' : 'h-[150px]'
         }`}
       >
         <div className="flex justify-between lg:justify-start items-center max-w-[865px] w-full lg:gap-28">
@@ -117,23 +117,23 @@ const Navbar = () => {
               className="object-contain"
             />
           </a>
-          <svg
+          <Image
+            src="/icons/burger-menu.svg"
+            alt="button open menu"
             onClick={() => {
               scrollRef.current = document.documentElement.scrollTop;
               setIsOpen(!isOpen);
             }}
-            xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 448 512"
-            fill="#274C5B"
             className={`cursor-pointer transition-all max-sm:w-[30px] max-sm:h-[30px] w-[60px] h-[60px] lg:hidden ${
-              isOpen ? "hidden" : "visible"
+              isOpen ? 'hidden' : 'visible'
             }`}
-          >
-            <path d="M0 96C0 78.3 14.3 64 32 64H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32C14.3 128 0 113.7 0 96zM0 256c0-17.7 14.3-32 32-32H416c17.7 0 32 14.3 32 32s-14.3 32-32 32H32c-17.7 0-32-14.3-32-32zM448 416c0 17.7-14.3 32-32 32H32c-17.7 0-32-14.3-32-32s14.3-32 32-32H416c17.7 0 32 14.3 32 32z" />
-          </svg>
+            width={60}
+            height={60}
+          />
+
           <div className="max-lg:hidden h-full flex justify-center items-center">
-            {navLinks.map(({ label, href }) => {
-              return onAllowSecureRoutes(label, href, "nav-item");
+            {navLinks.map(({label, href}) => {
+              return onAllowSecureRoutes(label, href, 'nav-item');
             })}
           </div>
 
@@ -142,17 +142,17 @@ const Navbar = () => {
             setIsOpen={() => setIsOpen(!isOpen)}
             scrollValue={scrollRef.current}
             classNameContainer={`relative cursor-pointer ${
-              (!isOpen || width! >= 1024) && "hidden"
+              (!isOpen || width! >= 1024) && 'hidden'
             }`}
           >
             <BurgerMenuAuth />
             {onLogInForm()}
             <div className="flex flex-col h-full w-full justify-start">
-              {navLinks.map(({ label, href }) => {
+              {navLinks.map(({label, href}) => {
                 return onAllowSecureRoutes(
                   label,
                   href,
-                  "burger-nav__item max-md:text-2xl md:text-4xl"
+                  'burger-nav__item max-md:text-2xl md:text-4xl',
                 );
               })}
             </div>

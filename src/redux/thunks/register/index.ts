@@ -1,5 +1,5 @@
-import supabase from "@/configs/supabaseConfig";
-import { createAsyncThunk } from "@reduxjs/toolkit";
+import supabase from '@/configs/supabaseConfig';
+import {createAsyncThunk} from '@reduxjs/toolkit';
 
 interface IRegistrationData {
   name: string;
@@ -8,9 +8,9 @@ interface IRegistrationData {
 }
 
 const onRegisterThunk = createAsyncThunk(
-  "registration/registerNewUser",
-  async ({ name, email, password }: IRegistrationData) => {
-    const { data: userForm, error } = await supabase.auth.signUp({
+  'registration/registerNewUser',
+  async ({name, email, password}: IRegistrationData) => {
+    const {data: userForm, error} = await supabase.auth.signUp({
       email,
       password,
       options: {
@@ -21,10 +21,11 @@ const onRegisterThunk = createAsyncThunk(
       },
     });
 
+    console.log(userForm);
     if (userForm?.user && userForm?.user?.identities.length > 0) {
       return {
         success: true,
-        response: "Great! Now check your email for further work with account.",
+        response: 'Great! Now check your email for further work with account.',
       };
     }
 
@@ -32,18 +33,18 @@ const onRegisterThunk = createAsyncThunk(
       return {
         success: false,
         response:
-          "Oh no. This email already exists. Please log in or rember your password.",
+          'Oh no. This email already exists. Please log in or rember your password.',
       };
     }
 
     if (error) {
-      console.log(error.message);
+      console.log('Error: ', error.message);
       return {
         success: false,
-        response: "Error",
+        response: 'Error',
       };
     }
-  }
+  },
 );
 
 export default onRegisterThunk;

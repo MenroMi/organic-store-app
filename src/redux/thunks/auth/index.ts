@@ -1,5 +1,5 @@
-import { createAsyncThunk } from "@reduxjs/toolkit";
-import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
+import {createAsyncThunk} from '@reduxjs/toolkit';
+import {createClientComponentClient} from '@supabase/auth-helpers-nextjs';
 interface ILogInData {
   email: string;
   password: string;
@@ -7,16 +7,16 @@ interface ILogInData {
 const supabase = createClientComponentClient();
 
 const onSignInThunk = createAsyncThunk(
-  "auth/login",
-  async ({ email, password }: ILogInData) => {
+  'auth/login',
+  async ({email, password}: ILogInData) => {
     try {
-      const { data, error } = await supabase.auth.signInWithPassword({
+      const {data, error} = await supabase.auth.signInWithPassword({
         email,
         password,
       });
 
       if (error && error?.message) {
-        const { name, message, status } = error;
+        const {name, message, status} = error;
         return {
           name,
           message,
@@ -25,14 +25,14 @@ const onSignInThunk = createAsyncThunk(
       }
 
       const {
-        session: { access_token },
-        user: { role, id, user_metadata },
+        session: {access_token},
+        user: {role, id, user_metadata},
       } = data;
 
-      const { full_name, avatar_url } = user_metadata;
+      const {full_name, avatar_url} = user_metadata;
 
       if (access_token) {
-        localStorage.setItem("access_token", access_token);
+        localStorage.setItem('access_token', access_token);
       }
 
       return {
@@ -51,17 +51,17 @@ const onSignInThunk = createAsyncThunk(
         message: error?.message,
       };
     }
-  }
+  },
 );
 
-const onSignInGoogleThunk = createAsyncThunk("auth/loginGoogle", async () => {
+const onSignInGoogleThunk = createAsyncThunk('auth/loginGoogle', async () => {
   try {
     await supabase.auth.signInWithOAuth({
-      provider: "google",
+      provider: 'google',
       options: {
         queryParams: {
-          access_type: "offline",
-          prompt: "consent",
+          access_type: 'offline',
+          prompt: 'consent',
         },
       },
     });
@@ -73,24 +73,24 @@ const onSignInGoogleThunk = createAsyncThunk("auth/loginGoogle", async () => {
 });
 
 const onSignInFacebookThunk = createAsyncThunk(
-  "auth/loginFacebook",
+  'auth/loginFacebook',
   async () => {
     try {
       await supabase.auth.signInWithOAuth({
-        provider: "facebook",
+        provider: 'facebook',
       });
 
       return null;
     } catch (error) {
       return error;
     }
-  }
+  },
 );
 
-const onSignInGitHubThunk = createAsyncThunk("auth/loginGithub", async () => {
+const onSignInGitHubThunk = createAsyncThunk('auth/loginGithub', async () => {
   try {
     await supabase.auth.signInWithOAuth({
-      provider: "github",
+      provider: 'github',
     });
 
     return null;
@@ -99,33 +99,31 @@ const onSignInGitHubThunk = createAsyncThunk("auth/loginGithub", async () => {
   }
 });
 
-const getAuthUserThunk = createAsyncThunk("auth/relogin", async () => {
+const getAuthUserThunk = createAsyncThunk('auth/relogin', async () => {
   try {
     const {
-      data: { session },
+      data: {session},
     } = await supabase.auth.getSession();
-    const { access_token, refresh_token } = session;
-    const localStorageToken = localStorage.getItem("access_token");
-
-    console.log(refresh_token);
+    const {access_token, refresh_token} = session;
+    const localStorageToken = localStorage.getItem('access_token');
 
     if (
       access_token &&
       localStorageToken &&
       access_token !== localStorageToken
     ) {
-      const { data: refresh } = await supabase.auth.refreshSession({
+      const {data: refresh} = await supabase.auth.refreshSession({
         refresh_token,
       });
-      localStorage.setItem("access_token", refresh.session?.access_token);
+      localStorage.setItem('access_token', refresh.session?.access_token);
     }
 
-    const { data } = await supabase.auth.getUser();
+    const {data} = await supabase.auth.getUser();
 
     if (data && data?.user) {
-      const { role, id, user_metadata } = data?.user;
+      const {role, id, user_metadata} = data?.user;
 
-      const { full_name, avatar_url } = user_metadata;
+      const {full_name, avatar_url} = user_metadata;
 
       return {
         role,
@@ -143,12 +141,12 @@ const getAuthUserThunk = createAsyncThunk("auth/relogin", async () => {
   }
 });
 
-const onLogOutThunk = createAsyncThunk("auth/logout", async () => {
+const onLogOutThunk = createAsyncThunk('auth/logout', async () => {
   try {
     await supabase.auth.signOut();
 
-    if (localStorage.getItem("access_token")) {
-      localStorage.removeItem("access_token");
+    if (localStorage.getItem('access_token')) {
+      localStorage.removeItem('access_token');
     }
 
     return null;

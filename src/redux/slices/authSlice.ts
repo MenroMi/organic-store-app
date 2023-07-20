@@ -1,5 +1,5 @@
 // slice from redux-toolkit
-import { createSlice } from "@reduxjs/toolkit";
+import {createSlice} from '@reduxjs/toolkit';
 
 // thunks
 import {
@@ -9,46 +9,45 @@ import {
   onSignInGitHubThunk,
   onSignInGoogleThunk,
   onSignInThunk,
-} from "@/redux/thunks/auth";
+} from '@/redux/thunks/auth';
 
 // initial state
-import { initAuthStates } from "@/redux/initialStates";
+import {initAuthStates} from '@/redux/initialStates';
 
 const authSlice = createSlice({
-  name: "auth",
+  name: 'auth',
   initialState: initAuthStates,
   reducers: {
-    setOpenLoginForm: (state) => {
-      return { ...state, isOpenLoginForm: !state.isOpenLoginForm };
+    setOpenLoginForm: state => {
+      return {...state, isOpenLoginForm: !state.isOpenLoginForm};
     },
   },
-  extraReducers: (builder) => {
+  extraReducers: builder => {
     // PENDING
-    builder.addCase(onSignInThunk.pending, (state) => {
-      return { ...state, isLoading: true };
+    builder.addCase(onSignInThunk.pending, state => {
+      return {...state, isLoading: true};
     });
-    builder.addCase(onSignInGoogleThunk.pending, (state) => {
-      return { ...state, isLoading: true };
+    builder.addCase(onSignInGoogleThunk.pending, state => {
+      return {...state, isLoading: true};
     });
-    builder.addCase(onSignInFacebookThunk.pending, (state) => {
-      return { ...state, isLoading: true };
+    builder.addCase(onSignInFacebookThunk.pending, state => {
+      return {...state, isLoading: true};
     });
 
-    builder.addCase(onSignInGitHubThunk.pending, (state) => {
-      return { ...state, isLoading: true };
+    builder.addCase(onSignInGitHubThunk.pending, state => {
+      return {...state, isLoading: true};
     });
-    builder.addCase(getAuthUserThunk.pending, (state) => {
-      return { ...state, isLoading: true };
+    builder.addCase(getAuthUserThunk.pending, state => {
+      return {...state, isLoading: true};
     });
-    builder.addCase(onLogOutThunk.pending, (state) => {
-      return { ...state, isLoading: true };
+    builder.addCase(onLogOutThunk.pending, state => {
+      return {...state, isLoading: true};
     });
 
     // FULFILLED
     builder.addCase(onSignInThunk.fulfilled, (state, action) => {
       if (action.payload?.id) {
-        const { id, role, user_metadata, accessToken } = action.payload;
-
+        const {id, role, user_metadata, accessToken} = action.payload;
         return {
           ...state,
           user: {
@@ -58,18 +57,18 @@ const authSlice = createSlice({
           },
           accessToken,
           isError: false,
-          error: { name: "", msg: "" },
+          error: {name: '', msg: ''},
           isLoading: false,
           isLogin: true,
         };
       }
 
-      const { name, message } = action.payload;
+      const {name, message} = action.payload;
       return {
         ...state,
         isError: true,
         isLoading: false,
-        error: { name, msg: message },
+        error: {name, msg: message},
         isLogin: false,
       };
     });
@@ -81,7 +80,7 @@ const authSlice = createSlice({
           user: action.payload,
           isLogin: true,
           isLoading: false,
-          error: { msg: "", name: "" },
+          error: {msg: '', name: ''},
         };
       }
 
@@ -90,7 +89,7 @@ const authSlice = createSlice({
         user: action.payload,
         isLogin: false,
         isLoading: false,
-        error: { msg: "", name: "" },
+        error: {msg: '', name: ''},
       };
     });
 
@@ -105,13 +104,13 @@ const authSlice = createSlice({
         isError: false,
         isLogin: false,
         isLoading: false,
-        error: { msg: "", name: "" },
+        error: {msg: '', name: ''},
       };
     });
   },
 });
 
-const { actions, reducer } = authSlice;
+const {actions, reducer} = authSlice;
 
 export default reducer;
-export const { setOpenLoginForm } = actions;
+export const {setOpenLoginForm} = actions;

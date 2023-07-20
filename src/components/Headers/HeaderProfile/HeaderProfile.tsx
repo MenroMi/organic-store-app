@@ -1,5 +1,5 @@
-import Image from "next/image";
-import React from "react";
+import Image from 'next/image';
+import React from 'react';
 
 const HeaderProfile = () => {
   return (
@@ -8,6 +8,7 @@ const HeaderProfile = () => {
         src="/login-bg.jpg"
         width={1920}
         height={1024}
+        priority
         alt="background image of profile"
         className="object-cover w-full h-72"
       />
