@@ -1,15 +1,15 @@
 // basic
-import Image from "next/image";
+import Image from 'next/image';
 
 // libs
-import { AnyAction, Dispatch } from "redux";
-import { useSelector } from "react-redux";
+import {AnyAction, Dispatch} from 'redux';
+import {useSelector} from 'react-redux';
 
 // selector
-import { memoAuthSelector } from "@/redux/selectors";
+import {memoAuthSelector} from '@/redux/selectors';
 
 // slice
-import { setOpenLoginForm } from "@/redux/slices/authSlice";
+import {setOpenLoginForm} from '@/redux/slices/authSlice';
 
 // interface
 interface INavbarUser {
@@ -25,10 +25,10 @@ const NavbarUser: React.FC<INavbarUser> = ({
   dispatch,
   isOpen,
 }) => {
-  const { user } = useSelector(memoAuthSelector);
+  const {user} = useSelector(memoAuthSelector);
 
   return (
-    <div className="cart max-sm:min-w-[40px] max-xl:min-w-[80px]">
+    <div className="cart">
       <button
         type="button"
         className="border rounded-full items-center gap-3 max-sm:p-1 max-lg:p-2 lg:p-2 active:scale-90 transition"
@@ -39,8 +39,8 @@ const NavbarUser: React.FC<INavbarUser> = ({
         }}
       >
         <div
-          className={`relative max-sm:p-2 p-4 w-14 h-14 rounded-full ${
-            user ? "bg-transparent" : "bg-primary-green"
+          className={`relative max-sm:p-2 p-4 w-14 h-14 lg:w-16 lg:h-16 rounded-full ${
+            user ? 'bg-transparent' : 'bg-primary-green'
           }`}
         >
           <Image
@@ -48,15 +48,15 @@ const NavbarUser: React.FC<INavbarUser> = ({
               user
                 ? user.user_metadata?.avatar
                   ? user?.user_metadata?.avatar
-                  : "/icons/no-image.svg"
-                : "/icons/user.svg"
+                  : '/icons/no-image.svg'
+                : '/icons/user.svg'
             }
             alt="user logo"
             width={40}
             height={40}
             priority
             className={`absolute object-cover top-[50%] translate-y-[-50%] left-[50%] translate-x-[-50%] rounded-full ${
-              user && "w-full h-full"
+              user && 'w-full h-full'
             }`}
           />
         </div>

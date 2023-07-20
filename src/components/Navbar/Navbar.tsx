@@ -95,12 +95,11 @@ const Navbar = () => {
       />
     );
   };
-
   return (
     <>
       <nav
         className={`general-header__navbar max-lg:gap-4 lg:gap-2 ${
-          smaller ? 'h-[90px]' : 'h-[150px]'
+          smaller ? 'min-h-[90px]' : 'min-h-[150px]'
         }`}
       >
         <div className="flex justify-between lg:justify-start items-center max-w-[865px] w-full lg:gap-28">
@@ -158,8 +157,8 @@ const Navbar = () => {
             </div>
           </BurgerMenu>
         </div>
-        <div className="flex gap-3">
-          <div className="cart max-sm:min-w-[40px] max-lg:min-w-[80px] lg:min-w-[165px]">
+        <div className="flex gap-3 items-center">
+          <div className="cart max-sm:min-w-[40px] max-sm:max-h-[30px] max-lg:min-w-[80px] lg:min-w-[165px]">
             <Link
               href={navHref.home}
               className="flex border rounded-full items-center gap-3 max-sm:p-1 max-lg:p-2 lg:py-2 lg:pl-3 lg:pr-6 "
@@ -168,8 +167,8 @@ const Navbar = () => {
                 <Image
                   src="/icons/cart.svg"
                   alt="cart logo"
-                  width={26}
-                  height={24}
+                  width={30}
+                  height={30}
                   priority
                   className="object-contain"
                 />
@@ -178,12 +177,14 @@ const Navbar = () => {
               <p className="lg:visible max-lg:hidden">Cart 0</p>
             </Link>
           </div>
-          <NavbarUser
-            width={width}
-            setIsOpen={setIsOpen}
-            dispatch={dispatch}
-            isOpen={isOpen}
-          />
+          {width >= 640 && (
+            <NavbarUser
+              width={width}
+              setIsOpen={setIsOpen}
+              dispatch={dispatch}
+              isOpen={isOpen}
+            />
+          )}
         </div>
       </nav>
       {isOpenLogInForm && width! >= 1024 && <DropdownAuth />}
