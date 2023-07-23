@@ -4,4 +4,7 @@ export enum ErrorMsgs {
   name = 'Your name have forbidden characters. Please check it!',
 }
 
-export enum ResponseMsgs {}
+export enum ResponseMsgs {
+  acceptRegistration = 'Great! Now check your email for further work with account.',
+  rejectRegistration = 'Oh no. This email already exists. Please log in or rember your password.',
+}

@@ -15,7 +15,7 @@ import {
   products,
   categories,
 } from './UI';
-import {ErrorMsgs} from './messages';
+import {ErrorMsgs, ResponseMsgs} from './messages';
 
 export {
   navLinks,
@@ -36,4 +36,5 @@ export {
   navHref,
   userMenuLinks,
   ErrorMsgs,
+  ResponseMsgs,
 };
