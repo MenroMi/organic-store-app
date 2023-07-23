@@ -3,23 +3,23 @@ import {
   IFiltersReducer,
   IRegisterReducer,
   IUpdatePassReducer,
-} from "@/types/reduxTypes";
+} from '@/types/reduxTypes';
 
 export const initFilterStates: IFiltersReducer = {
-  searchFilterCategory: "",
+  searchFilterCategory: '',
   filterPrice: {
-    from: "",
-    to: "",
+    from: '',
+    to: '',
   },
 };
 
 export const initAuthStates: IAuthReducer = {
   user: null,
-  accessToken: "",
+  accessToken: '',
   error: {
-    name: "",
-    msg: "",
-    status: "",
+    name: '',
+    msg: '',
+    status: '',
   },
   isError: false,
   isLoading: false,
@@ -30,25 +30,25 @@ export const initAuthStates: IAuthReducer = {
 export const initRegisterStates: IRegisterReducer = {
   response: {
     success: false,
-    response: "",
+    response: '',
   },
   error: {
-    name: "",
-    msg: "",
-    status: "",
+    name: '',
+    msg: '',
+    status: '',
   },
   isError: false,
   isLoading: false,
 };
 
 export const initUpdatePassStates: IUpdatePassReducer = {
-  newPassword: "",
-  repeatPassword: "",
+  newPassword: '',
+  repeatPassword: '',
   isError: false,
   isLoading: false,
   error: {
-    msg: "",
-    name: "",
-    status: "",
+    msg: '',
+    name: '',
+    status: '',
   },
 };

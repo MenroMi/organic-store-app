@@ -1,16 +1,21 @@
-import { UserMetadata } from "@supabase/supabase-js";
-import { IPrice } from ".";
-import { IErrors, ILoader } from "./errorsAndLoadersTypes";
+import {UserMetadata} from '@supabase/supabase-js';
+import {IPrice} from '.';
+import {IErrors, ILoader} from './errorsAndLoadersTypes';
 
 interface IResponse {
   success: boolean;
   response: string;
 }
 
+interface IUserMetadata extends UserMetadata {
+  full_name: string;
+  avatar: string | null;
+}
+
 interface IUser {
   id: string;
   role: string;
-  user_metadata: UserMetadata;
+  user_metadata: IUserMetadata;
 }
 
 export interface IFiltersReducer {

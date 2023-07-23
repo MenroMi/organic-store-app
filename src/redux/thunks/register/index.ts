@@ -21,8 +21,8 @@ const onRegisterThunk = createAsyncThunk(
       },
     });
 
-    console.log(userForm);
     if (userForm?.user && userForm?.user?.identities.length > 0) {
+      await supabase.from('users').insert({id: userForm.user.id, name, email});
       return {
         success: true,
         response: 'Great! Now check your email for further work with account.',

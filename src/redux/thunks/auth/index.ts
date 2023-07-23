@@ -4,6 +4,16 @@ interface ILogInData {
   email: string;
   password: string;
 }
+
+interface IUserOnDB {
+  id: string;
+  username?: string;
+  name: string;
+  email: string;
+  avatar: string | null;
+  birthday?: string;
+}
+
 const supabase = createClientComponentClient();
 
 const onSignInThunk = createAsyncThunk(
@@ -29,7 +39,7 @@ const onSignInThunk = createAsyncThunk(
         user: {role, id, user_metadata},
       } = data;
 
-      const {full_name, avatar_url} = user_metadata;
+      const {full_name, avatar} = user_metadata;
 
       if (access_token) {
         localStorage.setItem('access_token', access_token);
@@ -39,8 +49,8 @@ const onSignInThunk = createAsyncThunk(
         role,
         id,
         user_metadata: {
-          name: full_name,
-          avatar: avatar_url,
+          full_name,
+          avatar,
         },
         accessToken: access_token,
       };
@@ -118,19 +128,22 @@ const getAuthUserThunk = createAsyncThunk('auth/relogin', async () => {
       localStorage.setItem('access_token', refresh.session?.access_token);
     }
 
-    const {data} = await supabase.auth.getUser();
+    const {data: users} = await supabase
+      .from('users')
+      .select()
+      .eq('id', session.user.id);
 
-    if (data && data?.user) {
-      const {role, id, user_metadata} = data?.user;
+    const [user] = users as IUserOnDB[];
 
-      const {full_name, avatar_url} = user_metadata;
+    if (users && users.length > 0 && user) {
+      const {id, name, avatar} = user;
 
       return {
-        role,
+        role: session.user.role,
         id,
         user_metadata: {
-          name: full_name,
-          avatar: avatar_url,
+          full_name: name,
+          avatar,
         },
       };
     }
