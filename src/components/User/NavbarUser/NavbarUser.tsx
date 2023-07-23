@@ -26,7 +26,6 @@ const NavbarUser: React.FC<INavbarUser> = ({
   isOpen,
 }) => {
   const {user} = useSelector(memoAuthSelector);
-
   return (
     <div className="cart">
       <button
@@ -44,13 +43,17 @@ const NavbarUser: React.FC<INavbarUser> = ({
           }`}
         >
           <Image
-            src={
+            src="/icons/user.svg"
+            /*
+
+            {
               user
                 ? user.user_metadata?.avatar
                   ? user?.user_metadata?.avatar
                   : '/icons/no-image.svg'
                 : '/icons/user.svg'
             }
+            */
             alt="user logo"
             width={40}
             height={40}

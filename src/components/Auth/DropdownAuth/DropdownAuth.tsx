@@ -1,28 +1,28 @@
-"use client";
+'use client';
 
 // basic
-import { useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
+import {useRouter} from 'next/navigation';
+import {useEffect, useState} from 'react';
 
 // lib
-import { useSelector } from "react-redux";
+import {useSelector} from 'react-redux';
 
 // constants
-import { navHref } from "@/constants/navigation";
+import {navHref} from '@/constants';
 
 // selector
-import { memoAuthSelector } from "@/redux/selectors";
+import {memoAuthSelector} from '@/redux/selectors';
 
 // components
-import LoginByProviders from "@/components/Auth/LoginByProviders";
-import Spinner from "@/components/Spinner";
-import { UserMenu } from "@/components/Menu";
-import LoginFormByEmail from "@/components/Auth/FormsAuth/LoginFormByEmail/LoginFormByEmail";
-import useHandleInputErrors from "@/hooks/useHandleInputErrors";
+import LoginByProviders from '@/components/Auth/LoginByProviders';
+import Spinner from '@/components/Spinner';
+import {UserMenu} from '@/components/Menu';
+import LoginFormByEmail from '@/components/Auth/FormsAuth/LoginFormByEmail/LoginFormByEmail';
+import useHandleInputErrors from '@/hooks/useHandleInputErrors';
 
 const DropdownAuth = () => {
-  const { loading, setLoading } = useHandleInputErrors();
-  const { user } = useSelector(memoAuthSelector);
+  const {loading, setLoading} = useHandleInputErrors();
+  const {user} = useSelector(memoAuthSelector);
   const router = useRouter();
 
   useEffect(() => {
@@ -51,7 +51,7 @@ const DropdownAuth = () => {
           </p>
           <LoginByProviders />
           <p className="text-gray-300 font-thin text-lg text-center">
-            You do not have an account?{" "}
+            You do not have an account?{' '}
             <span
               onClick={() => {
                 setLoading(true);

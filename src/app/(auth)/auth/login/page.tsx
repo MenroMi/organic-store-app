@@ -1,5 +1,5 @@
 // constants
-import { navHref } from "@/constants/navigation";
+import {navHref} from '@/constants';
 
 // components
 import {
@@ -7,7 +7,7 @@ import {
   CustomButton,
   LoginByProviders,
   LoginFormByEmail,
-} from "@/components";
+} from '@/components';
 
 const LoginPage = async () => {
   return (

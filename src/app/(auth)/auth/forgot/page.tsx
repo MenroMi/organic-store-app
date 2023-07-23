@@ -1,8 +1,8 @@
 // constants
-import { navHref } from "@/constants/navigation";
+import {navHref} from '@/constants';
 
 // components
-import { AuthLink, CustomButton, ForgotPasswordForm } from "@/components";
+import {AuthLink, CustomButton, ForgotPasswordForm} from '@/components';
 
 const ForgotPasswordPage = () => {
   return (

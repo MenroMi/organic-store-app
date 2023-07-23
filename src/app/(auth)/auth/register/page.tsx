@@ -1,8 +1,8 @@
 // constants
-import { navHref } from "@/constants/navigation";
+import {navHref} from '@/constants';
 
 // components
-import { CustomButton, RegisterForm, AuthLink } from "@/components";
+import {CustomButton, RegisterForm, AuthLink} from '@/components';
 
 const RegisterPage = async () => {
   return (
