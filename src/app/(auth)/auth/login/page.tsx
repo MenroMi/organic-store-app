@@ -2,12 +2,7 @@
 import {navHref} from '@/constants';
 
 // components
-import {
-  AuthLink,
-  CustomButton,
-  LoginByProviders,
-  LoginFormByEmail,
-} from '@/components';
+import {AuthLink, LoginByProviders, LoginFormByEmail} from '@/components';
 
 const LoginPage = async () => {
   return (

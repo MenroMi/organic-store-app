@@ -2,7 +2,7 @@
 import {navHref} from '@/constants';
 
 // components
-import {CustomButton, RegisterForm, AuthLink} from '@/components';
+import {RegisterForm, AuthLink} from '@/components';
 
 const RegisterPage = async () => {
   return (

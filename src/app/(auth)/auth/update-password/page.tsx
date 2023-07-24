@@ -1,8 +1,5 @@
-// constants
-import {navHref} from '@/constants';
-
 // components
-import {CustomButton, UpdatePasswordForm} from '@/components';
+import {UpdatePasswordForm} from '@/components';
 
 const UpdatePassword = () => {
   return (
