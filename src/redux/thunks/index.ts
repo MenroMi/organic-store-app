@@ -1,6 +1,13 @@
-import { onSignInThunk, getAuthUserThunk, onLogOutThunk } from "./auth";
-import onRegisterThunk from "./register";
-import onUpdatePasswordThunk from "./update-password";
+import {
+  onSignInThunk,
+  getAuthUserThunk,
+  onLogOutThunk,
+  onSignInFacebookThunk,
+  onSignInGitHubThunk,
+  onSignInGoogleThunk,
+} from './auth';
+import onRegisterThunk from './register';
+import {onUpdatePasswordThunk, onUpdateAvatarUserThunk} from './update';
 
 export {
   onLogOutThunk,
@@ -8,4 +15,8 @@ export {
   getAuthUserThunk,
   onRegisterThunk,
   onUpdatePasswordThunk,
+  onUpdateAvatarUserThunk,
+  onSignInFacebookThunk,
+  onSignInGitHubThunk,
+  onSignInGoogleThunk,
 };

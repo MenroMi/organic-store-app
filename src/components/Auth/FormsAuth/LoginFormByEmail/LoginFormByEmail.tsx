@@ -1,34 +1,34 @@
-"use client";
+'use client';
 
 // basic
-import Link from "next/link";
-import { useEffect, useState } from "react";
-import Image from "next/image";
-import { useRouter } from "next/navigation";
+import Link from 'next/link';
+import {useEffect, useState} from 'react';
+import Image from 'next/image';
+import {useRouter} from 'next/navigation';
 
 // libs
-import { useDispatch, useSelector } from "react-redux";
+import {useDispatch, useSelector} from 'react-redux';
 
 // thunk
-import { onSignInThunk } from "@/redux/thunks/auth";
+import {onSignInThunk} from '@/redux/thunks/auth';
 
 // selector
-import memoAuthSelector from "@/redux/selectors/authSelector";
+import {memoUserSelector} from '@/redux/selectors';
 
 // constants
-import { regexpEmail, navHref, regexpPassword } from "@/constants";
+import {regexpEmail, navHref, regexpPassword} from '@/constants';
 
 // hooks
-import useHandleInputErrors from "@/hooks/useHandleInputErrors";
+import useHandleInputErrors from '@/hooks/useHandleInputErrors';
 
 // utils
-import { onValidateForm } from "@/utils";
+import {onValidateForm} from '@/utils';
 
 // components
-import Spinner from "@/components/Spinner";
+import Spinner from '@/components/Spinner';
 
 // interface/types
-import { AppDispatch } from "@/redux/provider/ReduxProvider";
+import {AppDispatch} from '@/redux/provider/ReduxProvider';
 
 interface ILoginFormByEmailProps {
   classNameForm?: string;
@@ -57,42 +57,42 @@ const LoginFormByEmail: React.FC<ILoginFormByEmailProps> = ({
     setErrorPassword,
   } = useHandleInputErrors();
   const [visiblePass, setVisiblePass] = useState<boolean>(false);
-  const [email, setEmail] = useState<string>("");
-  const [password, setPassword] = useState<string>("");
-  const { error, isLoading, isLogin } = useSelector(memoAuthSelector);
+  const [email, setEmail] = useState<string>('');
+  const [password, setPassword] = useState<string>('');
+  const {error, isLoading, isLogin} = useSelector(memoUserSelector);
   const dispatch = useDispatch<AppDispatch>();
 
   const onHandleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    dispatch(onSignInThunk({ email, password }));
-    setEmail("");
-    setPassword("");
+    dispatch(onSignInThunk({email, password}));
+    setEmail('');
+    setPassword('');
   };
 
   useEffect(() => {
     if (isLogin) {
-      router.push("/home");
+      router.push('/home');
     }
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isLogin]);
-
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(() => setLoading(false), []);
 
   return (
-    <form onSubmit={(e) => onHandleSubmit(e)} className={classNameForm}>
+    <form onSubmit={e => onHandleSubmit(e)} className={classNameForm}>
       <label className={classNameLabelEmail}>
         Email:
         <input
-          onChange={(e) =>
+          onChange={e =>
             setEmail(
               onValidateForm(
                 setErrorEmail,
                 regexpEmail,
                 errorEmail,
-                e.target.value
-              )
+                e.target.value,
+              ),
             )
           }
           value={email}
@@ -111,18 +111,18 @@ const LoginFormByEmail: React.FC<ILoginFormByEmailProps> = ({
       <label className={classNameLabelPassword}>
         Password:
         <input
-          onChange={(e) =>
+          onChange={e =>
             setPassword(
               onValidateForm(
                 setErrorPassword,
                 regexpPassword,
                 errorPassword,
-                e.target.value
-              )
+                e.target.value,
+              ),
             )
           }
           value={password}
-          type={visiblePass ? "text" : "password"}
+          type={visiblePass ? 'text' : 'password'}
           name="password"
           required
           className={classNameInputPassword}
@@ -131,7 +131,7 @@ const LoginFormByEmail: React.FC<ILoginFormByEmailProps> = ({
         />
         <Image
           onClick={() => setVisiblePass(!visiblePass)}
-          src={visiblePass ? "/icons/eye-close.svg" : "/icons/eye-open.svg"}
+          src={visiblePass ? '/icons/eye-close.svg' : '/icons/eye-open.svg'}
           alt="icon for control visibility password"
           width={visiblePass ? 32 : 30}
           height={visiblePass ? 32 : 30}
@@ -155,7 +155,7 @@ const LoginFormByEmail: React.FC<ILoginFormByEmailProps> = ({
         type="submit"
         className={classNameButtonConfirm}
       >
-        {isLoading || loading ? <Spinner /> : "Log In"}
+        {isLoading || loading ? <Spinner /> : 'Log In'}
       </button>
     </form>
   );

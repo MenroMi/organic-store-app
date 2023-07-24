@@ -6,10 +6,10 @@ import {AnyAction, Dispatch} from 'redux';
 import {useSelector} from 'react-redux';
 
 // selector
-import {memoAuthSelector} from '@/redux/selectors';
+import {memoUserSelector} from '@/redux/selectors';
 
 // slice
-import {setOpenLoginForm} from '@/redux/slices/authSlice';
+import {setOpenLoginForm} from '@/redux/slices/userSlice';
 
 // interface
 interface INavbarUser {
@@ -25,7 +25,7 @@ const NavbarUser: React.FC<INavbarUser> = ({
   dispatch,
   isOpen,
 }) => {
-  const {user} = useSelector(memoAuthSelector);
+  const {user} = useSelector(memoUserSelector);
   return (
     <div className="cart">
       <button

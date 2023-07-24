@@ -9,10 +9,10 @@ import {useState} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 
 // slice
-import {setRepeatPassword} from '@/redux/slices/updatePassSlice';
+import {setRepeatPassword} from '@/redux/slices/userSlice';
 
 // selectors
-import {memoUpdatePassSelector} from '@/redux/selectors';
+import {memoUserSelector} from '@/redux/selectors';
 
 // constants
 import {regexpPassword} from '@/constants';
@@ -32,7 +32,7 @@ const UpdatePasswordForm = () => {
     useHandleInputErrors();
   const [visiblePass, setVisiblePass] = useState<boolean>(false);
   const [newPass, setNewPass] = useState<string>('');
-  const {repeatPass, error, isError} = useSelector(memoUpdatePassSelector);
+  const {repeatPassword, error, isError} = useSelector(memoUserSelector);
 
   const onHandleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -129,7 +129,7 @@ const UpdatePasswordForm = () => {
               }),
             );
           }}
-          value={repeatPass}
+          value={repeatPassword}
           type="password"
           name="password"
           required
@@ -137,13 +137,13 @@ const UpdatePasswordForm = () => {
           placeholder="Repeat your password"
         />
       </label>
-      {isError && repeatPass && (
+      {isError && repeatPassword && (
         <p className="text-red-500 text-sm">
           {error.name} {error.msg}
         </p>
       )}
       <button
-        disabled={isError || errorPassword || !newPass || !repeatPass}
+        disabled={isError || errorPassword || !newPass || !repeatPassword}
         type="submit"
         className="w-full h-[60px] bg-primary-green mt-3 font-bold text-lg px-3 text-white hover:bg-primary-green-darker transition tracking-widest rounded-lg disabled:opacity-80"
       >

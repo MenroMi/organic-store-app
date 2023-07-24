@@ -9,7 +9,7 @@ interface ILogInData {
 }
 
 const onSignInThunk = createAsyncThunk(
-  'auth/login',
+  'user/login',
   async ({email, password}: ILogInData) => {
     try {
       const {data, error} = await userService.signIn(email, password);
@@ -37,7 +37,7 @@ const onSignInThunk = createAsyncThunk(
   },
 );
 
-const onSignInGoogleThunk = createAsyncThunk('auth/loginGoogle', async () => {
+const onSignInGoogleThunk = createAsyncThunk('user/loginGoogle', async () => {
   try {
     await userService.signInGoogle();
     return null;
@@ -48,7 +48,7 @@ const onSignInGoogleThunk = createAsyncThunk('auth/loginGoogle', async () => {
 });
 
 const onSignInFacebookThunk = createAsyncThunk(
-  'auth/loginFacebook',
+  'user/loginFacebook',
   async () => {
     try {
       await userService.signInGithub();
@@ -59,7 +59,7 @@ const onSignInFacebookThunk = createAsyncThunk(
   },
 );
 
-const onSignInGitHubThunk = createAsyncThunk('auth/loginGithub', async () => {
+const onSignInGitHubThunk = createAsyncThunk('user/loginGithub', async () => {
   try {
     await userService.signInFacebook();
     return null;
@@ -68,13 +68,12 @@ const onSignInGitHubThunk = createAsyncThunk('auth/loginGithub', async () => {
   }
 });
 
-const getAuthUserThunk = createAsyncThunk('auth/relogin', async () => {
+const getAuthUserThunk = createAsyncThunk('user/relogin', async () => {
   try {
     let session = await sessionService.getActualSession();
     const {access_token, refresh_token} = session;
     const localStorageToken = localStorage.getItem('access_token');
 
-    console.log(session);
     if (
       access_token &&
       localStorageToken &&
@@ -91,6 +90,7 @@ const getAuthUserThunk = createAsyncThunk('auth/relogin', async () => {
 
     if (user) {
       const {id, name, avatar, email} = user;
+
       return {
         role: session.user.role,
         id,
@@ -110,7 +110,7 @@ const getAuthUserThunk = createAsyncThunk('auth/relogin', async () => {
   }
 });
 
-const onLogOutThunk = createAsyncThunk('auth/logout', async () => {
+const onLogOutThunk = createAsyncThunk('user/logout', async () => {
   try {
     await userService.signOut();
     return null;

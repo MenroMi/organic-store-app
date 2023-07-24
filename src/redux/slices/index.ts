@@ -1,6 +1,4 @@
-import filters from "./filtersSlice";
-import auth from "./authSlice";
-import registration from "./registerSlice";
-import updatePass from "./updatePassSlice";
+import filters from './filtersSlice';
+import user from './userSlice';
 
-export { filters, auth, registration, updatePass };
+export {filters, user};

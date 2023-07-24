@@ -2,7 +2,7 @@
 
 // basic
 import {useRouter} from 'next/navigation';
-import {useEffect, useState} from 'react';
+import {useEffect} from 'react';
 
 // lib
 import {useSelector} from 'react-redux';
@@ -11,7 +11,7 @@ import {useSelector} from 'react-redux';
 import {navHref} from '@/constants';
 
 // selector
-import {memoAuthSelector} from '@/redux/selectors';
+import {memoUserSelector} from '@/redux/selectors';
 
 // components
 import LoginByProviders from '@/components/Auth/LoginByProviders';
@@ -22,11 +22,13 @@ import useHandleInputErrors from '@/hooks/useHandleInputErrors';
 
 const DropdownAuth = () => {
   const {loading, setLoading} = useHandleInputErrors();
-  const {user} = useSelector(memoAuthSelector);
+  const {user} = useSelector(memoUserSelector);
   const router = useRouter();
 
   useEffect(() => {
     return () => setLoading(false);
+
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (

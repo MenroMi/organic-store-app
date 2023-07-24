@@ -1,9 +1,4 @@
-import {
-  IAuthReducer,
-  IFiltersReducer,
-  IRegisterReducer,
-  IUpdatePassReducer,
-} from '@/types/reduxTypes';
+import {IFiltersReducer, IUserReducer} from '@/types/reduxTypes';
 
 export const initFilterStates: IFiltersReducer = {
   searchFilterCategory: '',
@@ -13,42 +8,28 @@ export const initFilterStates: IFiltersReducer = {
   },
 };
 
-export const initAuthStates: IAuthReducer = {
-  user: null,
-  accessToken: '',
+export const initUserStates: IUserReducer = {
+  user: {
+    id: '',
+    role: '',
+    user_metadata: {
+      full_name: '',
+      avatar: '',
+      email: '',
+    },
+  },
+  repeatPassword: '',
+  isError: false,
   error: {
     name: '',
     msg: '',
     status: '',
   },
-  isError: false,
   isLoading: false,
   isLogin: false,
-  isOpenLoginForm: false,
-};
-
-export const initRegisterStates: IRegisterReducer = {
   response: {
     success: false,
     response: '',
   },
-  error: {
-    name: '',
-    msg: '',
-    status: '',
-  },
-  isError: false,
-  isLoading: false,
-};
-
-export const initUpdatePassStates: IUpdatePassReducer = {
-  newPassword: '',
-  repeatPassword: '',
-  isError: false,
-  isLoading: false,
-  error: {
-    msg: '',
-    name: '',
-    status: '',
-  },
+  isOpenLoginForm: false,
 };

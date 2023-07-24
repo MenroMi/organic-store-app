@@ -2,9 +2,9 @@
 
 import Spinner from '@/components/Spinner';
 import {ErrorMsgs, regexpEmail, regexpName, regexpPassword} from '@/constants';
-import {setResetResponse} from '@/redux/slices/registerSlice';
+import {setResetResponse} from '@/redux/slices/userSlice';
 import onValidateForm from '@/utils/onValidateForm';
-import {memoRegSelector} from '@/redux/selectors';
+import {memoUserSelector} from '@/redux/selectors';
 import Image from 'next/image';
 import {useState} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
@@ -18,7 +18,7 @@ const RegisterForm = () => {
   const [password, setPassword] = useState<string>('');
   const [visiblePass, setVisiblePass] = useState<boolean>(false);
 
-  const {response} = useSelector(memoRegSelector);
+  const {response} = useSelector(memoUserSelector);
   const dispatch = useDispatch<AppDispatch>();
   const {
     loading,

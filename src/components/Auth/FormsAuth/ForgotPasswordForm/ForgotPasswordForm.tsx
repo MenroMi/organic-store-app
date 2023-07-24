@@ -7,13 +7,13 @@ import {useEffect, useState} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 
 // slices
-import {setLoading} from '@/redux/slices/updatePassSlice';
+import {setLoading} from '@/redux/slices/userSlice';
 
 // thunk
 import {onUpdatePasswordThunk} from '@/redux/thunks';
 
 // selectors
-import {memoUpdatePassSelector} from '@/redux/selectors';
+import {memoUserSelector} from '@/redux/selectors';
 
 // constants
 import {regexpEmail} from '@/constants';
@@ -27,7 +27,7 @@ import {AppDispatch} from '@/redux/provider/ReduxProvider';
 const ForgotPasswordForm = () => {
   const [email, setEmail] = useState<string>('');
   const [showMsg, setShowMsg] = useState<boolean>(false);
-  const {loading, isError, error} = useSelector(memoUpdatePassSelector);
+  const {isLoading, isError, error} = useSelector(memoUserSelector);
   const dispatch = useDispatch<AppDispatch>();
 
   const onHandleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
@@ -75,7 +75,7 @@ const ForgotPasswordForm = () => {
         type="submit"
         className="w-full h-[60px] bg-primary-green mt-3 font-bold text-lg px-3 text-white hover:bg-primary-green-darker transition tracking-widest rounded-lg disabled:opacity-80"
       >
-        {loading ? <Spinner /> : 'Send password'}
+        {isLoading ? <Spinner /> : 'Send password'}
       </button>
     </form>
   );

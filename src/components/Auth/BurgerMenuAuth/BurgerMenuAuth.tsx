@@ -11,7 +11,7 @@ import {useDispatch, useSelector} from 'react-redux';
 import {getAuthUserThunk} from '@/redux/thunks/auth';
 
 // selectors
-import {memoAuthSelector} from '@/redux/selectors';
+import {memoUserSelector} from '@/redux/selectors';
 
 // components
 import {LogInBtnInBurger} from '@/components/Buttons';
@@ -23,7 +23,7 @@ import {AppDispatch} from '@/redux/provider/ReduxProvider';
 const BurgerMenuAuth = () => {
   const [isOpenDropdownUserMenu, setOpenDropdownUserMenu] =
     useState<boolean>(false);
-  const {user} = useSelector(memoAuthSelector);
+  const {user} = useSelector(memoUserSelector);
   const dispatch = useDispatch<AppDispatch>();
 
   useEffect(() => {

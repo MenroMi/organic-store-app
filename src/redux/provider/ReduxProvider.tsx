@@ -1,22 +1,20 @@
-"use client";
+'use client';
 
 // base
-import { Provider } from "react-redux";
-import { configureStore } from "@reduxjs/toolkit";
+import {Provider} from 'react-redux';
+import {configureStore} from '@reduxjs/toolkit';
 
 // reducers
-import { filters, auth, registration, updatePass } from "@/redux/slices";
+import {filters, user} from '@/redux/slices';
 
 // store
 export const store = configureStore({
   reducer: {
     filters,
-    auth,
-    registration,
-    updatePass,
+    user,
   },
-  middleware: (getDefaultMiddleware) => getDefaultMiddleware(),
-  devTools: process.env.NODE_ENV !== "production",
+  middleware: getDefaultMiddleware => getDefaultMiddleware(),
+  devTools: process.env.NODE_ENV !== 'production',
 });
 
 // interface
@@ -24,7 +22,7 @@ interface IReduxProvider {
   children: React.ReactNode;
 }
 
-const ReduxProvider: React.FC<IReduxProvider> = ({ children }) => {
+const ReduxProvider: React.FC<IReduxProvider> = ({children}) => {
   return <Provider store={store}>{children}</Provider>;
 };
 

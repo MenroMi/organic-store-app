@@ -1,5 +1,3 @@
-import memoAuthSelector from "./authSelector";
-import memoRegSelector from "./registerSelector";
-import memoUpdatePassSelector from "./updatePassSelector";
+import memoUserSelector from './userSelector';
 
-export { memoAuthSelector, memoRegSelector, memoUpdatePassSelector };
+export {memoUserSelector};

@@ -7,10 +7,10 @@ import React, {useEffect, useRef, useState} from 'react';
 
 // libs
 import {useDispatch, useSelector} from 'react-redux';
-import {setOpenLoginForm} from '@/redux/slices/authSlice';
+import {setOpenLoginForm} from '@/redux/slices/userSlice';
 
 // selectors
-import {memoAuthSelector} from '@/redux/selectors';
+import {memoUserSelector} from '@/redux/selectors';
 
 // constants
 import {navLinks, navHref} from '@/constants';
@@ -31,7 +31,7 @@ const Navbar = () => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [smaller, setSmaller] = useState<boolean>(false);
   const scrollRef = useRef<number>(0);
-  const {isOpenLogInForm, user, isLogin} = useSelector(memoAuthSelector);
+  const {isOpenLoginForm, user, isLogin} = useSelector(memoUserSelector);
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -60,7 +60,7 @@ const Navbar = () => {
   }, []);
 
   const onLogInForm = () => {
-    if (isOpenLogInForm) {
+    if (isOpenLoginForm) {
       return width! < 1024 && !user && <DropdownAuth />;
     }
     return null;
@@ -95,6 +95,7 @@ const Navbar = () => {
       />
     );
   };
+
   return (
     <>
       <nav
@@ -187,7 +188,7 @@ const Navbar = () => {
           )}
         </div>
       </nav>
-      {isOpenLogInForm && width! >= 1024 && <DropdownAuth />}
+      {isOpenLoginForm && width! >= 1024 && <DropdownAuth />}
     </>
   );
 };

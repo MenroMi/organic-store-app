@@ -13,7 +13,7 @@ interface IUserMetadata extends UserMetadata {
   avatar: string | null;
 }
 
-interface IUser {
+export interface IUser {
   id: string;
   role: string;
   user_metadata: IUserMetadata;
@@ -24,18 +24,10 @@ export interface IFiltersReducer {
   filterPrice: IPrice;
 }
 
-export interface IAuthReducer extends IErrors, ILoader {
+export interface IUserReducer extends IErrors, ILoader {
   user: IUser | null;
-  accessToken: string;
   isLogin: boolean;
-  isOpenLoginForm: boolean;
-}
-
-export interface IRegisterReducer extends IErrors, ILoader {
-  response: IResponse;
-}
-
-export interface IUpdatePassReducer extends IErrors, ILoader {
-  newPassword: string;
   repeatPassword: string;
+  response: IResponse;
+  isOpenLoginForm: boolean;
 }
