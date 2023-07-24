@@ -6,18 +6,6 @@ const updatePassSlice = createSlice({
   name: "updatePassword",
   initialState: initUpdatePassStates,
   reducers: {
-    setEmail: (state, action) => {
-      return {
-        ...state,
-        email: action.payload,
-      };
-    },
-    setNewPassword: (state, action) => {
-      return {
-        ...state,
-        newPassword: action.payload,
-      };
-    },
     setRepeatPassword: (state, action) => {
       const { value, error, name, msg } = action.payload;
 
@@ -29,12 +17,6 @@ const updatePassSlice = createSlice({
           name,
           msg,
         },
-      };
-    },
-    setPassError: (state, action) => {
-      return {
-        ...state,
-        errorPass: action.payload,
       };
     },
     setLoading: (state, action) => {
@@ -80,10 +62,4 @@ const updatePassSlice = createSlice({
 
 const { actions, reducer } = updatePassSlice;
 export default reducer;
-export const {
-  setNewPassword,
-  setRepeatPassword,
-  setPassError,
-  setEmail,
-  setLoading,
-} = actions;
+export const { setRepeatPassword, setLoading } = actions;

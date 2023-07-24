@@ -1,18 +1,21 @@
-import { filtersData } from "./filter";
-import { sliderOptions } from "./sliderOptions";
-import { articles } from "./articles";
-import { categories } from "./categories";
-import { advantagesEcoProducts } from "./ecoFriendly";
-import { advantages } from "./testimontial";
-import { products } from "./products";
-import { aboutReasons } from "./about";
+import {filtersData} from './filter';
+import {sliderOptions} from './sliderOptions';
+import {regexpEmail, regexpName, regexpPassword} from './regexpConst';
 import {
+  navLinks,
+  aboutReasons,
+  advantages,
+  advantagesEcoProducts,
+  articles,
+  navHref,
+  userMenuLinks,
   footerContactData,
   footerSocialMedia,
   footerUtilityPages,
-} from "./footer";
-import { regexpEmail, regexpName, regexpPassword } from "./regexpConst";
-import { navHref, userMenuLinks, navLinks } from "./navigation";
+  products,
+  categories,
+} from './UI';
+import {ErrorMsgs, ResponseMsgs} from './messages';
 
 export {
   navLinks,
@@ -32,4 +35,6 @@ export {
   regexpPassword,
   navHref,
   userMenuLinks,
+  ErrorMsgs,
+  ResponseMsgs,
 };

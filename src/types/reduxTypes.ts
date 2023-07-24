@@ -1,16 +1,22 @@
-import { UserMetadata } from "@supabase/supabase-js";
-import { IPrice } from ".";
-import { IErrorAuth } from "./errorsAndLoadersTypes";
+import {UserMetadata} from '@supabase/supabase-js';
+import {IPrice} from '.';
+import {IErrors, ILoader} from './errorsAndLoadersTypes';
 
 interface IResponse {
   success: boolean;
   response: string;
 }
 
+interface IUserMetadata extends UserMetadata {
+  email: string;
+  full_name: string;
+  avatar: string | null;
+}
+
 interface IUser {
   id: string;
   role: string;
-  user_metadata: UserMetadata;
+  user_metadata: IUserMetadata;
 }
 
 export interface IFiltersReducer {
@@ -18,23 +24,18 @@ export interface IFiltersReducer {
   filterPrice: IPrice;
 }
 
-export interface IAuthReducer extends IErrorAuth {
+export interface IAuthReducer extends IErrors, ILoader {
   user: IUser | null;
-  email: string;
-  password: string;
+  accessToken: string;
   isLogin: boolean;
   isOpenLoginForm: boolean;
 }
 
-export interface IRegisterReducer extends IErrorAuth {
-  name: string;
-  email: string;
-  password: string;
+export interface IRegisterReducer extends IErrors, ILoader {
   response: IResponse;
 }
 
-export interface IUpdatePassReducer extends IErrorAuth {
-  email: string;
+export interface IUpdatePassReducer extends IErrors, ILoader {
   newPassword: string;
   repeatPassword: string;
 }

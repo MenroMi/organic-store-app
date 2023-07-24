@@ -13,12 +13,12 @@ import { userMenuLinks } from "@/constants";
 import { AppDispatch } from "@/redux/provider/ReduxProvider";
 import { usePathname, useRouter } from "next/navigation";
 import Spinner from "@/components/Spinner";
-import { useLoading } from "@/hooks/useLoading";
+import useHandleInputErrors from "@/hooks/useHandleInputErrors";
 import CustomLink from "@/components/CustomLink/CustomLink";
 import { useEffect } from "react";
 
 const UserMenu = () => {
-  const { loading, setLoading } = useLoading();
+  const { loading, setLoading } = useHandleInputErrors();
   const dispatch = useDispatch<AppDispatch>();
   const router = useRouter();
   const pathname = usePathname();

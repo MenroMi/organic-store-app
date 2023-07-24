@@ -1,127 +1,118 @@
-import { createAsyncThunk } from "@reduxjs/toolkit";
-import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
+import dbService from '@/services/dbService';
+import sessionService from '@/services/sessionService';
+import userService from '@/services/userService';
+import {createAsyncThunk} from '@reduxjs/toolkit';
+
 interface ILogInData {
   email: string;
   password: string;
 }
-const supabase = createClientComponentClient();
 
 const onSignInThunk = createAsyncThunk(
-  "auth/login",
-  async ({ email, password }: ILogInData) => {
+  'auth/login',
+  async ({email, password}: ILogInData) => {
     try {
-      const { data, error } = await supabase.auth.signInWithPassword({
-        email,
-        password,
-      });
+      const {data, error} = await userService.signIn(email, password);
 
-      if (error && error?.message) {
-        const { name, message, status } = error;
+      if (data) {
+        return data;
+      } else {
+        throw new Error(JSON.stringify(error));
+      }
+    } catch (error) {
+      if (typeof error === 'string') {
+        const serverError = JSON.parse(error);
+
         return {
-          name,
-          message,
-          status,
+          name: serverError?.name,
+          message: serverError?.message,
         };
       }
 
-      const {
-        role,
-        id,
-        user_metadata: { avatar_url, full_name },
-      } = data?.user;
-
-      return {
-        role,
-        id,
-        user_metadata: {
-          name: full_name,
-          avatar: avatar_url,
-        },
-      };
-    } catch (error) {
-      console.log(error);
       return {
         name: error?.name,
         message: error?.message,
       };
     }
-  }
+  },
 );
 
-const onSignInGoogleThunk = createAsyncThunk("auth/loginGoogle", async () => {
+const onSignInGoogleThunk = createAsyncThunk('auth/loginGoogle', async () => {
   try {
-    await supabase.auth.signInWithOAuth({
-      provider: "google",
-      options: {
-        queryParams: {
-          access_type: "offline",
-          prompt: "consent",
-        },
-      },
-    });
-
+    await userService.signInGoogle();
     return null;
   } catch (error) {
+    console.log(error);
     return error;
   }
 });
 
 const onSignInFacebookThunk = createAsyncThunk(
-  "auth/loginFacebook",
+  'auth/loginFacebook',
   async () => {
     try {
-      await supabase.auth.signInWithOAuth({
-        provider: "facebook",
-      });
-
+      await userService.signInGithub();
       return null;
     } catch (error) {
       return error;
     }
-  }
+  },
 );
 
-const onSignInGitHubThunk = createAsyncThunk("auth/loginGithub", async () => {
+const onSignInGitHubThunk = createAsyncThunk('auth/loginGithub', async () => {
   try {
-    await supabase.auth.signInWithOAuth({
-      provider: "github",
-    });
-
+    await userService.signInFacebook();
     return null;
   } catch (error) {
     return error;
   }
 });
 
-const getAuthUserThunk = createAsyncThunk("auth/relogin", async () => {
+const getAuthUserThunk = createAsyncThunk('auth/relogin', async () => {
   try {
-    const { data } = await supabase.auth.getUser();
+    let session = await sessionService.getActualSession();
+    const {access_token, refresh_token} = session;
+    const localStorageToken = localStorage.getItem('access_token');
 
-    if (data && data?.user) {
-      const { role, id, user_metadata } = data?.user;
+    console.log(session);
+    if (
+      access_token &&
+      localStorageToken &&
+      access_token !== localStorageToken
+    ) {
+      session = await sessionService.refreshActualSession(refresh_token);
+      localStorage.setItem('access_token', session?.access_token);
+    }
 
-      const { full_name, avatar_url } = user_metadata;
+    // for correct authentication we check our user in DB
+    const {data: user, error} = await dbService.onSelectUserFromDB(
+      session.user.id,
+    );
 
+    if (user) {
+      const {id, name, avatar, email} = user;
       return {
-        role,
+        role: session.user.role,
         id,
         user_metadata: {
-          name: full_name,
-          avatar: avatar_url,
+          email,
+          full_name: name,
+          avatar,
         },
       };
+    } else {
+      console.log(error);
     }
 
     return null;
   } catch (error) {
-    alert("onUserFetch: " + error);
     return null;
   }
 });
 
-const onLogOutThunk = createAsyncThunk("auth/logout", async () => {
+const onLogOutThunk = createAsyncThunk('auth/logout', async () => {
   try {
-    await supabase.auth.signOut();
+    await userService.signOut();
     return null;
   } catch (error) {
     error = error as Error;

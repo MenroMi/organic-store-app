@@ -1,13 +1,13 @@
 // constants
-import { banners } from "@/constants/banners";
+import {banners} from '@/constants/UI/banners';
 
 // components
-import Banner from "@/components/HomePageComponents/Banner/Banner";
+import Banner from '@/components/HomePageComponents/Banner/Banner';
 
 const BannersList = () => {
   return (
     <section className={`banner-list flex py-24 lg:flex-row lg:py-[140px]`}>
-      {banners.map((banner) => (
+      {banners.map(banner => (
         <Banner
           key={banner.name}
           title={banner.title}

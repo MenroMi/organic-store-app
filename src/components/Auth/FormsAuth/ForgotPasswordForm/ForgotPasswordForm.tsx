@@ -1,41 +1,39 @@
-"use client";
+'use client';
 
 // basic
-import { useEffect, useState } from "react";
+import {useEffect, useState} from 'react';
 
 // libs
-import { useDispatch, useSelector } from "react-redux";
+import {useDispatch, useSelector} from 'react-redux';
 
 // slices
-import { setEmail, setLoading } from "@/redux/slices/updatePassSlice";
+import {setLoading} from '@/redux/slices/updatePassSlice';
 
 // thunk
-import { onUpdatePasswordThunk } from "@/redux/thunks";
+import {onUpdatePasswordThunk} from '@/redux/thunks';
 
 // selectors
-import { memoUpdatePassSelector } from "@/redux/selectors";
+import {memoUpdatePassSelector} from '@/redux/selectors';
 
 // constants
-import { regexpEmail } from "@/constants";
+import {regexpEmail} from '@/constants';
 
 // components
-import Spinner from "@/components/Spinner";
+import Spinner from '@/components/Spinner';
 
 // interface
-import { AppDispatch } from "@/redux/provider/ReduxProvider";
+import {AppDispatch} from '@/redux/provider/ReduxProvider';
 
 const ForgotPasswordForm = () => {
+  const [email, setEmail] = useState<string>('');
   const [showMsg, setShowMsg] = useState<boolean>(false);
-  const { email, loading, isError, error } = useSelector(
-    memoUpdatePassSelector
-  );
+  const {loading, isError, error} = useSelector(memoUpdatePassSelector);
   const dispatch = useDispatch<AppDispatch>();
 
   const onHandleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-
     dispatch(onUpdatePasswordThunk(email));
-    dispatch(setEmail(""));
+    setEmail('');
     dispatch(setLoading(false));
     setShowMsg(true);
     setTimeout(() => setShowMsg(false), 5000);
@@ -45,13 +43,13 @@ const ForgotPasswordForm = () => {
 
   return (
     <form
-      onSubmit={(e) => onHandleSubmit(e)}
+      onSubmit={e => onHandleSubmit(e)}
       className="flex flex-col gap-2 w-full mt-10"
     >
       <label className="text-primary-green text-xl">
         Email:
         <input
-          onChange={(e) => dispatch(setEmail(e.target.value))}
+          onChange={e => setEmail(e.target.value)}
           value={email}
           type="email"
           name="email"
@@ -77,7 +75,7 @@ const ForgotPasswordForm = () => {
         type="submit"
         className="w-full h-[60px] bg-primary-green mt-3 font-bold text-lg px-3 text-white hover:bg-primary-green-darker transition tracking-widest rounded-lg disabled:opacity-80"
       >
-        {loading ? <Spinner /> : "Send password"}
+        {loading ? <Spinner /> : 'Send password'}
       </button>
     </form>
   );

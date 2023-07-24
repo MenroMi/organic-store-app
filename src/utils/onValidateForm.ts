@@ -1,10 +1,8 @@
-import { ActionCreatorWithPayload } from "@reduxjs/toolkit";
+import { SetStateAction } from "react";
 import { AnyAction, Dispatch } from "redux";
 
 const onValidateForm = (
-  dispatch: Dispatch<AnyAction>,
-  action: ActionCreatorWithPayload<any, any>,
-  actionError: ActionCreatorWithPayload<any, any>,
+  setError: React.Dispatch<SetStateAction<boolean>>,
   regexp: RegExp,
   error: boolean,
   txt: string
@@ -12,24 +10,24 @@ const onValidateForm = (
   const validate = (
     value: string,
     regexp: RegExp,
-    actionError: ActionCreatorWithPayload<any, any>,
+    setError: React.Dispatch<SetStateAction<boolean>>,
     error: boolean
   ) => {
     if (value.length >= 1 && !regexp.test(value)) {
       if (!error) {
-        dispatch(actionError(true));
+        setError(true);
       }
       return value;
     }
 
     if (error) {
-      dispatch(actionError(false));
+      setError(false);
     }
 
     return value;
   };
 
-  return dispatch(action(validate(txt, regexp, actionError, error)));
+  return validate(txt, regexp, setError, error);
 };
 
 export default onValidateForm;

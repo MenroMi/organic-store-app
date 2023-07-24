@@ -1,5 +1,6 @@
-import supabase from "@/configs/supabaseConfig";
-import { createAsyncThunk } from "@reduxjs/toolkit";
+import {ResponseMsgs} from '@/constants';
+import userService from '@/services/userService';
+import {createAsyncThunk} from '@reduxjs/toolkit';
 
 interface IRegistrationData {
   name: string;
@@ -8,42 +9,31 @@ interface IRegistrationData {
 }
 
 const onRegisterThunk = createAsyncThunk(
-  "registration/registerNewUser",
-  async ({ name, email, password }: IRegistrationData) => {
-    const { data: userForm, error } = await supabase.auth.signUp({
-      email,
-      password,
-      options: {
-        emailRedirectTo: `${location.origin}/auth/callback`,
-        data: {
-          name,
-        },
-      },
-    });
+  'registration/registerNewUser',
+  async ({name, email, password}: IRegistrationData) => {
+    const {data: user, error} = await userService.signUp(name, email, password);
 
-    if (userForm?.user && userForm?.user?.identities.length > 0) {
+    if (user && user?.identities.length > 0) {
       return {
         success: true,
-        response: "Great! Now check your email for further work with account.",
+        response: ResponseMsgs.acceptRegistration,
       };
     }
 
-    if (userForm && !error && userForm?.user?.identities.length === 0) {
+    if (user && !error && user?.user?.identities.length === 0) {
       return {
         success: false,
-        response:
-          "Oh no. This email already exists. Please log in or rember your password.",
+        response: ResponseMsgs.rejectRegistration,
       };
     }
 
     if (error) {
-      console.log(error.message);
       return {
         success: false,
-        response: "Error",
+        response: `Error: ${error?.status}. ${error?.message}`,
       };
     }
-  }
+  },
 );
 
 export default onRegisterThunk;

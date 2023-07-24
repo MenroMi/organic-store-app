@@ -3,27 +3,24 @@ import {
   IFiltersReducer,
   IRegisterReducer,
   IUpdatePassReducer,
-} from "@/types/reduxTypes";
+} from '@/types/reduxTypes';
 
 export const initFilterStates: IFiltersReducer = {
-  searchFilterCategory: "",
+  searchFilterCategory: '',
   filterPrice: {
-    from: "",
-    to: "",
+    from: '',
+    to: '',
   },
 };
 
 export const initAuthStates: IAuthReducer = {
   user: null,
-  email: "",
-  password: "",
+  accessToken: '',
   error: {
-    name: "",
-    msg: "",
-    status: "",
+    name: '',
+    msg: '',
+    status: '',
   },
-  errorEmail: false,
-  errorPass: false,
   isError: false,
   isLoading: false,
   isLogin: false,
@@ -31,37 +28,27 @@ export const initAuthStates: IAuthReducer = {
 };
 
 export const initRegisterStates: IRegisterReducer = {
-  name: "",
-  email: "",
-  password: "",
   response: {
     success: false,
-    response: "",
+    response: '',
   },
   error: {
-    name: "",
-    msg: "",
-    status: "",
+    name: '',
+    msg: '',
+    status: '',
   },
-  errorName: false,
-  errorEmail: false,
-  errorPass: false,
   isError: false,
   isLoading: false,
 };
 
 export const initUpdatePassStates: IUpdatePassReducer = {
-  email: "",
-  newPassword: "",
-  repeatPassword: "",
+  newPassword: '',
+  repeatPassword: '',
   isError: false,
   isLoading: false,
   error: {
-    msg: "",
-    name: "",
-    status: "",
+    msg: '',
+    name: '',
+    status: '',
   },
-  errorEmail: false,
-  errorPass: false,
-  errorName: false,
 };
