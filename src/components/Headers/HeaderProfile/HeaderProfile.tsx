@@ -1,49 +1,31 @@
 'use client';
 
 import Spinner from '@/components/Spinner';
-import {memoAuthSelector} from '@/redux/selectors';
-import {createClientComponentClient} from '@supabase/auth-helpers-nextjs';
+import {AppDispatch} from '@/redux/provider/ReduxProvider';
+import {memoUserSelector} from '@/redux/selectors';
+import {onUpdateAvatarUserThunk} from '@/redux/thunks';
 import Image from 'next/image';
-import {useSelector} from 'react-redux';
-
-const supabase = createClientComponentClient();
+import {useDispatch, useSelector} from 'react-redux';
 
 const HeaderProfile = () => {
-  const {user} = useSelector(memoAuthSelector);
+  const {user} = useSelector(memoUserSelector);
+  const dispatch = useDispatch<AppDispatch>();
 
-  const onSelectFile = async (e: React.FormEvent<HTMLInputElement>) => {
+  const onUpdateProfileImage = async (e: React.FormEvent<HTMLInputElement>) => {
     e.preventDefault();
 
     try {
       const {files} = e.target as HTMLInputElement;
-
-      const isRepeatImages = (
-        await supabase.storage.from('images').list('users')
-      ).data.filter(image => image.name === files[0].name);
-
-      if (isRepeatImages.length > 0) {
-        await supabase.storage
-          .from('images')
-          .remove([`users/${isRepeatImages[0].name}`]);
-      }
-
-      if (user?.user_metadata?.avatar) {
-        await supabase.from('users').update({avatar: null}).eq('id', user.id);
-      }
-
-      const uploadedImage = (
-        await supabase.storage
-          .from('images')
-          .upload(`users/${files[0].name}`, files[0])
-      ).data.path;
-
-      const avatar = supabase.storage.from('images').getPublicUrl(uploadedImage)
-        .data.publicUrl;
-      await supabase.from('users').update({avatar}).eq('id', user.id);
+      dispatch(onUpdateAvatarUserThunk({file: files[0], user}));
     } catch (error) {
-      console.log(error);
+      console.log('Error Header Profile: ', error);
+      return {
+        name: error?.name,
+        message: error?.message,
+      };
     }
   };
+
   return (
     <div className="flex flex-col">
       <Image
@@ -72,7 +54,7 @@ const HeaderProfile = () => {
           <input
             type="file"
             accept="image/*"
-            onChange={onSelectFile}
+            onChange={onUpdateProfileImage}
             id="file"
             className="hidden"
           />
