@@ -8,6 +8,7 @@ interface IResponse {
 }
 
 interface IUserMetadata extends UserMetadata {
+  email: string;
   full_name: string;
   avatar: string | null;
 }

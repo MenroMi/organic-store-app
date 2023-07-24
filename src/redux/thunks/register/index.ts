@@ -1,5 +1,4 @@
 import {ResponseMsgs} from '@/constants';
-import dbService from '@/services/dbService';
 import userService from '@/services/userService';
 import {createAsyncThunk} from '@reduxjs/toolkit';
 
@@ -15,7 +14,6 @@ const onRegisterThunk = createAsyncThunk(
     const {data: user, error} = await userService.signUp(name, email, password);
 
     if (user && user?.identities.length > 0) {
-      await dbService.onInsertUserToDB(user?.id, name, email);
       return {
         success: true,
         response: ResponseMsgs.acceptRegistration,
@@ -30,10 +28,9 @@ const onRegisterThunk = createAsyncThunk(
     }
 
     if (error) {
-      console.log('Error: ', error.message);
       return {
         success: false,
-        response: error?.message,
+        response: `Error: ${error?.status}. ${error?.message}`,
       };
     }
   },

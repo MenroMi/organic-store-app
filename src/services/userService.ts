@@ -74,6 +74,8 @@ class UserService extends SupabaseClientService {
   }
 
   async signUp(name: string, email: string, password: string) {
+    // const isExistUser = await this.supabase.auth.
+
     const {data, error} = await this.supabase.auth.signUp({
       email,
       password,
@@ -81,15 +83,22 @@ class UserService extends SupabaseClientService {
         emailRedirectTo: `${location.origin}/auth/callback`,
         data: {
           full_name: name,
+          email,
         },
       },
     });
-
-    if (data) {
+    if (data.user) {
       return {data: data.user, error: null};
     }
 
-    return {data: null, error};
+    return {
+      data: null,
+      error: {
+        name: error?.name,
+        message: error?.message,
+        status: error?.status,
+      },
+    };
   }
 
   async signOut() {

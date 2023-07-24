@@ -39,13 +39,11 @@ const HeaderProfile = () => {
 
       const avatar = supabase.storage.from('images').getPublicUrl(uploadedImage)
         .data.publicUrl;
-
       await supabase.from('users').update({avatar}).eq('id', user.id);
     } catch (error) {
       console.log(error);
     }
   };
-
   return (
     <div className="flex flex-col">
       <Image
@@ -57,14 +55,15 @@ const HeaderProfile = () => {
         className="object-cover w-full h-48 md:h-72"
       />
       <div className="px-10 lg:px-40 flex gap-5 md:justify-between justify-center">
-        <div className="relative w-[200px] h-[200px] md:w-[250px] md:h-[250px] group before:bg-black/50 mt-[-100px] before:shadow-xl before:w-[100%] before:h-[100%] before:absolute before:top-[50%] before:left-[50%] before:z-20 before:rounded-full before:translate-x-[-50%] before:translate-y-[-50%] before:opacity-0 before:hover:opacity-100 before:transition">
+        <div className="relative w-[200px] h-[200px] shadow-md md:w-[250px] md:h-[250px] group before:bg-black/40 mt-[-100px] before:shadow-xl before:w-[100%] before:h-[100%] before:absolute before:top-[50%] before:left-[50%] before:z-20 before:rounded-full before:translate-x-[-50%] before:translate-y-[-50%] before:opacity-0 before:hover:opacity-100 before:transition border-[10px] border-white rounded-full before:hover:shadow-inner">
           {user && user?.id ? (
             <Image
-              src={user?.user_metadata?.avatar ?? ''}
+              src={user?.user_metadata?.avatar ?? '/icons/user.svg'}
               alt="user avatar"
               width={250}
               height={250}
-              className="rounded-full w-full h-full object-cover border-[10px] border-white drop-shadow-lg bg-white"
+              className="rounded-full w-full h-full object-cover"
+              // className="rounded-full w-full h-full object-cover border-[10px] border-white drop-shadow-lg bg-white"
             />
           ) : (
             <Spinner width="200px" height="200px" />

@@ -43,17 +43,7 @@ const NavbarUser: React.FC<INavbarUser> = ({
           }`}
         >
           <Image
-            src="/icons/user.svg"
-            /*
-
-            {
-              user
-                ? user.user_metadata?.avatar
-                  ? user?.user_metadata?.avatar
-                  : '/icons/no-image.svg'
-                : '/icons/user.svg'
-            }
-            */
+            src={user?.user_metadata?.avatar ?? '/icons/user.svg'}
             alt="user logo"
             width={40}
             height={40}

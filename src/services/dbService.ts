@@ -29,6 +29,7 @@ class DbService extends SupabaseClientService {
     }
   }
 
+  // deprecated
   async onInsertUserToDB(id: string, name: string, email: string) {
     return await this.supabase.from('users').insert({id, name, email});
   }

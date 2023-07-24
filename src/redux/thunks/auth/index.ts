@@ -42,6 +42,7 @@ const onSignInGoogleThunk = createAsyncThunk('auth/loginGoogle', async () => {
     await userService.signInGoogle();
     return null;
   } catch (error) {
+    console.log(error);
     return error;
   }
 });
@@ -73,6 +74,7 @@ const getAuthUserThunk = createAsyncThunk('auth/relogin', async () => {
     const {access_token, refresh_token} = session;
     const localStorageToken = localStorage.getItem('access_token');
 
+    console.log(session);
     if (
       access_token &&
       localStorageToken &&
@@ -82,17 +84,18 @@ const getAuthUserThunk = createAsyncThunk('auth/relogin', async () => {
       localStorage.setItem('access_token', session?.access_token);
     }
 
+    // for correct authentication we check our user in DB
     const {data: user, error} = await dbService.onSelectUserFromDB(
       session.user.id,
     );
 
     if (user) {
-      const {id, name, avatar} = user;
-
+      const {id, name, avatar, email} = user;
       return {
         role: session.user.role,
         id,
         user_metadata: {
+          email,
           full_name: name,
           avatar,
         },
