@@ -9,8 +9,6 @@ const selectError = (state: {user: IUserReducer}) => state.user.error;
 const selectResponse = (state: {user: IUserReducer}) => state.user.response;
 const selectIsOpenLoginForm = (state: {user: IUserReducer}) =>
   state.user.isOpenLoginForm;
-const selectRepeatPassword = (state: {user: IUserReducer}) =>
-  state.user.repeatPassword;
 
 const memoUserSelector = createSelector(
   selectUser,
@@ -19,25 +17,14 @@ const memoUserSelector = createSelector(
   selectError,
   selectResponse,
   selectIsOpenLoginForm,
-  selectRepeatPassword,
   selectIsLogin,
-  (
+  (user, isLoading, isError, error, response, isOpenLoginForm, isLogin) => ({
     user,
     isLoading,
     isError,
     error,
     response,
     isOpenLoginForm,
-    repeatPassword,
-    isLogin,
-  ) => ({
-    user,
-    isLoading,
-    isError,
-    error,
-    response,
-    isOpenLoginForm,
-    repeatPassword,
     isLogin,
   }),
 );

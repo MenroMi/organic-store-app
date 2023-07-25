@@ -27,7 +27,6 @@ export interface IFiltersReducer {
 export interface IUserReducer extends IErrors, ILoader {
   user: IUser | null;
   isLogin: boolean;
-  repeatPassword: string;
   response: IResponse;
   isOpenLoginForm: boolean;
 }

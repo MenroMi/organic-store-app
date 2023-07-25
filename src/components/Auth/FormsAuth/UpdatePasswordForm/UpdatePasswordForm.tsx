@@ -9,13 +9,13 @@ import {useState} from 'react';
 import {useDispatch, useSelector} from 'react-redux';
 
 // slice
-import {setRepeatPassword} from '@/redux/slices/userSlice';
+import {setUserError} from '@/redux/slices/userSlice';
 
 // selectors
 import {memoUserSelector} from '@/redux/selectors';
 
 // constants
-import {regexpPassword} from '@/constants';
+import {ErrorMsgs, regexpPassword} from '@/constants';
 
 // utils
 import {onValidateForm} from '@/utils';
@@ -32,7 +32,8 @@ const UpdatePasswordForm = () => {
     useHandleInputErrors();
   const [visiblePass, setVisiblePass] = useState<boolean>(false);
   const [newPass, setNewPass] = useState<string>('');
-  const {repeatPassword, error, isError} = useSelector(memoUserSelector);
+  const [newRepeatPassword, setNewRepeatPassword] = useState<string>('');
+  const {error, isError} = useSelector(memoUserSelector);
 
   const onHandleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -45,21 +46,23 @@ const UpdatePasswordForm = () => {
         throw new Error(JSON.stringify(error));
       }
     } catch (error) {
-      if ('status' in JSON.parse(error)) {
-        error = JSON.parse(error);
-        return {
-          name: error?.name,
-          message: error?.message,
-        };
+      if (
+        typeof JSON.parse(error?.message) === 'object' &&
+        'status' in JSON.parse(error?.message)
+      ) {
+        error = JSON.parse(error?.message);
+        return dispatch(
+          setUserError({error: true, name: error?.name, msg: error?.message}),
+        );
       } else {
-        return {
-          name: error?.name,
-          message: error?.message,
-        };
+        return dispatch(
+          setUserError({error: true, name: error?.name, msg: error?.message}),
+        );
       }
+    } finally {
+      setLoading(false);
     }
 
-    setLoading(false);
     router.push('/home');
   };
 
@@ -99,10 +102,7 @@ const UpdatePasswordForm = () => {
         />
       </label>
       {errorPassword && (
-        <p className="text-red-500 text-sm">
-          Password should have: min 8 char., 1 lowercase letter, 1 uppercase
-          letter, 1 special symbol and 1 number.
-        </p>
+        <p className="text-red-500 text-sm">{ErrorMsgs.password}</p>
       )}
       <label className="text-primary-green text-xl">
         Repeat password:
@@ -110,26 +110,27 @@ const UpdatePasswordForm = () => {
           disabled={errorPassword}
           onChange={e => {
             if (newPass !== e.target.value) {
-              return dispatch(
-                setRepeatPassword({
-                  value: e.target.value,
+              setNewRepeatPassword(e.target.value);
+              dispatch(
+                setUserError({
                   error: true,
                   name: 'Passwords are different!',
                   msg: 'Please make passwords are similar',
                 }),
               );
+              return;
             }
-
-            return dispatch(
-              setRepeatPassword({
-                value: e.target.value,
+            setNewRepeatPassword(e.target.value);
+            dispatch(
+              setUserError({
                 error: false,
                 name: '',
                 msg: '',
               }),
             );
+            return;
           }}
-          value={repeatPassword}
+          value={newRepeatPassword}
           type="password"
           name="password"
           required
@@ -137,13 +138,13 @@ const UpdatePasswordForm = () => {
           placeholder="Repeat your password"
         />
       </label>
-      {isError && repeatPassword && (
+      {isError && newRepeatPassword && (
         <p className="text-red-500 text-sm">
-          {error.name} {error.msg}
+          {error.name} {error?.status}: {error.msg}
         </p>
       )}
       <button
-        disabled={isError || errorPassword || !newPass || !repeatPassword}
+        disabled={isError || errorPassword || !newPass || !newRepeatPassword}
         type="submit"
         className="w-full h-[60px] bg-primary-green mt-3 font-bold text-lg px-3 text-white hover:bg-primary-green-darker transition tracking-widest rounded-lg disabled:opacity-80"
       >

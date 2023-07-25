@@ -18,7 +18,6 @@ export const initUserStates: IUserReducer = {
       email: '',
     },
   },
-  repeatPassword: '',
   isError: false,
   error: {
     name: '',

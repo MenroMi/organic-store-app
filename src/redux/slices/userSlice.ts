@@ -23,12 +23,11 @@ const userSlice = createSlice({
       ...state,
       response: {success: false, response: ''},
     }),
-    setRepeatPassword: (state, action) => {
-      const {value, error, name, msg} = action.payload;
+    setUserError: (state, action) => {
+      const {error, name, msg} = action.payload;
 
       return {
         ...state,
-        repeatPassword: value,
         isError: error,
         error: {
           name,
@@ -156,6 +155,12 @@ const userSlice = createSlice({
 
       return {
         ...state,
+        error: {
+          name: '',
+          msg: '',
+          status: '',
+        },
+        isError: false,
         response: {
           success,
           response,
@@ -219,9 +224,5 @@ const userSlice = createSlice({
 
 const {actions, reducer} = userSlice;
 export default reducer;
-export const {
-  setLoading,
-  setOpenLoginForm,
-  setRepeatPassword,
-  setResetResponse,
-} = actions;
+export const {setLoading, setOpenLoginForm, setUserError, setResetResponse} =
+  actions;
