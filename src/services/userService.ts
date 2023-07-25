@@ -1,5 +1,6 @@
 import {AuthError, User} from '@supabase/supabase-js';
 import SupabaseClientService from '.';
+import dbService, {IUserOnDB} from './dbService';
 
 class UserService extends SupabaseClientService {
   constructor() {
@@ -29,7 +30,23 @@ class UserService extends SupabaseClientService {
       user: {role, id, user_metadata},
     } = data;
 
-    const {full_name, avatar} = user_metadata;
+    const {data: userRow, error: userError} =
+      await dbService.onSelectUserFromDB(id);
+
+    if (userError && userError?.message) {
+      const {message, code} = userError;
+      return {
+        data: null,
+        error: {
+          name: 'Unexpected Error',
+          message,
+          status: code,
+        },
+      };
+    }
+
+    const {avatar} = userRow as IUserOnDB;
+    const {full_name} = user_metadata;
 
     if (access_token) {
       localStorage.setItem('access_token', access_token);
@@ -43,7 +60,6 @@ class UserService extends SupabaseClientService {
           full_name,
           avatar,
         },
-        accessToken: access_token,
       },
       error: null,
     };

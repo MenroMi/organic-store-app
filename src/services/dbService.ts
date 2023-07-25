@@ -1,6 +1,6 @@
 import SupabaseClientService from '.';
 
-interface IUserOnDB {
+export interface IUserOnDB {
   id: string;
   username?: string;
   name: string;
