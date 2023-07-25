@@ -7,9 +7,6 @@ import React, {useEffect, useState} from 'react';
 // libs
 import {useDispatch, useSelector} from 'react-redux';
 
-// thunk
-import {getAuthUserThunk} from '@/redux/thunks/auth';
-
 // selectors
 import {memoUserSelector} from '@/redux/selectors';
 
@@ -25,12 +22,6 @@ const BurgerMenuAuth = () => {
     useState<boolean>(false);
   const {user} = useSelector(memoUserSelector);
   const dispatch = useDispatch<AppDispatch>();
-
-  useEffect(() => {
-    dispatch(getAuthUserThunk()); // later search another solution for checking auth user after reload app
-
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
 
   return (
     <div

@@ -23,6 +23,7 @@ import BurgerMenu from '@/components/Menu/BurgerMenu';
 import {BurgerMenuAuth, DropdownAuth} from '@/components/Auth';
 import CustomLink from '@/components/CustomLink';
 import NavbarUser from '@/components/User/NavbarUser';
+import type {AppDispatch} from '@/redux/provider/ReduxProvider';
 
 const Navbar = () => {
   const {
@@ -32,7 +33,7 @@ const Navbar = () => {
   const [smaller, setSmaller] = useState<boolean>(false);
   const scrollRef = useRef<number>(0);
   const {isOpenLoginForm, user, isLogin} = useSelector(memoUserSelector);
-  const dispatch = useDispatch();
+  const dispatch = useDispatch<AppDispatch>();
 
   useEffect(() => {
     const handleScroll = (e: Event) => {
@@ -178,14 +179,9 @@ const Navbar = () => {
               <p className="lg:visible max-lg:hidden">Cart 0</p>
             </Link>
           </div>
-          {width >= 640 && (
-            <NavbarUser
-              width={width}
-              setIsOpen={setIsOpen}
-              dispatch={dispatch}
-              isOpen={isOpen}
-            />
-          )}
+          {/* {width >= 640 && ( */}
+          <NavbarUser width={width} setIsOpen={setIsOpen} isOpen={isOpen} />
+          {/* )} */}
         </div>
       </nav>
       {isOpenLoginForm && width! >= 1024 && <DropdownAuth />}
