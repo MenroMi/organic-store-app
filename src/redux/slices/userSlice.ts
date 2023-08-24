@@ -23,6 +23,16 @@ const userSlice = createSlice({
       ...state,
       response: {success: false, response: ''},
     }),
+    setUserMetadata: (state, action) => ({
+      ...state,
+      user: {
+        ...state.user,
+        user_metadata: {
+          ...state.user.user_metadata,
+          avatar: action.payload,
+        },
+      },
+    }),
     setUserError: (state, action) => {
       const {error, name, msg} = action.payload;
 
@@ -113,7 +123,6 @@ const userSlice = createSlice({
     builder.addCase(getAuthUserThunk.fulfilled, (state, action) => {
       if (action.payload?.id) {
         const {id, role, user_metadata} = action.payload;
-
         return {
           ...state,
           user: {
@@ -214,7 +223,13 @@ const userSlice = createSlice({
         isLoading: false,
         isError: false,
         error: {name: '', msg: ''},
-        user: {...action.payload.user, avatar: action.payload.avatar},
+        user: {
+          ...action.payload.user,
+          user_metadata: {
+            ...action.payload.user.user_metadata,
+            avatar: action.payload.avatar,
+          },
+        },
       };
     });
 
@@ -224,5 +239,10 @@ const userSlice = createSlice({
 
 const {actions, reducer} = userSlice;
 export default reducer;
-export const {setLoading, setOpenLoginForm, setUserError, setResetResponse} =
-  actions;
+export const {
+  setLoading,
+  setOpenLoginForm,
+  setUserError,
+  setResetResponse,
+  setUserMetadata,
+} = actions;

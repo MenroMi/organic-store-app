@@ -160,7 +160,7 @@ const Navbar = () => {
           </BurgerMenu>
         </div>
         <div className="flex gap-3 items-center">
-          <div className="cart max-sm:min-w-[40px] max-sm:max-h-[30px] max-lg:min-w-[80px] lg:min-w-[165px]">
+          <div className="cart flex max-sm:min-w-[40px] max-sm:max-h-[30px] max-lg:min-w-[80px] lg:min-w-[165px]">
             <Link
               href={navHref.home}
               className="flex border rounded-full items-center gap-3 max-sm:p-1 max-lg:p-2 lg:py-2 lg:pl-3 lg:pr-6 "

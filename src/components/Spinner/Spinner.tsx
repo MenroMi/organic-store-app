@@ -1,4 +1,4 @@
-import React from "react";
+import React from 'react';
 
 interface ISpinnerProps {
   width?: string;
@@ -8,24 +8,24 @@ interface ISpinnerProps {
 }
 
 const Spinner: React.FC<ISpinnerProps> = ({
-  width = "40px",
-  height = "40px",
-  display = "block",
-  fill = "#7eb693",
+  width = '40px',
+  height = '40px',
+  display = 'block',
+  fill = '#7eb693',
 }) => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
       xmlnsXlink="http://www.w3.org/1999/xlink"
       style={{
-        margin: "auto",
-        background: "transparent",
+        margin: 'auto',
+        background: 'transparent',
         display,
-        shapeRendering: "auto",
+        shapeRendering: 'auto',
       }}
       width={width}
       height={height}
-      viewBox="0 0 100 100"
+      viewBox={`0 0 100 100`}
       preserveAspectRatio="xMidYMid"
     >
       <g transform="rotate(0 50 50)">

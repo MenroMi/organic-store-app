@@ -26,28 +26,24 @@ const onUpdateAvatarUserThunk = createAsyncThunk(
   'user/updateAvatar',
   async (inputData: {file: File; user: IUser}) => {
     try {
-      const {
-        data: {isRepeat, repeatFiles},
-        error,
-      } = await dbService.onRepeatFileInStorage(
-        'images',
-        'users',
-        inputData.file,
+      const {data: images, error} = await supabase.storage
+        .from('images')
+        .list('users');
+
+      const repeatImages = images.filter(
+        img => img.name === inputData.file.name,
       );
+      const isRepeatImage: boolean = repeatImages.length > 0;
 
-      if (error) {
-        throw new Error(`${error?.name} - ${error?.message}`);
-      }
+      if (isRepeatImage) {
+        const avatar = supabase.storage
+          .from('images')
+          .getPublicUrl(`users/${repeatImages[0].name}`).data.publicUrl;
 
-      if (isRepeat && !error) {
-        const removeError = await dbService.onRemoveFileInStorage(
-          'images',
-          `users/${repeatFiles[0].name}`,
-        );
-
-        if (removeError?.name) {
-          throw new Error(`${removeError?.name} - ${removeError?.message}`);
-        }
+        return {
+          user: inputData.user,
+          avatar,
+        };
       }
 
       if (inputData.user?.user_metadata?.avatar) {
@@ -80,7 +76,6 @@ const onUpdateAvatarUserThunk = createAsyncThunk(
 
       const avatar = supabase.storage.from('images').getPublicUrl(data.path)
         .data.publicUrl;
-
       await dbService.onUpdateDataInTable(
         'users',
         'avatar',

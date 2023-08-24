@@ -32,9 +32,8 @@ const NavbarUser: React.FC<INavbarUser> = ({width, setIsOpen, isOpen}) => {
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
-  console.log(user);
   return (
-    <div className="cart">
+    <div className="cart hidden lg:flex">
       <button
         type="button"
         className="border rounded-full items-center gap-3 max-sm:p-1 max-lg:p-2 lg:p-2 active:scale-90 transition"

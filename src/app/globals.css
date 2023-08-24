@@ -46,7 +46,7 @@ body {
 }
 
 .cart {
-  @apply flex-1 h-full w-full flex items-center justify-end;
+  @apply flex-1 h-full w-full items-center justify-end;
 }
 
 /** START: Burger menu styles **/
