@@ -10,6 +10,7 @@ import {
   onSignInFacebookThunk,
   onSignInGitHubThunk,
   onSignInGoogleThunk,
+  onUpdateBGImageUserThunk,
 } from '@/redux/thunks';
 
 const userSlice = createSlice({
@@ -23,13 +24,23 @@ const userSlice = createSlice({
       ...state,
       response: {success: false, response: ''},
     }),
-    setUserMetadata: (state, action) => ({
+    setUserAvatar: (state, action) => ({
       ...state,
       user: {
         ...state.user,
         user_metadata: {
           ...state.user.user_metadata,
           avatar: action.payload,
+        },
+      },
+    }),
+    setUserBgImage: (state, action) => ({
+      ...state,
+      user: {
+        ...state.user,
+        user_metadata: {
+          ...state.user.user_metadata,
+          bg_image: action.payload,
         },
       },
     }),
@@ -233,6 +244,36 @@ const userSlice = createSlice({
       };
     });
 
+    builder.addCase(onUpdateBGImageUserThunk.fulfilled, (state, action) => {
+      if (action.payload?.name) {
+        const {name, message: msg} = action.payload;
+
+        return {
+          ...state,
+          isLoading: false,
+          isError: true,
+          error: {
+            name,
+            msg,
+          },
+        };
+      }
+
+      return {
+        ...state,
+        isLoading: false,
+        isError: false,
+        error: {name: '', msg: ''},
+        user: {
+          ...action.payload.user,
+          user_metadata: {
+            ...action.payload.user.user_metadata,
+            bg_image: action.payload.bgImage,
+          },
+        },
+      };
+    });
+
     // onUpdateUserData
   },
 });
@@ -244,5 +285,6 @@ export const {
   setOpenLoginForm,
   setUserError,
   setResetResponse,
-  setUserMetadata,
+  setUserAvatar,
+  setUserBgImage,
 } = actions;

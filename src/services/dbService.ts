@@ -6,6 +6,7 @@ export interface IUserOnDB {
   name: string;
   email: string;
   avatar: string | null;
+  bg_image: string | null;
   birthday?: string;
 }
 

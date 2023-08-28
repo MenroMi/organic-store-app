@@ -7,7 +7,11 @@ import {
   onSignInGoogleThunk,
 } from './auth';
 import onRegisterThunk from './register';
-import {onUpdatePasswordThunk, onUpdateAvatarUserThunk} from './update';
+import {
+  onUpdatePasswordThunk,
+  onUpdateAvatarUserThunk,
+  onUpdateBGImageUserThunk,
+} from './update';
 
 export {
   onLogOutThunk,
@@ -19,4 +23,5 @@ export {
   onSignInFacebookThunk,
   onSignInGitHubThunk,
   onSignInGoogleThunk,
+  onUpdateBGImageUserThunk,
 };

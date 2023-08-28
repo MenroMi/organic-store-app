@@ -2,10 +2,18 @@ import {createClientComponentClient} from '@supabase/auth-helpers-nextjs';
 import {SupabaseClient} from '@supabase/supabase-js';
 
 abstract class SupabaseClientService {
-  readonly supabase: SupabaseClient<any, 'public', any>;
+  protected supabase: SupabaseClient<any, 'public', any>;
 
   constructor() {
-    this.supabase = createClientComponentClient();
+    this.getInstance();
+  }
+
+  getInstance() {
+    if (!this.supabase) {
+      this.supabase = createClientComponentClient();
+    }
+
+    return this.supabase;
   }
 }
 

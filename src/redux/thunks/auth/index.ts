@@ -1,4 +1,4 @@
-import dbService from '@/services/dbService';
+import dbService, {IUserOnDB} from '@/services/dbService';
 import sessionService from '@/services/sessionService';
 import userService from '@/services/userService';
 import {createAsyncThunk} from '@reduxjs/toolkit';
@@ -89,8 +89,7 @@ const getAuthUserThunk = createAsyncThunk('user/relogin', async () => {
     );
 
     if (user) {
-      const {id, name, avatar, email} = user;
-
+      const {id, name, avatar, email, bg_image} = user as IUserOnDB;
       return {
         role: session.user.role,
         id,
@@ -98,6 +97,7 @@ const getAuthUserThunk = createAsyncThunk('user/relogin', async () => {
           email,
           full_name: name,
           avatar,
+          bg_image,
         },
       };
     } else {

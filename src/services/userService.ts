@@ -103,6 +103,7 @@ class UserService extends SupabaseClientService {
         },
       },
     });
+
     if (data.user) {
       return {data: data.user, error: null};
     }

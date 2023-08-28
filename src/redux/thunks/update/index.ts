@@ -40,23 +40,17 @@ const onUpdateAvatarUserThunk = createAsyncThunk(
           .from('images')
           .getPublicUrl(`users/${repeatImages[0].name}`).data.publicUrl;
 
+        await dbService.onUpdateDataInTable(
+          'users',
+          'avatar',
+          avatar,
+          inputData.user.id,
+        );
+
         return {
           user: inputData.user,
           avatar,
         };
-      }
-
-      if (inputData.user?.user_metadata?.avatar) {
-        const updateError = await dbService.onUpdateDataInTable(
-          'users',
-          'avatar',
-          null,
-          inputData.user.id,
-        );
-
-        if (updateError?.name) {
-          throw new Error(`${updateError?.name} - ${updateError?.message}`);
-        }
       }
 
       const uploadResponse: {
@@ -95,4 +89,75 @@ const onUpdateAvatarUserThunk = createAsyncThunk(
   },
 );
 
-export {onUpdatePasswordThunk, onUpdateAvatarUserThunk};
+const onUpdateBGImageUserThunk = createAsyncThunk(
+  'user/updateBGImage',
+  async (inputData: {file: File; user: IUser}) => {
+    try {
+      const {data: images, error} = await supabase.storage
+        .from('images')
+        .list('bgs');
+
+      const repeatImages = images.filter(
+        img => img.name === inputData.file.name,
+      );
+      const isRepeatImage: boolean = repeatImages.length > 0;
+
+      if (isRepeatImage) {
+        const bgImage = supabase.storage
+          .from('images')
+          .getPublicUrl(`bgs/${repeatImages[0].name}`).data.publicUrl;
+
+        await dbService.onUpdateDataInTable(
+          'users',
+          'bg_image',
+          bgImage,
+          inputData.user.id,
+        );
+
+        return {
+          user: inputData.user,
+          bgImage,
+        };
+      }
+
+      const uploadResponse: {
+        data: {path: string};
+        error: {name: string; message: string};
+      } = await dbService.onUploadFileToStorage(
+        'images',
+        `bgs/${inputData.file.name}`,
+        inputData.file,
+      );
+
+      const {data, error: uploadError} = uploadResponse;
+
+      if (uploadError?.name) {
+        throw new Error(`${uploadError?.name} - ${uploadError?.message}`);
+      }
+
+      const bgImage = supabase.storage.from('images').getPublicUrl(data.path)
+        .data.publicUrl;
+      await dbService.onUpdateDataInTable(
+        'users',
+        'bg_image',
+        bgImage,
+        inputData.user.id,
+      );
+      return {
+        user: inputData.user,
+        bgImage,
+      };
+    } catch (error) {
+      return {
+        name: error?.name,
+        message: error?.message,
+      };
+    }
+  },
+);
+
+export {
+  onUpdatePasswordThunk,
+  onUpdateAvatarUserThunk,
+  onUpdateBGImageUserThunk,
+};

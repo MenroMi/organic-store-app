@@ -11,6 +11,7 @@ interface IUserMetadata extends UserMetadata {
   email: string;
   full_name: string;
   avatar: string | null;
+  bg_image: string | null;
 }
 
 export interface IUser {

@@ -15,6 +15,7 @@ export const initUserStates: IUserReducer = {
     user_metadata: {
       full_name: '',
       avatar: '',
+      bg_image: '',
       email: '',
     },
   },
